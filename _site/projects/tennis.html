@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Plain Description -->
+	<title>Tennis Player Comparisons | Ganesh Iyer - Product Design, UX</title>
+	<meta name="description" content="In this project, we designed and prototyped a proof-of-concept for a visualization that allows for comparison between how male tennis players performed on the court and how they were expected to perform.">
+	<link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64 128x128" href="/favicon.ico">
+
+	<!-- CSS, JS & fonts -->
+	<link rel="stylesheet" href="/css/app.css" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" >
+	</script>
+	<!-- <script type="text/javascript" src = "/js/jquery.onepage-scroll.js" ></script> -->
+	<script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.2/jquery.fullPage.min.js" ></script>
+	<script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.2/vendors/jquery.easings.min.js" ></script>
+	<!-- <script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.2/vendors/scrolloverflow.min.js" ></script> -->
+	<script type="text/javascript" src = "/js/project.js" ></script>
+
+	<!-- Put your fonts here -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link href='/fonts/fontawesome-webfont.ttf' rel='stylesheet' type='application/x-font-ttf'>
+	<!-- <link href='/css/onepage-scroll.css' rel='stylesheet' type='text/css'> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.2/jquery.fullPage.min.css">
+</head>
+
+
+	<body class = "project-body">
+		<!--[if lt IE 8]>
+		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
+		<div id = "height-bar"></div>
+<a id = "go-to-top" href ="#top"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+<div id = "fullpage">
+  <div class = "section stage-wrap fp-auto-height-responsive">
+      <div class = "proj-nav-wrap">
+  <div class = "proj-nav">
+    <div class = "logo">
+      <a href = "http://localhost:4000">
+        <img src = "http://localhost:4000/img/logo.png">
+      </a>
+    </div>
+    
+    <div class = "hide-next">
+      <span class  = "nav-label">Next > </span><a href = "/projects/geometris.html">Geometris - Creating an embodied and collaborative game for children</a>
+    </div>
+    <div class = "show-next">
+      <a href = "/projects/geometris.html">Next Project</a>
+    </div>
+    
+    
+  </div>
+</div>
+
+      <div class = "stage">
+        <div class = "stage-img">
+          <img src = "/img/tennis.png" />
+        </div>
+        <div class = "stage-text">
+          <h2 class = "stage-heading">Visualizing Betting v Performance Data in Mens' Tennis</h2>
+          <p class = "baby-hide-text"><span class = "project-field">Summary</span> Through this design we narrate stories through a visualization that maps <em>what was predicted to happen on the court</em> (betting) to <em>what happened on the court</em> (performances).</p>
+          <p><span class = "project-field">Duration </span>April 2016 - May 2016</p>
+          <p><span class = "project-field">Resources </span><a href = "http://pitan.hu/info247-final/" target="_blank">Website</a>, <a href = "http://courses.ischool.berkeley.edu/i247/s16/reports/tenniscomparison.pdf" target="_blank">Report</a>, <a href = "http://tennis-data.co.uk/alldata.php" target="_blank">Dataset</a></p>
+          <p class = "baby-hide-text"><span class = "project-field">Team Members </span>
+            <a href = "https://www.linkedin.com/in/pitanhu" target="_blank">Pi-Tan Hu</a> and <a href = "https://www.linkedin.com/in/owenhsiao" target="_blank">Owen Hsiao</a>
+          </p>
+          <p><span class = "project-field">Responsibilities </span>
+            <ul>
+              <li>I sketched out visualization concepts, used Illustrator to detail them out as wireframes and also designed and coded the front-end UI elements like tabs, headers, etc. that housed the charts.</li>
+              <li>I explored the data to map common patterns to ideate potential solutions. The concept of the unit chart came from such explorations.</li>
+              <li>I also tested out the efficacy of the unit charts by presenting variations of the unit chart to different users.</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+      <a class = "arrow bounce" href = "#brief"><i class="fa fa-angle-double-down fa-lg"></i></a>
+  </div>
+  <div class = "section project-section-wrap fp-auto-height-responsive">
+    <div class = "project-section">
+      <div class = "project-section-heading"><h2>Problem Statement</h2></div>
+      <div class = "project-section-text">
+        <p>Performance and betting data for Men’s tennis are readily available. But there were not enough visualizations bringing those two narratives together. Specifically, the <span class = "key-term">data representing betting odds was not in a format that could be readily consumed by even a lay tennis enthusiast</span>. For this purpose, I tried to sketch various combinations trying to bring those two narratives together.</p>
+      </div>
+      <div class = "project-section-img">
+        <img src = "/projects/tennis/01.png" />
+      </div>
+    </div>
+  </div>
+  <div class = "section project-section-wrap fp-auto-height-responsive">
+    <div class = "project-section">
+      <div class = "project-section-heading"><h2>Approach</h2></div>
+      <div class = "project-section-text">
+        <p>The betting data was in the form of ratios that indicate how much the better would win or lose depending on the result. Higher ratios pointed to more unlikely results. This needed further cognitive processing to understand who is more favored to win a particular match. The design must start from the <span class = "key-term">key question</span> that the narrative must answer. Hence, we transformed ‘How much am I going to win if Player A wins?’ to ‘How much likely do bookies think Player A is going to win?’.</p>
+      </div>
+      <div class = "project-section-img">
+        <img src = "/projects/tennis/02.png" />
+      </div>
+    </div>
+  </div>
+  <div class = "section project-section-wrap fp-auto-height-responsive">
+    <div class = "project-section">
+      <div class = "project-section-text">
+        <p>This reframing led to newer questions. Does winning favorability change with the type of playing surface? Is Federer expected to fare better on hard courts against Djokovic than he does in grass courts? Does the chosen player have an arch rival - one player they always struggle against? Is it possible to code an upset - the phenomenon that a player is expected to lose but still wins - through data?</p>
+        <p>My hypothesis through these questions was that <span class = "key-term">if data for an entire match could be coded in a small and simple representation</span>, it could then be reused for all matches and also progressively tell stories at other levels. Did the player defy all odds after suffering a horrendous injury in 2012? The key challenge here was to also convey both result and predicted result using this device. Reusability became key not just to represent matches but also prowess across a time period!</p>
+      </div>
+      <div class = "project-section-img">
+        <img src = "/projects/tennis/03.png" />
+      </div>
+    </div>
+  </div>
+  <div class = "section project-section-wrap fp-auto-height-responsive">
+    <div class = "project-section">
+      <div class = "project-section-text">
+        <p>Owing to the extremely short timeline, the three of us had to be really nimble with the process. Once we finalized our approach of using unit charts, there were many times where we were making data, design and development decisions at the same time. While we did not fix an approach from the word go, it looked very similar to the diagram below.
+        </p>
+      </div>
+      <div class = "project-section-img">
+          <img src = "/projects/tennis/04.png" />
+      </div>
+    </div>
+  </div>
+  <div class = "section project-section-wrap fp-auto-height-responsive">
+    <div class = "project-section">
+      <div class = "project-section-heading"><h2>Wireframe</h2></div>
+      <div class = "project-section-text">
+        <p>While we were unable to develop all the features entailed by the wireframe, this was an important process in the design of the visualization because we were able to organize our charts that told interesting stories at each step. Within a unit chart, we show variations in confidence by various betting companies. Across a row of unit charts, we see how overall confidence in that player rises or falls. Across multiple rows, we see variations in confidence for that player in that Grand Slam year and if that confidence was justified.
+        </p>
+      </div>
+
+      <div class = "project-section-img">
+          <div class = "img-animation" style="height: 0px; position: relative; padding-bottom: 56.250%;"><iframe src="//streamable.com/e/686g5" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen scrolling="no" style="width: 100%; height: 100%; position: absolute;"></iframe><script async  src="//v.streamablemedia.com/v1/embed.js"></script></div>
+      </div>
+
+    </div>
+  </div>
+  <div class = "section project-section-wrap fp-auto-height-responsive">
+    <div class = "project-section">
+      <div class = "project-section-heading"><h2>Key Decisions</h2></div>
+      <div class = "project-section-text">
+        <p>While we were extremely keen on users being able to discover interesting trends through our interface, we were also wary of going down a feature-heavy rabbit hole. We did include exploratory tools such as a filter panel where the user can filter the charts by year, by a specific opponent and also set an upset threshold. The upset threshold is that likelihood of winning where a player given lower odds than the threshold still wins. Below our summary charts, we also allowed users to filter by surface.
+        </p>
+        <p>We included explorations for one player's performance against all opponents faced during the selected time period in addition to a specific player-v-player combination. Also, we added default images for those not in the top 20 because of paucity of time.
+        </p>
+      </div>
+      <div class = "project-section-img">
+          <img src = "/projects/tennis/06.png" />
+      </div>
+    </div>
+  </div>
+  <div class = "section project-section-wrap fp-auto-height-responsive">
+    <div class = "project-section">
+      <div class = "project-section-heading"><h2>Screenshots</h2></div>
+      <div class = "project-section-img">
+          <img src = "/projects/tennis/07.png" />
+      </div>
+    </div>
+  </div>
+  <div class = "section project-section-wrap fp-auto-height-responsive">
+    <div class = "project-section">
+      <div class = "project-section-img">
+          <img src = "/projects/tennis/08.png" />
+      </div>
+    </div>
+  </div>
+  <div class = "section project-section-wrap fp-auto-height-responsive">
+    <div class = "project-section">
+      <div class = "project-section-heading"><h2>Testing and Showcase Feedback</h2></div>
+      <div class = "project-section-text">
+        <p>To evaluate the efficacy of the unit chart, I printed out multiple representations of the chart by varying positions, stroke, transparency, color etc. I then tested each permutation with users and discovered that having the chance of winning for the player was more effective if the bars started from the bottom. 7 out of 10 users guessed that the horizontal bar below the chart the surface of the court.
+        </p>
+        <p>During our showcase, we found that as the odds for a player dropped in a particular tournament round, the user hovered over the chart curious to know what exactly happened. When we asked users about what they would like to see more, they said things along the lines of ‘Federer went out in the 3rd round of the Australian Open? That’s impossible! How did it happen?’.</p>
+      </div>
+      <div class = "project-section-img">
+          <img src = "/projects/tennis/09.png" />
+      </div>
+    </div>
+  </div>
+  <div class = "section project-section-wrap fp-auto-height-responsive">
+    <div class = "project-section">
+      <div class = "project-section-heading"><h2>Insights and Challenges</h2></div>
+      <div class = "project-section-text">
+        <p><span class = "key-term">Creating and discovering new data scenarios/questions</span> is a key component of the process of designing new visualizations. In this project, I sketched visual elements on paper, translated them into Illustrator or Sketch and tested them for effectiveness in communication. I reused this same starting point during my internship to design a wide variety of dashboard representations.
+        </p>
+        <p><span class = "key-term">To decide scope of data is an acquired skill</span>. By focusing more on an optimally sized dataset, it became possible to explore the data in greater visual breadth and in the end we were able to create a representation that can be transposed to Women’s tennis or even other sports!
+        </p>
+        <p><span class = "key-term">Using Gestalt Laws at different view layers</span> can enable a drastic transformation of commonplace visual representations like bar charts that can then tell a different story at each layer.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class = "section project-section-wrap">
+    <div class = "project-section">
+      <div class = "project-section-heading"><h2>Instructor feedback</h2></div>
+      <div class = "project-section-text">
+        <blockquote>"You did an amazing job with the implementation of the betting interface! I appreciate that you did some paper prototyping and testing, and that you also did some evaluating during the showcase. Overall, the design is quite powerful, but still usable, and allows users to experiment with combinations of information that I don’t think can be seen other places. Overall, this is a terrific project. Great teamwork too."</blockquote>
+        <p class = "testimonial-author">- Marti Hearst, Head Instructor for <a href = "https://www.ischool.berkeley.edu/courses/info/247" target="_blank">INFO 247 - Information Visualization and Presentation</a>, Spring 2016 and professor at UC Berkeley School of Information and EECS.</p>
+      </div>
+      <div class = "project-section-heading" id = "last"><h2>Next project</h2></div>
+      <div class = "project-section-img-2">
+        <div class = "img-next">
+          <a href = "http://localhost:4000/projects/geometris.html">
+            <img src = "/img/geometris.png" />
+          </a>
+        </div>
+        <div class = "text-next">
+          <p><a href = "http://localhost:4000/projects/geometris.html">Geometris - Creating an embodied and collaborative game for children</a></p>
+          <p><span class = "project-field">Key aspects</span> Designing for children, spatial reasoning, tangible user interface, game design, learning through engagement</p>
+        </div>
+      </div>
+    </div>
+    <div class = "mini-footer baby-hide-div">
+      <div class = "footer-logo">
+        <img src = "/img/logo-small.png" />
+      </div>
+      <div class = "footer-text">
+      &copy; Ganesh Iyer 2017.
+      </div>
+    </div>
+  </div>
+</div>
+<div class = "project-footer baby-show-div">
+  <!-- Loading in some scripts here -->
+<footer id = "footer">
+  <div class = "footer-wrap">
+    <div class = "footer">
+      <div class = "credits">
+        <h2 class = "footer">Credits</h2>
+        <p>This website was built upwards from the arguably the best bare-bones <a href = "https://github.com/garrettboatman/Blank-Theme-Jekyll" target="_blank">Jekyll starter theme</a> by <a href = "https://garrettboatman.com/" target="_blank">Garett Boatman</a>.</p>
+        <p>I also thank Matt Boldt for <a href = "http://www.mattboldt.com/demos/typed-js/" target = "_blank">typed.js</a>, Alvaro Trigo for the cool <a href = "https://github.com/alvarotrigo/fullPage.js" target="_blank">fullpage.JS</a> and CodyHouse.co for the <a href = "https://codyhouse.co/gem/vertical-timeline/" target = "_blank">responsive timeline</a>.</p>
+        <p>Fonts - PT Sans by <a href = "http://www.paratype.com/public/" target = "_blank">Paratype</a> and Aleo Bold by <a href = "https://twitter.com/alessiolaiso?lang=en" target = "_blank">Alessio Laiso</a>. Icons by the always reliable <a href = "https://fontawesome.io/" target = "_blank">Font Awesome</a> and <a href = "https://thenounproject.com/" target = "_blank">The Noun Project</a>.</p>
+        <p>Hearfelt thanks to <a href = "http://www.hirisk.net/" target = "_blank">Iris Lin</a> of Premise for her insightful feedback on my previous portfolio and encouragement that helped me push myself technically.</p>
+        <p>Headshots courtesy <a href = "http://nishapathak.com/" target = "_blank">Nisha Pathak</a> and <a href = "http://dinabseiso.com/" target = "_blank">Dina Bseiso</a>, my classmates at the School of Information.</p>
+        <p>General Iroh, Kaori Miyazono, and Bill Watterson for the inspiration during rough times.</p>
+      </div>
+      <div class = "map-wrap">
+        <h2 class = "footer">Other presence</h2>
+        <div class = "map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50389.295519577434!2d-122.3156414240959!3d37.87594191359659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808579363a8549d3%3A0x94ea1595a675e993!2sBerkeley%2C+CA!5e0!3m2!1sen!2sus!4v1486240686163" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class = "social">
+        <a href = "https://www.linkedin.com/in/ganeshiyerv" class = "footer-icon" target="_blank"><i class="fa fa-linkedin-square fa-lg"></i></a><!-- LinkedIn -->
+        <a href = "https://www.angel.co/ganeshiyerv" class = "footer-icon" target="_blank"><i class="fa fa-angellist fa-lg"></i></a><!-- Angellist -->
+        <a href = "https://www.github.com/ganesh-iyer" class = "footer-icon" target="_blank"><i class="fa fa-github fa-lg"></i></a><!-- Github -->
+        <a href = "https://www.ischool.berkeley.edu/people/ganesh-viswanathan-iyer" class = "footer-icon" target="_blank"><i class="fa fa-university fa-lg"></i></a><!-- University -->
+        <a href = "mailto:ganesh.v@berkeley.edu?subject=Hello!" class = "footer-icon"><i class="fa fa-envelope fa-lg"></i></a><!-- Email -->
+      </div>
+    </div>
+    <div class = "footer-text">&copy; Ganesh Iyer 2017.</div>
+  </div>
+</footer>
+
+</div>
+
+	</body>
+</html>

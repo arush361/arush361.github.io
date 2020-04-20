@@ -1,0 +1,50 @@
+<div class = "proj-nav-wrap">
+  <div class = "proj-nav">
+    <div class = "logo">
+      <a href = "{{ site.url }}">
+        <img src = "{{ site.url }}/img/logo.png">
+      </a>
+    </div>
+    {% if page.nextProj %}
+    <div class = "hide-next">
+      <span class  = "nav-label">Next > </span><a href = "{{ page.nextURL }}">{{ page.nextProj }}</a>
+    </div>
+    <div class = "show-next">
+      <a href = "{{ page.nextURL }}">Next Project</a>
+    </div>
+    {% endif %}
+    {% if page.nav %}
+    <!-- regular nav stuff for misc pages -->
+    <div class = "misc-nav">
+      <input id = "slide-menu-toggler" type = "checkbox" />
+      <label for = "slide-menu-toggler" class = "hamburger"><i class="fa fa-bars fa-2x"></i></label>
+      <div class = "slide-menu">
+        <a class = "ham-nav-link" href = "{{ site.url }}">
+          <div class = "ham-logo">
+              <img src = "../img/logo.png" />
+          </div>
+        </a>
+        <nav>
+          <ul>
+            <a class = "ham-nav-link" href = "{{ site.url }}/#work"><li>Selected Work</li></a>
+            <a class = "ham-nav-link" href = "{{ site.url }}/#resume"><li>About</li></a>
+            <a class = "ham-nav-link" href = "{{ site.url }}/#contact"><li>Contact</li></a>
+          </ul>
+        </nav>
+      </div>
+      <div class = "nav-wrap misc-header">
+        <div class = "nav">
+          <a href = "{{ site.url }}"><div class = "misc-logo"></div></a>
+          <nav>
+            <ul>
+              <li><a href = "{{ site.url }}/#work">Selected Work</a></li>
+              <li><a href = "{{ site.url }}/#resume">About</a></li>
+              <li><a href = "{{ site.url }}/#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>

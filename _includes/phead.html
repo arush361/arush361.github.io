@@ -1,0 +1,27 @@
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Plain Description -->
+	<title>{{ page.title }}</title>
+	<meta name="description" content="{% if page.excerpt %}{{page.excerpt}}{% else %}{{site.tagline}}{% endif %}">
+	<link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64 128x128" href="{{site.baseurl}}/favicon.ico">
+
+	<!-- CSS, JS & fonts -->
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/app.css" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" >
+	</script>
+	<!-- <script type="text/javascript" src = "{{ site.baseurl }}/js/jquery.onepage-scroll.js" ></script> -->
+	<script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.2/jquery.fullPage.min.js" ></script>
+	<script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.2/vendors/jquery.easings.min.js" ></script>
+	<!-- <script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.2/vendors/scrolloverflow.min.js" ></script> -->
+	<script type="text/javascript" src = "{{ site.baseurl }}/js/project.js" ></script>
+
+	<!-- Put your fonts here -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/font-awesome.min.css">
+	<link href='{{ site.baseurl }}/fonts/fontawesome-webfont.ttf' rel='stylesheet' type='application/x-font-ttf'>
+	<!-- <link href='{{ site.baseurl }}/css/onepage-scroll.css' rel='stylesheet' type='text/css'> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.2/jquery.fullPage.min.css">
+</head>

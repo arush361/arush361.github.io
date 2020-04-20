@@ -1,0 +1,207 @@
+// Font Variables:
+$default-size: 18px;
+$primary-font: 'PT Sans';
+$secondary-font: 'Helvetica';
+
+// Padding, spacing and margin defaults:
+$atom-spacing: 8px;
+
+// Clearfix
+.clearfix:before, .clearfix:after{
+	content: "";
+	display: table;
+}
+.clearfix:after{
+	clear: both;
+}
+.clearfix{
+	zoom: 1;
+}
+
+// Breakpoint Variables
+$max-width: 1200px;
+$baby-bear: 436px;
+$mama-bear: 767px;
+$papa-bear: 1216px;
+$monster-bear: 1399px;
+
+@mixin bp-baby-bear{
+	@media only screen and (max-width: $baby-bear){
+		@content;
+	}
+} // 0 to 436px
+@mixin bp-mama-bear{
+	@media only screen and (min-width: $baby-bear + 1) and (max-width: $mama-bear){
+		@content;
+	}
+} // 437px to 767px
+@mixin bp-papa-bear{
+	@media only screen and (min-width: $mama-bear + 1) and (max-width: $papa-bear){
+		@content;
+	}
+} // 768px to 1216px
+
+// Grid ends at 1200px
+@mixin bp-papa-max{
+	@media only screen and (max-width: $papa-bear){
+		@content;
+	}
+} // All screens upto 1216px wide
+
+@mixin bp-beyond-papa{
+	@media only screen and (min-width: $papa-bear + 1){
+		@content;
+	}
+}
+
+@mixin bp-monster-bear{
+	@media only screen and (min-width: $papa-bear + 1) and (max-width: $monster-bear){
+		@content;
+	}
+} // 1217px to 1399px
+@mixin bp-gargantuan{
+	@media only screen and (min-width: $monster-bear + 1){
+		@content;
+	}
+} // 1400px and beyond
+@mixin bp-parent-bears{
+	@media only screen and (min-width: $mama-bear + 1){
+		@content;
+	}
+} // 768px and above. This is for situations where your single columns switch to multiple.
+
+// Box Shadow Mixin
+@mixin box-shadow($top, $left, $blur, $color, $inset:"") {
+  -webkit-box-shadow:$top $left $blur $color #{$inset};
+  -moz-box-shadow:$top $left $blur $color #{$inset};
+  box-shadow:$top $left $blur $color #{$inset};
+}
+
+// Backface Visibility
+@mixin backface-visibility ($arguments){
+	-webkit-backface-visibility: $arguments;
+     -moz-backface-visibility: $arguments;
+      -ms-backface-visibility: $arguments;
+       -o-backface-visibility: $arguments;
+          backface-visibility: $arguments;
+}
+
+// Trigonometric functions
+@function pi() {
+  @return 3.14159265359;
+}
+
+@function rad($angle) {
+  $unit: unit($angle);
+  $unitless: $angle / ($angle * 0 + 1);
+  // If the angle has 'deg' as unit, convert to radians.
+  @if $unit == deg {
+    $unitless: $unitless / 180 * pi();
+  }
+  @return $unitless;
+}
+
+@function sin($angle) {
+  $sin: 0;
+  $angle: rad($angle);
+  // Iterate a bunch of times.
+  @for $i from 0 through 10 {
+    $sin: $sin + pow(-1, $i) * pow($angle, (2 * $i + 1)) / fact(2 * $i + 1);
+  }
+  @return $sin;
+}
+
+@function cos($angle) {
+  $cos: 0;
+  $angle: rad($angle);
+  // Iterate a bunch of times.
+  @for $i from 0 through 10 {
+    $cos: $cos + pow(-1, $i) * pow($angle, 2 * $i) / fact(2 * $i);
+  }
+  @return $cos;
+}
+
+@function tan($angle) {
+  @return sin($angle) / cos($angle);
+}
+
+// Skew function
+@mixin angle-edge($pos-top:null, $angle-top:null, $pos-btm:null, $angle-btm:null){
+  width: 100%;
+  position: relative;
+	background-color: $shylock-dark;
+  &::before
+	&::after{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    transition: ease all .5s;
+  }
+
+  @if $pos-top{
+    &::before{
+      @if $pos-top == 'topleft'{
+        top: 0;
+        transform-origin: right top;
+        transform: skewY($angle-top);
+      }
+      @if $pos-top == 'topright' {
+        top: 0;
+        transform-origin: left top;
+        transform: skewY(-$angle-top);
+      }
+    }
+  }
+
+  @if $pos-btm{
+    &::after{
+      @if $pos-btm == 'bottomleft' {
+        bottom: 0;
+        transform-origin: right bottom;
+        transform: skewY(-$angle-btm);
+
+      }
+
+      @if $pos-btm == 'bottomright' {
+        bottom: 0;
+        transform-origin: left bottom;
+        transform: skewY($angle-btm);
+      }
+    }
+  }
+}
+
+// rem fallback - credits: http://zerosixthree.se/
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+// border radius
+
+@mixin border-radius($radius:.25em) {
+  border-radius: $radius;
+}
+
+@mixin keyframes($name){
+	-webkit-keyframes $name {
+		@content;
+	}
+  @-moz-keyframes $name {
+		@content;
+	}
+  @-ms-keyframes $name {
+		@content;
+	}
+  @keyframes $name {
+		@content;
+	}
+}
