@@ -26,11 +26,10 @@ jQuery(document).ready(function(){
 
   // This is for the typed section on the landing area
   $(".typed").typed({
-        strings: ["I have been teaching myself front-end web development for the last 2 years. Thanks internet! =]",
-        "At present, I'm in my final semester of grad school studying HCI and Data Visualization at UC Berkeley.",
+        strings: [
         "Recently, I learned to sing in overtones - two notes at the same time!",
-        "I speak 7 languages, half of them half as fluently as the other.",
-        "My team recently won the Games for a Purpose category at CHI 2017's Student Game Competition",
+        "I speak 7 languages - English, Hindi, Tamil, Marathi, French, German, Spanish",
+        "My team had won the Games for a Purpose category at CHI 2017's Student Game Competition",
         "I also design beautiful cheat sheets. Here's a <a href='/AI.pdf' target = '_blank'>sample</a> I had done for my AI mid-term in Fall 2016.",
         "Currently, I'm reading <a href='http://www.npr.org/2014/11/13/363123510/three-body-problem-asks-a-classic-sci-fi-question-in-chinese' target = '_blank'>The Three Body Problem by Cixin Liu</a>.",
         "Some of the designers I follow are Julie Zhou, Luke Wroblewski and Victor Papanek."],
