@@ -1,13 +1,13 @@
 <div class = "contact-wrap">
   <div class = "contact" id = "contact">
-      <h1 class = "section-header">Contact</h1>
+      <h1 class = "section-header mb-30">Contact</h1>
       <div class = "contact-left">
         <div class = "headshot">
-          <img src = "../img/head.png" />
+          <img src = "../img/head.png" class="zoom" />
         </div>
         <div class = "contact-note">
-          <p><span class = "bio-key">N.B.</span> I'm currently on the lookout for full-time Product Design opportunities. The earliest I can start any new role is June 2020.</p>
-          <p>I'm also open to relocating globally. I'm presently located in San Francisco, soon to be based in Mumbai, India.</p>
+          <p><span class = "bio-key">N.B.</span> I'm currently on the lookout for full-time Product Manager opportunities.</p>
+          <p>I'm also open to relocating globally. I'm presently located in Mumbai, India.</p>
           <p>I'm comfortable working remotely as well as in a traditional office setting.</p>
           <p>I look forward to talking to you!</p>
         </div>
@@ -15,11 +15,11 @@
       <div class = "contact-form">
         <form action="https://formspree.io/{{ site.email }}" method="POST" class="form-stacked">
           <label for="formName">Your name</label>
-          <input type="text" id = "formName" name="name" class="field-light">
+          <input type="text" id = "formName" name="name" class="field-light" placeholder="Name*" required>
           <label for="formEmail">Your email address</label>
-          <input type="email" id = "formEmail" name="email" class="field-light">
+          <input type="email" id = "formEmail" name="email" class="field-light" placeholder="Email Address*" required>
           <label for="formMessage">Your message</label>
-          <textarea type="text" id = "formMessage" name="message" class="field-light" rows="5" placeholder="What would you like to say? :-)"></textarea>
+          <textarea type="text" id = "formMessage" name="message" class="field-light" rows="5" required placeholder="What would you like to say? :-)"></textarea>
           <input type="hidden" name="_next" value="{{ site.url }}/thanks.html" />
           <input type="hidden" name="_subject" value="New submission!" />
           <input type="text" name="_gotcha" style="display:none" />

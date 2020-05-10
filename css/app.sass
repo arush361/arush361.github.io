@@ -295,12 +295,13 @@ body
 		margin: 0 auto
 		padding: $atom-spacing*2 0
 		.logo
-			opacity: 0.8 !important
+			opacity: 1 !important
 			+span-columns(2)
 			background-image: url(../img/logo.png)
 			background-repeat: no-repeat
 			background-size: contain
-			height: $atom-spacing*13
+			height: $atom-spacing*9
+			width: 30%
 			z-index: index($elements, logo)
 			+bp-baby-bear
 				margin-left: $atom-spacing
@@ -672,7 +673,8 @@ body
 		left: 18px
 		height: 100%
 		width: $atom-spacing*0.25
-		background: rgba($text-color, 0.1)
+		background: #faa82e
+		// rgba($text-color, 0.1)
 	+bp-parent-bears
 		margin:
 			top: $atom-spacing*6
@@ -771,9 +773,9 @@ body
 		border-bottom: 1px dotted darken($intro-link, 15%)
 
 	.cd-date
-		color: darken($contact-link, 25%)
+		color: darken($headline, 25%)
 		+bp-parent-bears
-			color: $contact-link
+			color: $headline
 		float: left
 		padding: .8em 0
 
@@ -1195,3 +1197,22 @@ body.project-body
 .bnyLogo
 	background: url(../img/bny.svg) no-repeat -12px -0px
 	height: 50px
+.zoom
+  transition: transform .2s
+  width: 90% !important
+  margin: 0 auto
+
+.zoom:hover
+  transform: scale(1.4)
+
+.mb-30
+	margin-bottom: 30px
+.mt-16
+	margin-top: -13px
+.VueCarousel-slide 
+	h2
+		color: #faa82e !important
+.VueCarousel-slide 
+	.read-more a
+		color: #faa82e !important
+	
