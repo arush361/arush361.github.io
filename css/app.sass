@@ -437,13 +437,6 @@ body
 .bio
 	+clearfix
 	.bio-left
-		padding: 0
-		+bp-papa-max
-			+span-columns(12)
-			margin-bottom: $atom-spacing*6
-		+bp-parent-bears
-			+span-columns(6)
-	.bio-right
 		background: $white
 		padding: $atom-spacing*2
 		border-radius: $button-radius
@@ -455,6 +448,36 @@ body
 			+span-columns(6)
 		p
 			font-size: 0.9em
+		.availability
+			.bio-key
+				font-size: 1.2em
+		.bio-key
+			color: $intro-link
+			text-transform: uppercase
+			font-weight: bold
+		a.resume-button
+			border: none
+			+bp-papa-max
+				margin: $atom-spacing*2 $atom-spacing 0 0
+				padding: 0 $atom-spacing*2
+			+bp-beyond-papa
+				margin: $atom-spacing*2 $atom-spacing*2 $atom-spacing*2 0
+			+box-shadow(0, 0, $atom-spacing*0.5, $button-shadow)
+	.bio-right
+		background: $white
+		padding: 16px 16px 12px 16px
+		border-radius: $button-radius
+		color: $dark-solid-bg
+		+bp-papa-max
+			+span-columns(12)
+			margin-bottom: $atom-spacing*6
+		+bp-parent-bears
+			+span-columns(6)
+		p
+			font-size: 0.9em
+		.availability
+			.bio-key
+				font-size: 1.2em
 		.bio-key
 			color: $intro-link
 			text-transform: uppercase

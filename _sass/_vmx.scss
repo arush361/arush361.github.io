@@ -206,9 +206,10 @@ $monster-bear: 1399px;
 	}
 }
 @media only screen and (max-width: 600px){
-    .bio .bio-right{
+    .bio .bio-left{
         .infotab button{
-            padding: 10px 10px !important;
+            padding: 12px 10px !important;
+            font-size: 0.8em;
         }
         .infotabcontent{
             font-size: 0.70em;
