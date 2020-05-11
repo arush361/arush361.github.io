@@ -27,7 +27,7 @@ jQuery(document).ready(function(){
   // This is for the typed section on the landing area
   $(".typed").typed({
         strings: [
-        "Worked across projects focusing on Digital Transformation/Project Management/Software Development",
+        "3+ years of experience focusing on Digital Transformation/Project Management/Software Development",
         "I speak 4 languages - English, German, Hindi ,Punjabi.",
         "I am a state level Snooker player!",
         "My team was adjudged as North Zone Winner for Google Case Challenge in 2019.",
@@ -128,3 +128,20 @@ function allResizeFunctions(){
   var viewPortWidth = jQuery(window).width();
   var viewPortHeight = jQuery(window).height();
 }
+
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("infotabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
