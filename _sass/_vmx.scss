@@ -211,7 +211,28 @@ $monster-bear: 1399px;
             padding: 10px 10px !important;
         }
         .infotabcontent{
-            font-size: 0.75em;
+            font-size: 0.70em;
         }
     }
+    .VueCarousel-slide{ 
+      h2{
+          font-size: 1em;
+          margin-top: 10px;
+      }
+    }
+    .slider-post{
+      min-height: 275px !important;
+    }
+}
+@media only screen and (max-width: 1000px){
+    .VueCarousel-pagination{ 
+      margin-top: 30px;
+    }
+}
+@media only screen and (min-width: 1000px){
+    .VueCarousel-pagination{ 
+      margin-top: 50px;
+    }
+    
+
 }
