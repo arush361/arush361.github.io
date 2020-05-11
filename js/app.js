@@ -23,7 +23,10 @@ jQuery(document).ready(function(){
       }
     }
   });
-
+    $(".lazy").slick({
+            lazyLoad: 'ondemand', // ondemand progressive anticipated
+            infinite: true
+          });
   // This is for the typed section on the landing area
   $(".typed").typed({
         strings: [

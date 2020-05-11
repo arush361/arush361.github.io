@@ -20,5 +20,14 @@
 		{% include footer.html %}
 		{{ content }}
 		<script src="https://www.retainable.io/assets/retainable/rss-embed/retainable-rss-embed.js"></script>
+		<script type="text/javascript" src="{{ site.baseurl }}/js/slick.js" charset="utf-8"></script>
+		<script type="text/javascript">
+		    $(document).on('ready', function() {
+		      $(".lazy").slick({
+		        lazyLoad: 'ondemand', // ondemand progressive anticipated
+		        infinite: true
+		      });
+		    });
+		</script>
 	</body>
 </html>
