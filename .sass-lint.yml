@@ -1,0 +1,22 @@
+# Site settings
+title: Arush Sharma | Product Manager
+tagline: "Persuasion over persistence"
+
+twitter: arush361
+quora: Arush-Sharma-5
+github: arush361
+medium: arush361
+linkedin: sharma-arush
+facebook: arush.sharma.56
+angel: arush-sharma
+university: arush.sharma
+
+# Contact
+email: "arush361@gmail.com"
+
+# Use this for production
+sass:
+   sass_dir: _sass
+   style: compressed
+
+exclude: [.scss, README.md, node_modules, gruntfile.js, package.json]
