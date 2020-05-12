@@ -686,6 +686,9 @@ body
 // Resume time-line
 #timeline
 	display: block
+.timeline
+	.bio-key
+		font-size: 1.2em
 #cd-timeline
 	position: relative
 	&::before
@@ -707,7 +710,7 @@ body
 			margin-left: -2px
 .cd-timeline-block
 	position: relative
-	margin: 2em 0
+	margin: 2em 0 !important
 	+clearfix
 	&:first-child
 		margin-top: 0
@@ -770,7 +773,7 @@ body
 	margin-left: 60px
 	background: $white
 	@include border-radius
-	padding: $atom-spacing*2
+	padding: 1em !important
 	box-shadow: 0 0 $atom-spacing*0.5 darken($white, 15%)
 	+clearfix
 	img
@@ -791,6 +794,7 @@ body
 		color: lighten($dark-solid-bg, 10%)
 		margin-bottom: 8px
 		margin-top: 8px
+		font-size: 0.85em
 	a
 		color: darken($intro-link, 15%)
 		border-bottom: 1px dotted darken($intro-link, 15%)
