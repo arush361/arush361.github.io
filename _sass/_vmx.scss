@@ -229,11 +229,14 @@ $monster-bear: 1399px;
     .VueCarousel-pagination{ 
       margin-top: 30px;
     }
+    #seeMoreModal .modal-content {
+        width: 80% !important;
+        font-size: 0.8em;
+      }
 }
 @media only screen and (min-width: 1000px){
     .VueCarousel-pagination{ 
       margin-top: 50px;
     }
-    
-
 }
+
