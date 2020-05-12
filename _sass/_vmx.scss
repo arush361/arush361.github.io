@@ -232,11 +232,14 @@ $monster-bear: 1399px;
     #seeMoreModal .modal-content {
         width: 80% !important;
         font-size: 0.8em;
-      }
+    }
+    #recommendations .slider {
+        width: 90% !important;
+        zoom: 120%;
+    }
 }
 @media only screen and (min-width: 1000px){
     .VueCarousel-pagination{ 
       margin-top: 50px;
     }
 }
-

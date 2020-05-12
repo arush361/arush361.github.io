@@ -7,7 +7,38 @@ jQuery(document).ready(function(){
 
   // onClick functions for the hamburger menu
   displayHamburgerMenu();
+  $(".lazy").slick({
+    // normal options...
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    speed: 1000,
+    pauseOnFocus:true,
+    dots: true,
 
+    // the magic
+    responsive: [{  
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          infinite: true
+        }
+
+      }, {
+
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          dots: true
+        }
+
+      }, {
+
+        breakpoint: 250,
+        settings: "unslick" // destroys slick
+
+      }]
+  });
   var animateTheseClasses = ['.section-header', '.project', '.skill'];
   ///////
   // Get the modal

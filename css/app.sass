@@ -1374,3 +1374,25 @@ body.project-body
 	font-weight: bold
 	cursor: pointer
 	margin-top: -5px
+#recommendations
+	+transform(skew(0, 2.5deg))
+	+clearfix
+	max-width: 1200px
+	margin-left: auto
+	margin-right: auto
+	.slider
+		width: 80%
+		margin: 50px auto 0 auto
+	.slick-prev:before,
+	.slick-next:before
+		color: white
+	.slick-slide 
+		margin: 0px 20px 
+		transition: all ease-in-out .3s 
+		opacity: .2 
+		img
+			width: 100%
+	.slick-active
+		opacity: .5 
+	.slick-current
+		opacity: 1 
