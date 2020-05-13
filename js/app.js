@@ -14,10 +14,10 @@ jQuery(document).ready(function(){
     autoplaySpeed: 5000,
     speed: 1000,
     pauseOnFocus:true,
-    dots: true,
+    dots: true, 
 
     // the magic
-    responsive: [{  
+    responsive: [/*{  
         breakpoint: 1024,
         settings: {
           slidesToShow: 1,
@@ -32,7 +32,7 @@ jQuery(document).ready(function(){
           dots: true
         }
 
-      }, {
+      }, */{
 
         breakpoint: 250,
         settings: "unslick" // destroys slick

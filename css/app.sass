@@ -465,7 +465,7 @@ body
 			+box-shadow(0, 0, $atom-spacing*0.5, $button-shadow)
 	.bio-right
 		background: $white
-		padding: 16px 16px 12px 16px
+		padding: 15px 16px 12px 16px
 		border-radius: $button-radius
 		color: $dark-solid-bg
 		+bp-papa-max
@@ -598,7 +598,7 @@ body
 				border-radius: $button-radius
 				color: $dark-solid-bg
 				padding: $atom-spacing
-				margin-bottom: $atom-spacing*4
+				margin-bottom: $atom-spacing*2
 				width: 100%
 				font-size: 0.9em
 			input[type="submit"]
@@ -1268,10 +1268,11 @@ body.project-body
 		background-image: url(../bg1.png)
 .infotab
 	float: left 
-	border: 1px solid #ccc 
 	background-color: #f1f1f1 
 	width: 30%
 	height: 202px 
+	&:hover
+		color: white
 	button 
 		display: block 
 		background-color: inherit 
@@ -1285,7 +1286,8 @@ body.project-body
 		transition: 0.3s 
 		font-size: 15px 
 		&:hover 
-			background-color: #ddd 
+			background-color: #252742
+			color: white !important
 		&.active 
 			background-color: #252742 
 			color: #EAEAEA !important

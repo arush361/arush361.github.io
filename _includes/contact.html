@@ -1,35 +1,6 @@
 <div class = "contact-wrap">
-  <div class = "contact" id = "contact">
-      <h1 class = "section-header mb-30">Contact</h1>
-      <div class = "contact-left">
-        <div class = "headshot">
-          <img src = "../img/head.png" class="zoom" />
-        </div>
-        <div class = "contact-note">
-          <p><span class = "bio-key">N.B.</span> I'm currently on the lookout for full-time Product Manager opportunities.</p>
-          <p>I'm also open to relocating globally. I'm presently located in Mumbai, India.</p>
-          <p>I'm comfortable working remotely as well as in a traditional office setting.</p>
-          <p>I look forward to talking to you!</p>
-        </div>
-      </div>
-      <div class = "contact-form">
-        <form action="https://formspree.io/{{ site.email }}" method="POST" class="form-stacked">
-          <label for="formName">Your name</label>
-          <input type="text" id = "formName" name="name" class="field-light" placeholder="Name*" required>
-          <label for="formEmail">Your email address</label>
-          <input type="email" id = "formEmail" name="email" class="field-light" placeholder="Email Address*" required>
-          <label for="formMessage">Your message</label>
-          <textarea type="text" id = "formMessage" name="message" class="field-light" rows="5" required placeholder="What would you like to say? :-)"></textarea>
-          <input type="hidden" name="_next" value="{{ site.url }}/thanks.html" />
-          <input type="hidden" name="_subject" value="New submission!" />
-          <input type="text" name="_gotcha" style="display:none" />
-          <input type="submit" class="primary-button intro-button" value="Send Message">
-        </form>
-      </div>
-
-  </div>
   <div id="recommendations">
-    <h1 class = "section-header mb-30">Recommendations</h1>
+    <h1 class = "section-header mb-30">ENDORSEMENTS</h1>
        <section class="lazy slider" data-sizes="70vw">
           <div>
             <img src="{{ site.url }}/img/test/1.png">
@@ -51,4 +22,34 @@
           </div>
       </section>
     </div>
+  <div class = "contact" id = "contact">
+      <h1 class = "section-header mb-30">Contact</h1>
+      <div class = "contact-left">
+        <div class = "headshot">
+          <!-- <img src = "../img/head.png" class="zoom" /> -->
+          <img src = "../img/head.png"/>
+        </div>
+        <div class = "contact-note">
+          <p><span class = "bio-key">N.B.</span> I'm currently on the lookout for full-time Product Manager opportunities.</p>
+          <p>I'm also open to relocating globally. I'm presently located in Mumbai, India.</p>
+          <p>I look forward to talking to you!</p>
+        </div>
+      </div>
+      <div class = "contact-form">
+        <form action="https://formspree.io/{{ site.email }}" method="POST" class="form-stacked">
+          <label for="formName">Your name</label>
+          <input type="text" id = "formName" name="name" class="field-light" placeholder="Name*" required>
+          <label for="formEmail">Your email address</label>
+          <input type="email" id = "formEmail" name="email" class="field-light" placeholder="Email Address*" required>
+          <label for="formMessage">Your message</label>
+          <textarea type="text" id = "formMessage" name="message" class="field-light" rows="5" required placeholder="What would you like to say? :-)"></textarea>
+          <input type="hidden" name="_next" value="{{ site.url }}/thanks.html" />
+          <input type="hidden" name="_subject" value="New submission!" />
+          <input type="text" name="_gotcha" style="display:none" />
+          <input type="submit" class="primary-button intro-button" value="Send Message">
+        </form>
+      </div>
+
+  </div>
+  
 </div>
