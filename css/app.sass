@@ -320,6 +320,8 @@ body
 				margin: 0
 				padding: 0
 				li
+					&:hover
+						color: white
 					float: left
 					text-transform: uppercase
 					margin-right: $atom-spacing*5
@@ -1268,14 +1270,12 @@ body.project-body
 		background-image: url(../bg1.png)
 .infotab
 	float: left 
-	background-color: #f1f1f1 
 	width: 30%
 	height: 202px 
 	&:hover
-		color: white
+		color: $white
 	button 
-		display: block 
-		background-color: inherit 
+		display: block
 		color: black 
 		padding: 19px 15px 
 		width: 100% 
@@ -1287,14 +1287,14 @@ body.project-body
 		font-size: 15px 
 		&:hover 
 			background-color: #252742
-			color: white !important
+			color: $white !important
+			transform: translate(5px, 0px)
 		&.active 
 			background-color: #252742 
 			color: #EAEAEA !important
 .infotabcontent 
 	float: left 
-	padding: 0px 12px 
-	border: 1px solid #ccc 
+	padding: 0px 12px
 	width: 70% 
 	border-left: none 
 	height: 202px 
@@ -1371,7 +1371,7 @@ body.project-body
 		color: white
 
 #seeMore
-	color: #fca92e
+	color: #49ace1
 	float: right
 	font-weight: bold
 	cursor: pointer
