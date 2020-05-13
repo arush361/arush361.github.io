@@ -84,9 +84,9 @@ jQuery(document).ready(function(){
   // This is for the typed section on the landing area
   $(".typed").typed({
         strings: [
-        "3+ years of experience focusing on Digital Transformation/Project Management/Software Development",
-        "I speak 4 languages - English, German, Hindi ,Punjabi.",
-        "I am a state level Snooker player!",
+        "3+ years of experience focusing on Digital Transformation, Project Management & Software Development",
+        "I speak 4 languages - English, German, Hindi, Punjabi.",
+        " !",
         "My team was adjudged as North Zone Winner for Google Case Challenge in 2019.",
         /*"I also design beautiful cheat sheets. Here's a <a href='/AI.pdf' target = '_blank'>sample</a> I had done for my AI mid-term in Fall 2016.",*/
         "Currently, I'm reading <a href='https://www.goodreads.com/en/book/show/39286958-measure-what-matters' target = '_blank'>Measure What Matters by John Doerr</a>.",
