@@ -238,7 +238,7 @@ $monster-bear: 1399px;
         zoom: 120%;
     }
     [data-aos="anim-right"], [data-aos="anim-left"]{
-      transform:scale(.4);
+      transform:translate3d(+10px,0,0);
       opacity: 0;
       transition-property: opacity,transform;
       &.aos-animate {
