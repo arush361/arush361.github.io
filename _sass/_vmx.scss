@@ -237,8 +237,11 @@ $monster-bear: 1399px;
         width: 90% !important;
         zoom: 120%;
     }
+    .cd-timeline-content{
+      font-size: 0.8em;
+    }
     [data-aos="anim-right"], [data-aos="anim-left"], [data-aos="anim-date"]{
-      transform:translate3d(+15px,0,0);
+      transform:translate3d(+10px,0,0);
       opacity: 0;
       transition-property: opacity,transform;
       &.aos-animate {
