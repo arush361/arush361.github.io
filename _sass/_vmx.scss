@@ -237,17 +237,8 @@ $monster-bear: 1399px;
         width: 90% !important;
         zoom: 120%;
     }
-    [data-aos="anim-right"], [data-aos="anim-left"]{
-      transform:translate3d(+10px,0,0);
-      opacity: 0;
-      transition-property: opacity,transform;
-      &.aos-animate {
-        transform: translateZ(0);
-        opacity: 1;
-      }
-    }
-    [data-aos="anim-date"] {
-      transform:scale(.6);
+    [data-aos="anim-right"], [data-aos="anim-left"], [data-aos="anim-date"]{
+      transform:translate3d(+15px,0,0);
       opacity: 0;
       transition-property: opacity,transform;
       &.aos-animate {
