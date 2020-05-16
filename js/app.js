@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
   // onClick functions for the hamburger menu
   displayHamburgerMenu();
   AOS.init({
-     throttleDelay: 99
+     
   });
   $(".lazy").slick({
     // normal options...

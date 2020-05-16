@@ -225,7 +225,7 @@ $monster-bear: 1399px;
       min-height: 275px !important;
     }
 }
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 899px){
     .VueCarousel-pagination{ 
       margin-top: 30px;
     }
@@ -237,10 +237,55 @@ $monster-bear: 1399px;
         width: 90% !important;
         zoom: 120%;
     }
+    [data-aos="anim-right"], [data-aos="anim-left"], [data-aos="anim-date"] {
+      transform:translate3d(+100px,0,0);
+      opacity: 0;
+      transition-property: opacity,transform;
+      &.aos-animate {
+        transform: translateZ(0);
+        opacity: 1;
+      }
+    }
+    [data-aos="anim-left"] {
+      transform:translate3d(+100px,0,0);
+      opacity: 0;
+      transition-property: opacity,transform;
+      &.aos-animate {
+        transform: translateZ(0);
+        opacity: 1;
+      }
+    }
 }
-@media only screen and (min-width: 1000px){
+@media only screen and (min-width: 900px){
     .VueCarousel-pagination{ 
       margin-top: 50px;
+    }
+    [data-aos="anim-right"] {
+      transform:translate3d(-100px,0,0);
+      opacity: 0;
+      transition-property: opacity,transform;
+      &.aos-animate {
+        transform: translateZ(0);
+        opacity: 1;
+      }
+    }
+    [data-aos="anim-left"] {
+      transform:translate3d(+100px,0,0);
+      opacity: 0;
+      transition-property: opacity,transform;
+      &.aos-animate {
+        transform: translateZ(0);
+        opacity: 1;
+      }
+    }
+    [data-aos="anim-date"] {
+      transform:scale(.6);
+      opacity: 0;
+      transition-property: opacity,transform;
+      &.aos-animate {
+        transform: translateZ(0);
+        opacity: 1;
+      }
     }
 }
 @-webkit-keyframes swing
