@@ -662,18 +662,22 @@ body
 					height: 100%
 		.social
 			margin: 0 auto
+			h2
+				opacity: 0.8
+				text-align: left
 			a
 				color: $intro-link
 				text-decoration: none
-			opacity: 0.6
 			+bp-papa-max
 				+span-columns(10)
 				+shift(1)
-				text-align: center
+				text-align: left
 			+bp-beyond-papa
-				text-align: center
+				text-align: left
 				+span-columns(4)
-				margin-top: $atom-spacing*4
+				padding-left: 30px
+			.fa-lg
+				line-height: 1.75em
 			.footer-icon
 				+bp-baby-bear
 					font-size: 1.5em
@@ -682,7 +686,7 @@ body
 				+bp-parent-bears
 					font-size: 2em
 				font-weight: normal
-				margin-right: $atom-spacing*3
+				margin-right: 18px
 				margin-bottom: $atom-spacing*3
 	.footer-text
 		font-size: 0.8em
@@ -801,10 +805,10 @@ body
 		font-size: 1em
 		color: lighten($dark-solid-bg, 10%)
 	p
-		color: lighten($dark-solid-bg, 10%)
+		color: lighten($dark-solid-bg, 5%)
 		margin-bottom: 8px
 		margin-top: 8px
-		font-size: 0.85em
+		font-size: 0.9em
 	a
 		color: darken($intro-link, 15%)
 		border-bottom: 1px dotted darken($intro-link, 15%)

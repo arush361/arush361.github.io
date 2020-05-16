@@ -8,7 +8,6 @@ jQuery(document).ready(function(){
   // onClick functions for the hamburger menu
   displayHamburgerMenu();
   AOS.init({
-     
   });
   $(".lazy").slick({
     // normal options...
