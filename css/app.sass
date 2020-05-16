@@ -719,13 +719,12 @@ body
 			margin-left: -2px
 .cd-timeline-block
 	position: relative
-	margin: 2em 0 !important
+	margin: 4em 0
 	+clearfix
 	&:first-child
 		margin-top: 0
 	&:last-child
 		margin-bottom: 0
-
 	+bp-parent-bears
 		margin: 4em 0
 		&:first-child
@@ -1300,6 +1299,7 @@ body.project-body
 		&.active 
 			background-color: #252742 
 			color: #EAEAEA !important
+			transform: translate(5px, 0px)
 .infotabcontent 
 	float: left 
 	padding: 0px 12px
@@ -1383,7 +1383,8 @@ body.project-body
 	float: right
 	font-weight: bold
 	cursor: pointer
-	margin-top: -5px
+	&:hover
+		transform: scale(1.2)
 #recommendations
 	+transform(skew(0, 2.5deg))
 	+clearfix
