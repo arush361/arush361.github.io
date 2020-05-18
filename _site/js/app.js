@@ -1,12 +1,17 @@
 document.onreadystatechange = function() { 
     if (document.readyState !== "complete") { 
-        document.querySelector("body").style.visibility = "hidden"; 
+        document.querySelector("body").style.visibility = "hidden";
         document.querySelector(".loader").style.visibility = "visible"; 
+        //if(detectMob()) document.querySelector("body").style.backgroundImage = "none"; 
     } else { 
         document.querySelector(".loader").style.display = "none"; 
         document.querySelector("body").style.visibility = "visible"; 
+        //if(detectMob()) document.querySelector("body").style.backgroundImage = "url(../img/bg.png)"; 
     } 
 }; 
+/*function detectMob() {
+    return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
+  }*/
 jQuery(document).ready(function(){
   var viewPortWidth = jQuery(window).width();
   var viewPortHeight = jQuery(window).height();

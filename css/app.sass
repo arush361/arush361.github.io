@@ -352,10 +352,10 @@ body
 		margin-top: -$atom-spacing*8
 	// only for projects-wrap
 	+bp-baby-bear
-		padding: $atom-spacing*10 $atom-spacing*2 $atom-spacing*4 $atom-spacing*2
+		padding: $atom-spacing*10 $atom-spacing*2 $atom-spacing*10 $atom-spacing*2
 	+bp-mama-bear
-		padding: $atom-spacing*10 $atom-spacing*2 $atom-spacing*4 $atom-spacing*2
-	padding: $atom-spacing*24 $atom-spacing*2 $atom-spacing*4 $atom-spacing*2
+		padding: $atom-spacing*10 $atom-spacing*2 $atom-spacing*10 $atom-spacing*2
+	padding: $atom-spacing*24 $atom-spacing*2 $atom-spacing*9 $atom-spacing*2
 	background: $project-bg
 	position: relative
 	+transform(skew(0, -2.5deg))
@@ -421,10 +421,10 @@ body
 								margin: $atom-spacing $atom-spacing*2 $atom-spacing*3 0
 .resume-wrap
 	+bp-baby-bear
-		margin-top: 0
+		margin-top: 20px
 	+bp-mama-bear
-		margin-top: 0
-	margin-top: $atom-spacing*5
+		margin-top: 20px
+	margin-top: $atom-spacing*8
 	padding: $atom-spacing*8 $atom-spacing*2 $atom-spacing*4 $atom-spacing*2
 	background: $resume-bg
 	position: relative
@@ -545,6 +545,9 @@ body
 		z-index: index($elements, contact)
 		.section-header
 			margin: 130px 0 60px 0
+			+bp-baby-bear
+				margin: 60px 0 60px 0
+			+bp-mama-bear
 		.contact-left
 			+bp-baby-bear
 				+span-columns(12)
@@ -1364,7 +1367,7 @@ body.project-body
 	.close
 		color: white
 		float: right
-		font-size: 25px
+		font-size: 20px
 		font-weight: bold
 
 		&:hover, &:focus
@@ -1393,14 +1396,21 @@ body.project-body
 	&:hover
 		transform: scale(1.2)
 #recommendations
-	+transform(skew(0, 2.5deg))
+	//+transform(skew(0, 2.5deg))
 	+clearfix
 	max-width: 1200px
-	margin: 0px auto 90px auto
+	margin: 50px auto 90px auto
+	padding: 16px
+	.section-header
+		margin: 30px 0 74px 0
 	.slider
 		width: 80%
 		margin: 50px auto 0 auto
 		opacity: 0.95
+	.slick-prev
+		left: -20px
+	.slick-next
+		right: -20px
 	.slick-prev:before,
 	.slick-next:before
 		color: white
@@ -1422,10 +1432,18 @@ body.project-body
 .allArticles
 	position: absolute
 	right: 0
-	bottom: 30px
+	bottom: 80px
+	+bp-baby-bear
+		bottom: 30px
+	+bp-mama-bear
+		bottom: 30px
 	&:hover
 		transform: scale(1.2)
 	a
 		font-weight: bold
 		cursor: pointer
 		color: white
+.projects-wrap
+	.projects
+		.section-header
+			margin: 20px 0 80px 0
