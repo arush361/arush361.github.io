@@ -450,3 +450,6 @@ $monster-bear: 1399px;
     transform: rotate(360deg);
   }
 }
+#post-container > div.rtb-close{
+  z-index: 99;
+}
