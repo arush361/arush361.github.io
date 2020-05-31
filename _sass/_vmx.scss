@@ -252,6 +252,14 @@ $monster-bear: 1399px;
     .allArticles{
         font-size: 0.9em;
     }
+    table.table.borderless{
+        font-size: 0.85em;
+    }
+    table.table.borderless .tag{
+      height: 23px;
+      line-height: 23px;
+      padding: 0 10px 0 10px;
+    }
 }
 @media only screen and (min-width: 900px){
     .VueCarousel-pagination{ 
@@ -353,10 +361,10 @@ $monster-bear: 1399px;
 }
 .cd-timeline-img:hover
 {
-        -webkit-animation: swing 1s ease;
-        animation: swing 1s ease;
-        -webkit-animation-iteration-count: 1;
-        animation-iteration-count: 1;
+  -webkit-animation: swing 1s ease;
+  animation: swing 1s ease;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
 }
 .loader {
   color: #ffffff;
