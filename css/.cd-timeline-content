@@ -801,7 +801,7 @@ body
 	img
 		display: block
 		box-sizing: border-box
-		max: 48px
+		height: 48px
 		margin-bottom: $atom-spacing*1
 		float: right
 	h2
