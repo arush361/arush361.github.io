@@ -17,6 +17,11 @@ document.onreadystatechange = function() {
 	})
     } 
 }; 
+if ($('.slide-menu').is(':visible')) {
+    $('body').addClass("fixed-position");
+ } else {
+    $('body').removeClass("fixed-position");
+ }
 /*function detectMob() {
     return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
   }*/
