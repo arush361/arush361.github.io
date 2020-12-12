@@ -170,9 +170,11 @@ function opacityControl(opacityMeasure){
 }
 
 function displayHamburgerMenu(){
+	
+  $("body").toggleClass("fixed-position");
   $( ".ham-nav-link" ).click(function() {
     $('#slide-menu-toggler').trigger('click');
-	  $("body").toggleClass("fixedPosition");
+  $("body").toggleClass("fixed-position");
   });
 }
 
