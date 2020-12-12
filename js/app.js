@@ -132,7 +132,7 @@ jQuery(document).ready(function(){
     }
 });
   // For the Curious Carls who want to check if I'm being responsive
-  jQuery(window).resize(doThisOnResize());
+  //jQuery(window).resize(doThisOnResize());
 
 });
 //
