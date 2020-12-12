@@ -1512,5 +1512,5 @@ body.project-body
 	.tag:hover
 		background-color: #49BD9D
 		color: white
-	.cd-timeline-content
-		zoom: 0.85
+.cd-timeline-content
+	zoom: 0.85
