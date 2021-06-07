@@ -3,10 +3,18 @@ document.onreadystatechange = function() {
         document.querySelector("body").style.visibility = "hidden";
         document.querySelector(".loader").style.visibility = "visible"; 
         //if(detectMob()) document.querySelector("body").style.backgroundImage = "none"; 
+    	$('html, body').css({
+	  'overflow': 'hidden',
+	  'height': '100%'
+	})
     } else { 
         document.querySelector(".loader").style.display = "none"; 
         document.querySelector("body").style.visibility = "visible"; 
         //if(detectMob()) document.querySelector("body").style.backgroundImage = "url(../img/bg.png)"; 
+	$('html, body').css({
+	  'overflow': 'auto',
+	  'height': 'auto'
+	})
     } 
 }; 
 /*function detectMob() {
@@ -85,12 +93,11 @@ jQuery(document).ready(function(){
   // This is for the typed section on the landing area
   $(".typed").typed({
         strings: [
-        "3+ years of experience focusing on Digital Transformation, Project Management & Software Development.",
+        "3+ years of experience focusing on Product & Project Management, Software Development & Digital Transformation.",
         "I speak 4 languages - English, German, Hindi, Punjabi.",
         "I am a state level Snooker player!",
         "My team was adjudged as North Zone Winner for Google Case Challenge in 2019.",
-        /*"I also design beautiful cheat sheets. Here's a <a href='/AI.pdf' target = '_blank'>sample</a> I had done for my AI mid-term in Fall 2016.",*/
-        "Currently, I'm reading <a href='https://www.goodreads.com/en/book/show/39286958-measure-what-matters' target = '_blank'>Measure What Matters by John Doerr</a>.",
+        "Currently, I'm reading <a href='https://svpg.com/empowered-product-teams/' target = '_blank'>EMPOWERED by Marty Cagan</a>.",
         "Some of the Product Managers I follow are Ben Horowitz, Nir Eyal & Scott Sehlhorst."],
         typeSpeed: 0,
         startDelay: 1000,
@@ -132,7 +139,7 @@ jQuery(document).ready(function(){
     }
 });
   // For the Curious Carls who want to check if I'm being responsive
-  jQuery(window).resize(doThisOnResize());
+  //jQuery(window).resize(doThisOnResize());
 
 });
 //
@@ -163,6 +170,7 @@ function opacityControl(opacityMeasure){
 }
 
 function displayHamburgerMenu(){
+	
   $( ".ham-nav-link" ).click(function() {
     $('#slide-menu-toggler').trigger('click');
   });
