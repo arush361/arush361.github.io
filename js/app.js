@@ -93,11 +93,11 @@ jQuery(document).ready(function(){
   // This is for the typed section on the landing area
   $(".typed").typed({
         strings: [
-        "3+ years of experience focusing on Product & Project Management, Software Development & Digital Transformation.",
+        "5+ years of experience focusing on Product & Project Management, Software Development & Digital Transformation.",
         "I speak 4 languages - English, German, Hindi, Punjabi.",
         "I am a state level Snooker player!",
         "My team was adjudged as North Zone Winner for Google Case Challenge in 2019.",
-        "Currently, I'm reading <a href='https://svpg.com/empowered-product-teams/' target = '_blank'>EMPOWERED by Marty Cagan</a>.",
+        "Currently, I'm reading <a href='https://www.goodreads.com/book/show/1713426.Predictably_Irrational' target = '_blank'>Predictably Irrational by Dan Ariely</a>.",
         "Some of the Product Managers I follow are Ben Horowitz, Nir Eyal & Scott Sehlhorst."],
         typeSpeed: 0,
         startDelay: 1000,
