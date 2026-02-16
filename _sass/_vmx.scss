@@ -1,6 +1,6 @@
 // Font Variables:
 $default-size: 18px;
-$primary-font: 'PT Sans';
+$primary-font: 'Inter';
 $secondary-font: 'Helvetica';
 
 // Padding, spacing and margin defaults:
@@ -206,37 +206,11 @@ $monster-bear: 1399px;
 	}
 }
 @media only screen and (max-width: 600px){
-    .bio .bio-left{
-        .infotab button{
-            padding: 10px 10px !important;
-            font-size: 0.8em;
-        }
-        .infotabcontent{
-            font-size: 0.70em;
-        }
-    }
-    .VueCarousel-slide{ 
-      h2{
-          font-size: 1em;
-          margin-top: 10px;
-      }
-    }
-    .slider-post{
-      min-height: 275px !important;
+    .cd-timeline-content{
+      font-size: 0.85em;
     }
 }
 @media only screen and (max-width: 899px){
-    .VueCarousel-pagination{ 
-      margin-top: 30px;
-    }
-    #seeMoreModal .modal-content {
-        width: 80% !important;
-        font-size: 0.8em;
-    }
-    #recommendations .slider {
-        width: 90% !important;
-        zoom: 120%;
-    }
     .cd-timeline-content{
       font-size: 0.8em;
     }
@@ -248,9 +222,6 @@ $monster-bear: 1399px;
         transform: translateZ(0);
         opacity: 1;
       }
-    }
-    .allArticles{
-        font-size: 0.9em;
     }
     table.table.borderless{
         font-size: 0.85em;

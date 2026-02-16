@@ -6,23 +6,23 @@
 // ----------------------------------------------------- //
 @import 'vmx'
 // New Material Colors - transfer to vmx after you confirm
-$text-color: #EAEAEA
-$project-bg: #112746
-$project-link: #F29292
-$dark-solid-bg: #0D212D
-// replace with a blend mode
+$text-color: #E8E8ED
+$project-bg: #0F1923
+$project-link: #94A3B8
+$dark-solid-bg: #0A1628
+// Clean minimal palette
 
-$intro-link: #49BD9D
-$headline: #faa82e
-$resume-bg: #252742
-$contact-bg: #243041
-$contact-link: #49ace1
-$nav-text: #C0B3A0
-$button-primary: #d24376
-$button-secondary: #CCCCCC
-$gradient-top: #eea849
-$gradient-bottom: #f46b45
-$light-purple: #A1BAE3
+$intro-link: #3B82F6
+$headline: #F8FAFC
+$resume-bg: #111827
+$contact-bg: #0F172A
+$contact-link: #60A5FA
+$nav-text: #94A3B8
+$button-primary: #3B82F6
+$button-secondary: #E2E8F0
+$gradient-top: #3B82F6
+$gradient-bottom: #1D4ED8
+$light-purple: #94A3B8
 
 $black: #000000
 $white: #FFFFFF
@@ -65,16 +65,18 @@ $elements: front, intro-wrapper, profile, intro, contact-wrap, contact, resume-w
 	height: $atom-spacing*6
 	line-height: $atom-spacing*6
 	padding: 0 $atom-spacing*4
-	+box-shadow(0, $atom-spacing*0.5, $atom-spacing, $button-shadow)
-	border-radius: $button-radius
-	font-size: 0.9em
+	border-radius: $atom-spacing
+	font-size: 0.85em
+	font-weight: 500
 	text-transform: uppercase
 	text-decoration: none
 	text-align: center
 	cursor: pointer
-	+transition(ease, 0.3s)
+	letter-spacing: 0.04em
+	+transition(ease, 0.2s)
 	&:hover
 		+transform(translate(0px, -$atom-spacing*0.25))
+		opacity: 0.9
 .primary-button
 	+button-general
 	background-color: $button-primary
@@ -113,11 +115,6 @@ a
 	text-decoration: none
 body
 	background-color: $dark-solid-bg
-	background-image: url(../img/bg.png)
-	background-position: center
-	background-size: cover
-	background-repeat: no-repeat
-	background-attachment: fixed
 	margin: 0
 	padding: 0
 	font-size: $fs-default
@@ -148,7 +145,8 @@ body
 	background-attachment: fixed
 .key-term
 	color: $contact-link
-	font-style: italic
+	font-weight: 600
+	font-style: normal
 .intro-wrapper
 	+outer-container
 	+clearfix
@@ -174,13 +172,12 @@ body
 					font-size: 2.7em
 				+bp-beyond-papa
 					font-size: 3.5em
-				font-family: 'headline'
-				font-weight: normal
-				text-transform: lowercase
-				line-height: 1.1em
+				font-family: $primary-font, $secondary-font, sans-serif
+				font-weight: 700
+				text-transform: none
+				line-height: 1.15em
 				color: $headline
-			.de-emph-headline
-				-webkit-text-fill-color: rgba(lighten($headline, 10%), 0.15)
+				letter-spacing: -0.02em
 		.typed-wrap
 			height: $atom-spacing*7
 			a
@@ -332,9 +329,10 @@ body
 // TODO: use the border mixin for browser compatibility
 .fixed
 	position: fixed
-	background: $project-bg
+	background: rgba($dark-solid-bg, 0.95)
 	top: 0
-	border-bottom: 1px dashed rgba($nav-text, 0.5)
+	border-bottom: 1px solid rgba($nav-text, 0.15)
+	backdrop-filter: blur(8px)
 	display: none
 	+bp-parent-bears
 		display: block
@@ -342,8 +340,10 @@ body
 	margin: $atom-spacing*8 0
 	text-align: left
 	text-transform: uppercase
-	font-size: 1.8em
-	font-weight: bold
+	font-size: 1.4em
+	font-weight: 600
+	letter-spacing: 0.08em
+	color: $nav-text
 .projects-wrap
 	margin-top: -$atom-spacing*15
 	+bp-baby-bear
@@ -358,12 +358,9 @@ body
 	padding: $atom-spacing*24 $atom-spacing*2 $atom-spacing*9 $atom-spacing*2
 	background: $project-bg
 	position: relative
-	+transform(skew(0, -2.5deg))
 	z-index: index($elements, projects-wrap)
-	+box-shadow(0, 0, $atom-spacing, $black)
 	.projects
 		+outer-container
-		+transform(skew(0, 2.5deg))
 		+clearfix
 		position: relative
 		z-index: index($elements, projects)
@@ -428,11 +425,8 @@ body
 	padding: $atom-spacing*8 $atom-spacing*2 $atom-spacing*4 $atom-spacing*2
 	background: $resume-bg
 	position: relative
-	+transform(skew(0, 2.5deg))
 	z-index: index($elements, resume-wrap)
-	+box-shadow(0, 0, $atom-spacing, $black)
 	.resume
-		+transform(skew(0, -2.5deg))
 		+clearfix
 		+outer-container
 		position: relative
@@ -495,9 +489,10 @@ body
 				margin: 12px 16px 0 0
 			+box-shadow(0, 0, $atom-spacing*0.5, $button-shadow)
 .bio-key
-	color: $headline
-	font-weight: bold
+	color: $intro-link
+	font-weight: 600
 	text-transform: uppercase
+	letter-spacing: 0.05em
 .skills
 	display: block
 	margin: $atom-spacing*6 auto
@@ -535,11 +530,8 @@ body
 	padding: $atom-spacing*8 $atom-spacing*2 $atom-spacing*12 $atom-spacing*2
 	background: $contact-bg
 	position: relative
-	+transform(skew(0, -2.5deg))
 	z-index: index($elements, contact-wrap)
-	+box-shadow(0, 0, $atom-spacing, $black)
 	.contact
-		+transform(skew(0, 2.5deg))
 		+clearfix
 		+outer-container
 		position: relative
@@ -627,84 +619,44 @@ body
 				float: right
 .footer-wrap
 	margin-top: $atom-spacing*5
-	padding: $atom-spacing*8 $atom-spacing*2 $atom-spacing*4 $atom-spacing*2
+	padding: $atom-spacing*6 $atom-spacing*2 $atom-spacing*4 $atom-spacing*2
 	position: relative
 	.footer
 		font-size: 0.8em
 		+outer-container
 		+clearfix
+		text-align: center
 		h2.footer
 			text-transform: uppercase
-			font-weight: bold
+			font-weight: 600
 			font-size: 1em
-			margin-bottom: $atom-spacing
-		.credits
-			opacity: 0.8
-			+bp-papa-max
-				+span-columns(10)
-				+shift(1)
-				margin-bottom: $atom-spacing*6
-			+bp-beyond-papa
-				+span-columns(4)
-			a
-				color: $intro-link
-				border-bottom: 1px dotted $intro-link
-		.map-wrap
-			+bp-papa-max
-				+span-columns(10)
-				+shift(1)
-				margin-bottom: $atom-spacing*6
-			+bp-beyond-papa
-				+span-columns(4)
-				margin-bottom: $atom-spacing*4
-			h2.footer
-				opacity: 0.8
-			.map
-				border-radius: $button-radius
-				overflow: hidden
-				height: $atom-spacing*32
-				iframe
-					width: 100%
-					height: 100%
+			margin-bottom: $atom-spacing*2
+			letter-spacing: 0.05em
 		.social
 			margin: 0 auto
 			h2
-				opacity: 0.8
-				text-align: left
+				opacity: 0.7
+				text-align: center
 			a
 				color: $intro-link
 				text-decoration: none
-			+bp-papa-max
-				+span-columns(10)
-				+shift(1)
-				text-align: left
-			+bp-beyond-papa
-				text-align: left
-				+span-columns(4)
-				padding-left: 30px
 			.fa-lg
 				line-height: 1.75em
 			.footer-icon
-				+bp-baby-bear
-					font-size: 1.5em
-				+bp-mama-bear
-					font-size: 1.8em
+				font-size: 1.8em
 				+bp-parent-bears
 					font-size: 2em
 				font-weight: normal
-				margin-right: 18px
+				margin: 0 $atom-spacing*1.5
 				margin-bottom: $atom-spacing*3
 				.fa:hover
-					transform: scale3d(1.3,1.3,1.3)
+					transform: scale3d(1.2,1.2,1.2)
+					transition: transform 0.2s ease
 	.footer-text
 		font-size: 0.8em
-		opacity: 0.6
+		opacity: 0.5
 		text-align: center
-	.footer-text-lv
-		margin: $atom-spacing*10 auto $atom-spacing*4 auto
-		margin-bottom: 0
-		span
-			color: #f84e4e
+		margin-top: $atom-spacing*4
 
 // Resume time-line
 #timeline
@@ -722,7 +674,7 @@ body
 		left: 18px
 		height: 100%
 		width: $atom-spacing*0.25
-		background: #faa82e
+		background: $button-primary
 		// rgba($text-color, 0.1)
 	+bp-parent-bears
 		margin:
@@ -1258,7 +1210,7 @@ body.project-body
 	margin-top: -13px
 .VueCarousel-slide 
 	h2
-		color: #faa82e !important
+		color: $intro-link !important
 		margin-top: 10px
 		overflow: hidden
 		text-overflow: ellipsis
@@ -1276,7 +1228,7 @@ body.project-body
 		position: absolute
 		bottom: 20px 
 	.read-more a
-		color: #faa82e !important
+		color: $intro-link !important
 .bnyLogo
 	background-image: url('../img/bny.svg')
 	background-repeat: no-repeat
@@ -1284,7 +1236,7 @@ body.project-body
 	height: $atom-spacing*6
 @media (max-width: 600px)
 	body
-		background-image: url(../img/bg1.png)
+		background-color: $dark-solid-bg
 .jwLogo
 	background-image: url('../img/jungle.svg')
 	background-repeat: no-repeat
@@ -1292,37 +1244,9 @@ body.project-body
 	height: $atom-spacing*6
 	zoom: 70%
 .infotab
-	float: left 
-	width: 30%
-	height: 202px 
-	&:hover
-		color: $white
-	button 
-		display: block
-		color: black 
-		padding: 19px 15px 
-		width: 100% 
-		border: none 
-		outline: none 
-		text-align: left 
-		cursor: pointer 
-		transition: 0.3s 
-		font-size: 15px
-		background-color: #fbf9f9
-		&:hover 
-			background-color: #252742
-			color: $white !important
-			transform: translate(5px, 0px)
-		&.active 
-			background-color: #252742 
-			color: #EAEAEA !important
-			transform: translate(5px, 0px)
-.infotabcontent 
-	float: left 
-	padding: 0px 12px
-	width: 70% 
-	border-left: none 
-	height: 202px 
+	display: none
+.infotabcontent
+	padding: 0 
 .pd10
 	padding: 10px
 
