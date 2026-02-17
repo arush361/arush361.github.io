@@ -10,7 +10,7 @@
         <nav class="breadcrumb reveal">
           <a href="{{ site.baseurl }}/">Home</a>
           <span class="breadcrumb__sep">/</span>
-          <a href="{{ site.baseurl }}/projects/">Projects</a>
+          <a href="{{ site.baseurl }}/projects/">Products</a>
           <span class="breadcrumb__sep">/</span>
           <span>{{ page.project_name }}</span>
         </nav>
@@ -31,19 +31,21 @@
         {% if page.next_project %}
         <hr>
         <div class="project-nav reveal">
-          <a href="{{ site.baseurl }}/projects/">&#8592; All Projects</a>
+          <a href="{{ site.baseurl }}/projects/">&#8592; All Products</a>
           <a href="{{ site.baseurl }}{{ page.next_project_url }}">{{ page.next_project }} &#8594;</a>
         </div>
         {% else %}
         <hr>
         <div class="project-nav reveal">
-          <a href="{{ site.baseurl }}/projects/">&#8592; All Projects</a>
-        </div>
+          <a href="{{ site.baseurl }}/projects/">&#8592; All Products</a>
+</div>
         {% endif %}
       </article>
     </main>
     {% include footer.html %}
   </div>
   <script src="{{ site.baseurl }}/js/app.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js"></script>
+  <script src="{{ site.baseurl }}/js/excalidraw-render.js" defer></script>
 </body>
 </html>

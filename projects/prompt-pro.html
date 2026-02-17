@@ -3,7 +3,7 @@ layout: project
 title: "PromptPro | Arush Sharma"
 excerpt: "Grammarly for prompts — a Chrome extension that enhances AI prompts in real-time on ChatGPT and Copilot."
 project_name: "PromptPro"
-company: "Personal Project"
+company: "Personal Product"
 date_range: "Aug 2025"
 tags: [Chrome MV3, OpenAI API, FastAPI, JavaScript, MongoDB, Prompt Engineering]
 next_project: "AI Nudge"
@@ -47,19 +47,7 @@ next_project_url: "/projects/ai-nudge.html"
 
 <div class="project-section reveal">
   <h2 class="project-section__title">Technical Architecture</h2>
-  <div class="flow">
-    <div class="flow__node flow__node--accent">Select text<b>ChatGPT / Copilot</b></div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node">Content script<b>Injected UI</b></div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node">Service worker<b>Background (MV3)</b></div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node flow__node--accent">OpenAI GPT<b>Prompt rewrite</b></div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node">Enhanced prompt<b>Modal preview</b></div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node flow__node--accent">Apply<b>Replace in input</b></div>
-  </div>
+  <div class="excalidraw-diagram" data-project="prompt-pro"></div>
   <p class="exp-entry__desc" style="margin-top:0.75rem">Key in chrome.storage.sync. Background worker mediates all network calls. Optional FastAPI + MongoDB backend scaffolded for future prompt history.</p>
 </div>
 

@@ -1164,6 +1164,20 @@ ul.project-list li strong {
 
 .misc-page p + a { margin-top: 1rem; }
 
+/* === Excalidraw Diagram === */
+.excalidraw-diagram {
+  padding: 1rem 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.excalidraw-diagram::-webkit-scrollbar { display: none; }
+
+.excalidraw-diagram svg {
+  display: block;
+  margin: 0 auto;
+}
+
 /* === Responsive === */
 @media (max-width: 950px) {
   body { background: var(--paper); }

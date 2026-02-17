@@ -3,7 +3,7 @@ layout: project
 title: "Desktop Authenticator | Arush Sharma"
 excerpt: "A Minecraft-themed desktop 2FA authenticator for macOS with encrypted local storage and zero cloud sync."
 project_name: "Desktop Authenticator"
-company: "Personal Project"
+company: "Personal Product"
 date_range: "May 2025"
 tags: [Electron, macOS, TOTP, SQLite, QR Code, Security, Privacy-First]
 next_project: "AI Nudge"
@@ -47,24 +47,7 @@ next_project_url: "/projects/ai-nudge.html"
 
 <div class="project-section reveal">
   <h2 class="project-section__title">Technical Architecture</h2>
-  <div class="flow">
-    <div class="flow__col">
-      <div class="flow__node flow__node--group">File upload</div>
-      <div class="flow__node flow__node--group">Drag &amp; drop</div>
-      <div class="flow__node flow__node--group">&#8984;V paste</div>
-      <div class="flow__node flow__node--group">Screenshot</div>
-    </div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node">jimp<b>Image processing</b></div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node">qrcode-reader<b>QR decode</b></div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node flow__node--accent">otplib<b>TOTP (RFC 6238)</b></div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node flow__node--accent">SQLite<b>Encrypted storage</b></div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node">Electron UI<b>macOS native</b></div>
-  </div>
+  <div class="excalidraw-diagram" data-project="mac-authenticator"></div>
   <p class="exp-entry__desc" style="margin-top:0.75rem">Fully air-gappable. No network calls, no telemetry, no cloud sync. Packaged as .dmg and .zip.</p>
 </div>
 

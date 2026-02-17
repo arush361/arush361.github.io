@@ -3,7 +3,7 @@ layout: project
 title: "LangEx PDF | Arush Sharma"
 excerpt: "AI-powered semantic extraction from healthcare PDFs with LLM providers and intelligent regex fallback."
 project_name: "LangEx PDF"
-company: "Personal Project"
+company: "Personal Product"
 date_range: "May 2025"
 tags: [LLMs, Python, PHP, Healthcare, PDF Extraction, RAG, Gemini, OpenAI, Anthropic]
 next_project: "Desktop Authenticator"
@@ -33,22 +33,7 @@ next_project_url: "/projects/mac-authenticator.html"
 
 <div class="project-section reveal">
   <h2 class="project-section__title">Technical Architecture</h2>
-  <div class="flow">
-    <div class="flow__node flow__node--accent">PDF Upload<b>Drag &amp; drop UI</b></div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node">PHP 8.1+<b>REST controller</b></div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node">PyMuPDF<b>Text extraction</b></div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__col">
-      <div class="flow__node flow__node--accent">LangExtract<b>AI semantic parse</b></div>
-      <div class="flow__node flow__node--group">Regex fallback<b>Healthcare patterns</b></div>
-    </div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node">Schema map<b>Type-specific</b></div>
-    <div class="flow__arrow">&rarr;</div>
-    <div class="flow__node flow__node--accent">JSON / CSV<b>Export</b></div>
-  </div>
+  <div class="excalidraw-diagram" data-project="langex-pdf"></div>
   <p class="exp-entry__desc" style="margin-top:0.75rem">AI providers selectable at runtime (Gemini / OpenAI / Anthropic). Ephemeral API keys &mdash; never stored. SQLite metadata + 24h temp files. CSRF + strict validation.</p>
 </div>
 
