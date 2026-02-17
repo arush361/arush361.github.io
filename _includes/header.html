@@ -1,27 +1,17 @@
-<input id = "slide-menu-toggler" type = "checkbox" />
-<label for = "slide-menu-toggler" class = "hamburger"><i class="fa fa-bars fa-2x"></i></label>
-<div class = "slide-menu">
-  <a class = "ham-nav-link" href = "#top">
-    <div class = "ham-logo">
-        <img src = "../img/logo.png"/>
-    </div>
-  </a>
-  <nav>
-    <ul>
-      <a class = "ham-nav-link" href = "#resume"><li>About</li></a>
-      <a class = "ham-nav-link" href = "#contact"><li>Contact</li></a>
-    </ul>
-  </nav>
-</div>
-<div class = "nav-wrap">
-  <div class = "nav" id = "papa-nav">
-    <a href = "#top"><div class = "logo mt-16"></div></a>
-    <nav>
-      <ul>
-        <li><a href = "#resume">About</a></li>
-        <li><a href = "#contact">Contact</a></li>
-        <li><a href = "https://arusharma.medium.com" target="_blank">Blog</a></li>
-      </ul>
+<header class="site-header">
+  <div class="site-header__top">
+    <a href="{{ site.baseurl }}/" class="site-header__name">Arush Sharma</a>
+    <nav class="site-header__nav">
+      <a href="#experience">Experience</a>
+      <a href="{{ site.baseurl }}/projects/">Projects</a>
+      <a href="#contact">Contact</a>
+      <a href="https://arusharma.medium.com" target="_blank" rel="noopener">Blog &#8599;</a>
     </nav>
   </div>
-</div>
+  <div class="site-header__social">
+    <a href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener">LinkedIn</a> &middot;
+    <a href="https://www.github.com/{{ site.github }}" target="_blank" rel="noopener">GitHub</a> &middot;
+    <a href="https://arusharma.medium.com" target="_blank" rel="noopener">Medium</a>
+  </div>
+</header>
+<hr>

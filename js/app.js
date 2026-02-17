@@ -1,121 +1,81 @@
-document.onreadystatechange = function() {
-    if (document.readyState !== "complete") {
-        document.querySelector("body").style.visibility = "hidden";
-        document.querySelector(".loader").style.visibility = "visible";
-    	$('html, body').css({
-	  'overflow': 'hidden',
-	  'height': '100%'
-	})
-    } else {
-        document.querySelector(".loader").style.display = "none";
-        document.querySelector("body").style.visibility = "visible";
-	$('html, body').css({
-	  'overflow': 'auto',
-	  'height': 'auto'
-	})
-    }
-};
-
-jQuery(document).ready(function(){
-  var viewPortWidth = jQuery(window).width();
-  var viewPortHeight = jQuery(window).height();
-  var navPos = jQuery("#papa-nav").offset().top;
-
-  jQuery(window).resize(allResizeFunctions());
-
-  // onClick functions for the hamburger menu
-  displayHamburgerMenu();
-  AOS.init({});
-
-  // Scroll to point
-  $('a[href*="#"]:not([href="#"])').click(function() {
-    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-      if (target.length) {
-        $('html, body').animate({
-          scrollTop: target.offset().top - 96
-        }, 1000);
-        return false;
-      }
-    }
-  });
-
-  // Typed animation
-  $(".typed").typed({
-        strings: [
-        "Building identity platforms for humans and AI agents at PointClickCare.",
-        "Previously: PokerStars (72M+ users), Amdocs, IDFC First Bank, BNY Mellon.",
-        "10+ years across Product Management, Software Engineering & Platform Strategy.",
-        "I speak 4 languages: English, German, Hindi, and Punjabi.",
-        "AWS Certified Solutions Architect. MBA from MDI Gurgaon."],
-        typeSpeed: 0,
-        startDelay: 1000,
-        backDelay: 4000,
-        showCursor: true,
-        loopCount: 10000,
-        loop: true,
-        typeSpeed: -2,
-        shuffle: false
-      });
-
-  jQuery(window).scroll(function(){
-    var scrollPos = jQuery(window).scrollTop();
-    var logoOpacity = opacityControl((4*scrollPos)/(viewPortWidth*3));
-    var introOpacity = opacityControl(1 - (scrollPos-200)*2/viewPortHeight);
-    $('.logo').css({
-        'opacity' : logoOpacity
-    });
-
-    if (viewPortWidth > 767){
-      moveInClass('.project');
-      moveInClass('.skill');
-    }
-
-    // Parallax for intro
-    $('.intro').css({
-      'transform' : 'translate(0px, ' + scrollPos/16 + '%)'
-    });
-    $('.intro').css({
-      'opacity' : introOpacity
-    });
-
-    if (scrollPos >= (navPos)){
-      jQuery(".nav-wrap").addClass("fixed");
-    }
-    else{
-      jQuery(".nav-wrap").removeClass("fixed");
-    }
-  });
-
+/* Smooth scroll for anchor links */
+document.addEventListener('click', function (e) {
+  var link = e.target.closest('a[href^="#"]');
+  if (!link) return;
+  var el = document.querySelector(link.getAttribute('href'));
+  if (!el) return;
+  e.preventDefault();
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
-function opacityControl(opacityMeasure){
-  if (opacityMeasure < 1 && opacityMeasure >= 0) return opacityMeasure;
-  else if (opacityMeasure > 1) return 1;
-  else if (opacityMeasure < 0) return 0;
-}
-
-function displayHamburgerMenu(){
-  $( ".ham-nav-link" ).click(function() {
-    $('#slide-menu-toggler').trigger('click');
-  });
-}
-
-function moveInClass(classToAnimate){
-  var scrollPos = jQuery(window).scrollTop();
-  var viewPortHeight = jQuery(window).height();
-  $(classToAnimate).each(function(){
-    if (scrollPos > $(this).offset().top - (14*viewPortHeight/15)){
-      $(this).addClass('appear');
+/* Scroll reveal animation */
+var observer = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
     }
-    else {
-      $(this).removeClass('appear');
-    };
   });
-}
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-function allResizeFunctions(){
-  var viewPortWidth = jQuery(window).width();
-  var viewPortHeight = jQuery(window).height();
-}
+document.querySelectorAll('.reveal').forEach(function (el) {
+  observer.observe(el);
+});
+
+/* Carousel navigation */
+document.querySelectorAll('.carousel').forEach(function (carousel) {
+  var track = carousel.querySelector('.carousel__track');
+  var prev = carousel.querySelector('.carousel__btn--prev');
+  var next = carousel.querySelector('.carousel__btn--next');
+  var scrollAmount = 272;
+
+  if (prev) prev.addEventListener('click', function () {
+    track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  });
+
+  if (next) next.addEventListener('click', function () {
+    track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  });
+});
+
+/* Medium RSS feed → carousel cards */
+(function () {
+  var track = document.getElementById('posts-track');
+  if (!track) return;
+
+  var rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@arusharma';
+
+  fetch(rssUrl)
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (!data.items || !data.items.length) {
+        track.innerHTML = '<div class="posts-loading">No articles found.</div>';
+        return;
+      }
+
+      track.innerHTML = '';
+
+      data.items.forEach(function (item) {
+        /* Strip HTML from description to get plain text excerpt */
+        var tmp = document.createElement('div');
+        tmp.innerHTML = item.description || '';
+        var text = tmp.textContent || tmp.innerText || '';
+        var excerpt = text.substring(0, 160).trim() + '\u2026';
+
+        var card = document.createElement('a');
+        card.className = 'post-card';
+        card.href = item.link;
+        card.target = '_blank';
+        card.rel = 'noopener';
+
+        card.innerHTML =
+          '<div class="post-card__source">Medium</div>' +
+          '<p class="post-card__text">' + item.title + ' \u2014 ' + excerpt + '</p>' +
+          '<span class="post-card__cta">Read article \u2197</span>';
+
+        track.appendChild(card);
+      });
+    })
+    .catch(function () {
+      track.innerHTML = '<div class="posts-loading">Could not load articles.</div>';
+    });
+})();

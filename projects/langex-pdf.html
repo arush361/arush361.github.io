@@ -1,0 +1,98 @@
+---
+layout: project
+title: "LangEx PDF | Arush Sharma"
+excerpt: "AI-powered semantic extraction from healthcare PDFs with LLM providers and intelligent regex fallback."
+project_name: "LangEx PDF"
+company: "Personal Project"
+date_range: "May 2025"
+tags: [LLMs, Python, PHP, Healthcare, PDF Extraction, RAG, Gemini, OpenAI, Anthropic]
+next_project: "Desktop Authenticator"
+next_project_url: "/projects/mac-authenticator.html"
+---
+<div class="project-section reveal">
+  <h2 class="project-section__title">Problem Statement</h2>
+  <p>Anyone who's worked in healthcare knows the pain: critical patient data locked inside PDFs that no two hospitals format the same way. You can throw OCR at it, but OCR doesn't understand context. You can write regex, but regex breaks the moment someone changes a form layout. Neither approach scales.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Hypothesis</h2>
+  <p>LLMs are great at understanding messy documents &mdash; until they hallucinate a patient's date of birth. Regex never hallucinates but can't handle layout variation. What if you ran both? LLM first, regex as safety net. And instead of trying to parse every document type under the sun, focus on three and do them really well.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Solution</h2>
+  <p><strong>LangEx PDF</strong> is a full-stack web application for extracting structured data from healthcare PDFs using AI-powered semantic extraction with intelligent fallback:</p>
+  <ul class="project-list">
+    <li><strong>Multi-provider AI extraction</strong> &mdash; supports Gemini, OpenAI, and Anthropic as selectable LLM providers. Users bring their own API key at runtime &mdash; keys never persisted or logged</li>
+    <li><strong>Intelligent regex fallback</strong> &mdash; if AI fails or is disabled, pattern-based extraction kicks in automatically. Healthcare regex is production-grade; others are best-effort</li>
+    <li><strong>AI Insights card</strong> &mdash; every extraction returns confidence level, text quality score, structure score, language detection, and processing notes</li>
+    <li><strong>Type-specific schemas</strong> &mdash; output maps to healthcare (patient info, diagnoses, medications), contract, or extended care agreement structures</li>
+    <li><strong>Drag-and-drop UI</strong> &mdash; modern responsive interface with real-time extraction progress, color-coded confidence, and JSON/CSV export</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Technical Architecture</h2>
+  <div class="flow">
+    <div class="flow__node flow__node--accent">PDF Upload<b>Drag &amp; drop UI</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node">PHP 8.1+<b>REST controller</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node">PyMuPDF<b>Text extraction</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__col">
+      <div class="flow__node flow__node--accent">LangExtract<b>AI semantic parse</b></div>
+      <div class="flow__node flow__node--group">Regex fallback<b>Healthcare patterns</b></div>
+    </div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node">Schema map<b>Type-specific</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node flow__node--accent">JSON / CSV<b>Export</b></div>
+  </div>
+  <p class="exp-entry__desc" style="margin-top:0.75rem">AI providers selectable at runtime (Gemini / OpenAI / Anthropic). Ephemeral API keys &mdash; never stored. SQLite metadata + 24h temp files. CSRF + strict validation.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Key Product Decisions</h2>
+  <ul class="project-list">
+    <li><strong>3 document types, not 30</strong> &mdash; narrowing scope to healthcare, contracts, and extended care agreements increased extraction accuracy dramatically. General-purpose extractors sacrifice quality for breadth</li>
+    <li><strong>AI-first with deterministic fallback</strong> &mdash; LLMs handle the 80% of documents with layout variation. Regex handles the structured 20% where patterns are reliable. Together, coverage approaches 100%</li>
+    <li><strong>Ephemeral API keys</strong> &mdash; keys live only in browser memory for the duration of the request. Never stored, never logged, never sent to our backend. This makes the tool usable in regulated environments without compliance review</li>
+    <li><strong>Confidence scoring as a product feature</strong> &mdash; surfacing extraction confidence, text quality, and structure scores lets users make informed decisions about trusting the output. Transparency builds trust in AI-powered tools</li>
+    <li><strong>WCAG 2.1 AA accessibility</strong> &mdash; semantic markup, keyboard navigation, and screen reader support. Healthcare tools must be accessible by default, not as an afterthought</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Impact &amp; Metrics</h2>
+  <div class="project-metrics">
+    <div class="project-metric">
+      <div class="project-metric__value">3 LLMs</div>
+      <div class="project-metric__label">Gemini, OpenAI, Anthropic &mdash; selectable at runtime</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">AI + Regex</div>
+      <div class="project-metric__label">Dual extraction pipeline with automatic fallback</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">Open Source</div>
+      <div class="project-metric__label"><a href="https://github.com/arush361/LangEx-PDF" target="_blank" rel="noopener">View on GitHub &#8599;</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Lessons Learned</h2>
+  <ul class="project-list">
+    <li><strong>LLMs are powerful but not reliable alone.</strong> Semantic extraction works brilliantly 85% of the time &mdash; and fails unpredictably the other 15%. The regex fallback isn't a crutch; it's what makes the product production-viable. AI + deterministic systems > AI alone</li>
+    <li><strong>Scope discipline is a superpower.</strong> The temptation was to support every document type. Narrowing to 3 types made extraction quality measurably better and development 3x faster. Ship narrow, expand with data</li>
+    <li><strong>Healthcare compliance starts at the architecture level.</strong> Ephemeral keys, no document persistence, temp file cleanup, CSRF protection &mdash; these aren't features, they're table stakes. Designing for HIPAA from day one is cheaper than retrofitting later</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Links</h2>
+  <p>
+    <a href="https://github.com/arush361/LangEx-PDF" target="_blank" rel="noopener">GitHub Repository &#8599;</a>
+  </p>
+</div>

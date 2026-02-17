@@ -1,0 +1,102 @@
+---
+layout: misc
+title: "Projects | Arush Sharma"
+excerpt: "Products and platforms I've built across HealthTech, gaming, fintech, and SaaS."
+---
+<div class="projects-page">
+  <nav class="breadcrumb">
+    <a href="{{ site.baseurl }}/">Home</a>
+    <span class="breadcrumb__sep">/</span>
+    <span>Projects</span>
+  </nav>
+
+  <h1 class="projects-page__title">Products I've Shipped</h1>
+
+  <!-- Toggle -->
+  <div class="proj-tabs">
+    <button class="proj-tab proj-tab--active" onclick="switchTab('personal',this)">Personal</button>
+    <button class="proj-tab" onclick="switchTab('professional',this)">Professional</button>
+  </div>
+
+  <!-- Personal Projects -->
+  <div class="proj-panel" id="panel-personal">
+
+    <a class="proj-row" href="{{ site.baseurl }}/projects/prompt-pro.html">
+      <span class="proj-row__name">PromptPro</span>
+      <span class="proj-row__desc">Grammarly for prompts &mdash; enhance text inline on ChatGPT &amp; Copilot</span>
+      <span class="proj-row__meta">Aug 2025</span>
+    </a>
+
+    <a class="proj-row" href="{{ site.baseurl }}/projects/ai-nudge.html">
+      <span class="proj-row__name">AI Nudge</span>
+      <span class="proj-row__desc">New tab replaced with AI shortcuts, weather, and smart nudges</span>
+      <span class="proj-row__meta">May 2025</span>
+    </a>
+
+    <a class="proj-row" href="{{ site.baseurl }}/projects/mac-authenticator.html">
+      <span class="proj-row__name">Desktop Authenticator</span>
+      <span class="proj-row__desc">Local-only 2FA for macOS with encrypted storage. Minecraft-themed</span>
+      <span class="proj-row__meta">May 2025</span>
+    </a>
+
+    <a class="proj-row" href="{{ site.baseurl }}/projects/langex-pdf.html">
+      <span class="proj-row__name">LangEx PDF</span>
+      <span class="proj-row__desc">LLM + regex extraction from healthcare PDFs. Multi-provider</span>
+      <span class="proj-row__meta">May 2025</span>
+    </a>
+
+  </div>
+
+  <!-- Professional Projects -->
+  <div class="proj-panel proj-panel--hidden" id="panel-professional">
+
+    <div class="proj-row proj-row--muted">
+      <span class="proj-row__name">PointClickCare</span>
+      <span class="proj-row__desc">Identity platform for humans &amp; AI agents in healthcare</span>
+      <span class="proj-row__meta">2024 &ndash; now</span>
+    </div>
+
+    <div class="proj-row proj-row--muted">
+      <span class="proj-row__name">Amdocs</span>
+      <span class="proj-row__desc">ML-powered billing &amp; payments optimization</span>
+      <span class="proj-row__meta">2022 &ndash; 2024</span>
+    </div>
+
+    <div class="proj-row proj-row--muted">
+      <span class="proj-row__name">Flutter / PokerStars</span>
+      <span class="proj-row__desc">Platform personalization &amp; automation at 72M+ user scale</span>
+      <span class="proj-row__meta">2022 &ndash; 2024</span>
+    </div>
+
+    <div class="proj-row proj-row--muted">
+      <span class="proj-row__name">IDFC First Bank</span>
+      <span class="proj-row__desc">WhatsApp loan channel &amp; digital lending. 20M MAU</span>
+      <span class="proj-row__meta">2020 &ndash; 2022</span>
+    </div>
+
+    <div class="proj-row proj-row--muted">
+      <span class="proj-row__name">JungleWorks</span>
+      <span class="proj-row__desc">Telecom ERP from scratch. $1M revenue in 3 months</span>
+      <span class="proj-row__meta">2017 &ndash; 2018</span>
+    </div>
+
+    <div class="proj-row proj-row--muted">
+      <span class="proj-row__name">BNY Mellon</span>
+      <span class="proj-row__desc">RFID document management. 2 WOW Awards</span>
+      <span class="proj-row__meta">2015 &ndash; 2017</span>
+    </div>
+
+    <p class="proj-panel__note">Detailed case studies coming soon.</p>
+
+  </div>
+
+</div>
+
+<script>
+function switchTab(tab, btn) {
+  document.querySelectorAll('.proj-panel').forEach(function(p) { p.classList.add('proj-panel--hidden'); });
+  document.querySelectorAll('.proj-tab').forEach(function(t) { t.classList.remove('proj-tab--active'); });
+  document.getElementById('panel-' + tab).classList.remove('proj-panel--hidden');
+  btn.classList.add('proj-tab--active');
+}
+</script>

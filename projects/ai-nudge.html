@@ -1,0 +1,106 @@
+---
+layout: project
+title: "AI Nudge | Arush Sharma"
+excerpt: "A Chrome extension that transforms your new tab into an intelligent AI productivity hub."
+project_name: "AI Nudge"
+company: "Personal Project"
+date_range: "May 2025"
+tags: [Chrome Extension, OpenAI API, JavaScript, HTML/CSS, Product Hunt API, Privacy-First]
+---
+<div class="project-section reveal">
+  <h2 class="project-section__title">Problem Statement</h2>
+  <p>Here's the thing &mdash; we're all paying for ChatGPT, Claude, Gemini, whatever. And yet half the time we forget to use them. You're 20 minutes into manually formatting a spreadsheet before it hits you: <em>"wait, AI could've done this in seconds."</em> The tools exist. The habit doesn't.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Hypothesis</h2>
+  <p>What if the new tab page &mdash; something you open 30+ times a day without thinking &mdash; quietly reminded you that AI exists? Not in an annoying way. Just... there. Alongside the time, weather, and whatever's trending on Product Hunt.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Solution</h2>
+  <p><strong>AI Nudge</strong> replaces the default Chrome new tab page with an intelligent productivity hub that combines utility with AI awareness:</p>
+  <ul class="project-list">
+    <li><strong>AI-Generated Inspiration</strong> &mdash; motivational quotes powered by OpenAI, refreshed every 30 minutes to keep content fresh without being noisy</li>
+    <li><strong>One-Click AI Access</strong> &mdash; shortcut tiles to ChatGPT, Claude, Gemini, and other AI tools so they're always one click away</li>
+    <li><strong>Contextual Utility</strong> &mdash; local time, weather via OpenWeather API, and trending Product Hunt launches to keep you informed</li>
+    <li><strong>Customizable Nudging</strong> &mdash; users control when and how often the AI prompt appears &mdash; respecting attention, not hijacking it</li>
+    <li><strong>Privacy-First Architecture</strong> &mdash; all API keys stored locally in browser storage. Zero data leaves the device. No analytics, no tracking</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Screenshots</h2>
+  <div class="project-screenshots">
+    <figure class="project-screenshot">
+      <img src="{{ site.baseurl }}/img/projects/ai-nudge/screenshot1.jpg" alt="AI Nudge - new tab with time, weather, AI shortcuts and Product Hunt feed" loading="lazy">
+      <figcaption>New tab &mdash; time, weather, AI-generated quote, search, AI tool shortcuts, and trending Product Hunt launches</figcaption>
+    </figure>
+    <figure class="project-screenshot">
+      <img src="{{ site.baseurl }}/img/projects/ai-nudge/screenshot2.jpg" alt="AI Nudge - settings and customization" loading="lazy">
+      <figcaption>Customization &mdash; API key setup and nudge frequency settings</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Technical Architecture</h2>
+  <div class="flow">
+    <div class="flow__node flow__node--accent">New Tab<b>Chrome MV3</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node">Vanilla JS<b>HTML/CSS</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__col">
+      <div class="flow__node flow__node--group">OpenAI API<b>GPT quotes</b></div>
+      <div class="flow__node flow__node--group">OpenWeather<b>Geolocation</b></div>
+      <div class="flow__node flow__node--group">Product Hunt<b>Trending feed</b></div>
+    </div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node flow__node--accent">chrome.storage<b>Keys &amp; prefs</b></div>
+  </div>
+  <p class="exp-entry__desc" style="margin-top:0.75rem">All client-side. No server, no database. Minimal permissions: storage, geolocation (with consent), notifications.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Key Product Decisions</h2>
+  <ul class="project-list">
+    <li><strong>New tab as the surface</strong> &mdash; Chosen over a sidebar or popup because new tab is the highest-frequency, lowest-friction touchpoint. Average user opens 20&ndash;50 new tabs per day</li>
+    <li><strong>No account required</strong> &mdash; Users bring their own API keys. This eliminates auth complexity, reduces trust barriers, and means zero ongoing infrastructure cost</li>
+    <li><strong>30-minute quote refresh</strong> &mdash; Tested faster intervals (5 min, 15 min) but they became wallpaper. 30 minutes balances freshness with noticeability</li>
+    <li><strong>Opt-in geolocation</strong> &mdash; Weather only appears after explicit consent. Graceful fallback to manual city entry if denied</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Impact &amp; Metrics</h2>
+  <div class="project-metrics">
+    <div class="project-metric">
+      <div class="project-metric__value">3 APIs</div>
+      <div class="project-metric__label">OpenAI, OpenWeather, Product Hunt integrated client-side</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">0 KB</div>
+      <div class="project-metric__label">Server infrastructure &mdash; fully client-side, privacy-first</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">Open Source</div>
+      <div class="project-metric__label"><a href="https://github.com/arush361/AI-Nudge" target="_blank" rel="noopener">View on GitHub &#8599;</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Lessons Learned</h2>
+  <ul class="project-list">
+    <li><strong>Behavior change beats feature count.</strong> The extension does 5 things, but the core value is one thing: making you <em>think</em> about AI at the right moment. Every other feature exists to earn the right to deliver that nudge</li>
+    <li><strong>Privacy as a feature, not a constraint.</strong> "No server" isn't a limitation &mdash; it's a trust accelerator. Users are far more willing to enter API keys when they can verify nothing leaves their browser</li>
+    <li><strong>The best distribution is zero friction.</strong> Chrome extensions install in one click. No signup, no onboarding wizard, no email verification. The time from "interested" to "using" is under 10 seconds</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Links</h2>
+  <p>
+    <a href="https://github.com/arush361/AI-Nudge" target="_blank" rel="noopener">GitHub Repository &#8599;</a>
+  </p>
+</div>

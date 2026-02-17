@@ -1,0 +1,108 @@
+---
+layout: project
+title: "PromptPro | Arush Sharma"
+excerpt: "Grammarly for prompts — a Chrome extension that enhances AI prompts in real-time on ChatGPT and Copilot."
+project_name: "PromptPro"
+company: "Personal Project"
+date_range: "Aug 2025"
+tags: [Chrome MV3, OpenAI API, FastAPI, JavaScript, MongoDB, Prompt Engineering]
+next_project: "AI Nudge"
+next_project_url: "/projects/ai-nudge.html"
+---
+<div class="project-section reveal">
+  <h2 class="project-section__title">Problem Statement</h2>
+  <p>Most people write terrible prompts. Not because they're bad at thinking — because prompting is a new skill and nobody has muscle memory for it yet. You type something vague into ChatGPT, get a mediocre response, and blame the model. But 80% of the time, the prompt was the problem.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Hypothesis</h2>
+  <p>What if prompt improvement happened <em>inline</em>, right where you're already typing? No separate tool, no copy-pasting into a "prompt optimizer" — just highlight your text, click a button, and get a better version. Like Grammarly, but for talking to AI.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Solution</h2>
+  <p><strong>PromptPro</strong> is a Chrome extension that injects directly into ChatGPT and Microsoft Copilot, adding an "Improve" button next to the input box:</p>
+  <ul class="project-list">
+    <li><strong>Inline enhancement</strong> &mdash; select text or place cursor in any supported input, click Improve, get a restructured prompt with better clarity, structure, and specificity</li>
+    <li><strong>Persona-based refinement</strong> &mdash; optionally refine with a persona (Teacher, Executive, Technical Reviewer) to shape the tone and depth</li>
+    <li><strong>One-click apply</strong> &mdash; the enhanced prompt replaces your original text directly in the input box. Hit enter and go</li>
+    <li><strong>BYOK (Bring Your Own Key)</strong> &mdash; runs on your personal OpenAI API key, stored in Chrome sync storage. Never leaves your browser</li>
+    <li><strong>Zero tracking</strong> &mdash; no analytics, no telemetry, no prompt logging. Your prompts stay yours</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Screenshots</h2>
+  <div class="project-screenshots">
+    <figure class="project-screenshot">
+      <img src="{{ site.baseurl }}/img/projects/promptpro/enhancing.png" alt="PromptPro - Improve Prompt button on ChatGPT with enhancing spinner" loading="lazy">
+      <figcaption>Inline on ChatGPT &mdash; "Improve Prompt" button with enhancing spinner</figcaption>
+    </figure>
+    <figure class="project-screenshot">
+      <img src="{{ site.baseurl }}/img/projects/promptpro/result.png" alt="PromptPro - Enhanced prompt result with Role, Task, Context, Parameters" loading="lazy">
+      <figcaption>Enhanced result &mdash; structured with Role, Task, Context, and Parameters</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Technical Architecture</h2>
+  <div class="flow">
+    <div class="flow__node flow__node--accent">Select text<b>ChatGPT / Copilot</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node">Content script<b>Injected UI</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node">Service worker<b>Background (MV3)</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node flow__node--accent">OpenAI GPT<b>Prompt rewrite</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node">Enhanced prompt<b>Modal preview</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node flow__node--accent">Apply<b>Replace in input</b></div>
+  </div>
+  <p class="exp-entry__desc" style="margin-top:0.75rem">Key in chrome.storage.sync. Background worker mediates all network calls. Optional FastAPI + MongoDB backend scaffolded for future prompt history.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Key Product Decisions</h2>
+  <ul class="project-list">
+    <li><strong>Inject, don't redirect.</strong> The extension lives <em>inside</em> ChatGPT and Copilot, not in a separate tab. Users shouldn't context-switch to improve their prompts &mdash; it should happen where they already are</li>
+    <li><strong>Enhancement, not generation.</strong> PromptPro improves what you wrote, it doesn't write for you. This preserves intent while adding structure &mdash; which is what most prompts actually need</li>
+    <li><strong>Personas are optional, not default.</strong> Most users just want "make this clearer." Power users get persona modes. Layering complexity rather than frontloading it</li>
+    <li><strong>Backend exists but sleeps.</strong> The FastAPI service is scaffolded for prompt history and team features, but v1 is fully client-side. Ship the simplest thing that works, then layer on</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Impact &amp; Metrics</h2>
+  <div class="project-metrics">
+    <div class="project-metric">
+      <div class="project-metric__value">2 Sites</div>
+      <div class="project-metric__label">ChatGPT &amp; Microsoft Copilot supported</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">MV3</div>
+      <div class="project-metric__label">Modern Chrome Manifest V3 architecture</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">Open Source</div>
+      <div class="project-metric__label"><a href="https://github.com/arush361/ChromePromptPro" target="_blank" rel="noopener">View on GitHub &#8599;</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Lessons Learned</h2>
+  <ul class="project-list">
+    <li><strong>The best AI tools are invisible.</strong> Nobody wants to learn a new interface to use AI better. Embedding the enhancement directly into the tools people already use eliminates adoption friction entirely</li>
+    <li><strong>Prompt quality is a UX problem, not an AI problem.</strong> The models are capable enough &mdash; the bottleneck is the human-to-model interface. Improving that interface is where the leverage is</li>
+    <li><strong>MV3 is painful but worth it.</strong> Chrome's Manifest V3 restrictions (no persistent background pages, limited APIs) forced cleaner architecture. The service worker pattern is actually better for this use case</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Links</h2>
+  <p>
+    <a href="https://github.com/arush361/ChromePromptPro" target="_blank" rel="noopener">GitHub Repository &#8599;</a>
+  </p>
+</div>

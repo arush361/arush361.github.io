@@ -1,22 +1,14 @@
 # Site settings
 title: Arush Sharma | Sr. Product Manager - Platform @ PointClickCare
-tagline: "Sr. Product Manager building identity platforms in HealthTech. 10+ years across healthcare, gaming, fintech, and SaaS."
+tagline: "Sr. Product Manager building intelligent platforms in HealthTech. 10+ years shipping products across healthcare, gaming, fintech, and SaaS."
 
-twitter: arush361
-quora: Arush-Sharma-5
 github: arush361
 medium: arusharma
 linkedin: sharma-arush
-facebook: arush.sharma.56
-angel: arush-sharma
-university: arush.sharma
 
 # Contact
 email: "arush361@gmail.com"
 
-# Use this for production
-sass:
-   sass_dir: _sass
-   style: compressed
+exclude: [.scss, README.md, node_modules, gruntfile.js, package.json, .playwright-mcp]
 
-exclude: [.scss, README.md, node_modules, gruntfile.js, package.json]
+include: [v1]

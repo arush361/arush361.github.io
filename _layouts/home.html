@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 {% include head.html %}
-
-	<body>
-		<div class="loader"></div>
-		{% include header.html %}
-		{% include intro.html %}
-		{% include bio.html %}
-		{% include contact.html %}
-		{% include footer.html %}
-		{{ content }}
-		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
-	</body>
+<body>
+  <a href="{{ site.baseurl }}/v1/" class="version-toggle">&#9654; Classic</a>
+  <div class="paper">
+    {% include header.html %}
+    <main>
+      {% include intro.html %}
+      {% include posts.html %}
+      {% include project-links.html %}
+      {% include bio.html %}
+      {% include skills.html %}
+      {% include contact.html %}
+    </main>
+    {% include footer.html %}
+    {{ content }}
+  </div>
+  <script src="{{ site.baseurl }}/js/app.js" defer></script>
+</body>
 </html>

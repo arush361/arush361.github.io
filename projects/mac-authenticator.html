@@ -1,0 +1,113 @@
+---
+layout: project
+title: "Desktop Authenticator | Arush Sharma"
+excerpt: "A Minecraft-themed desktop 2FA authenticator for macOS with encrypted local storage and zero cloud sync."
+project_name: "Desktop Authenticator"
+company: "Personal Project"
+date_range: "May 2025"
+tags: [Electron, macOS, TOTP, SQLite, QR Code, Security, Privacy-First]
+next_project: "AI Nudge"
+next_project_url: "/projects/ai-nudge.html"
+---
+<div class="project-section reveal">
+  <h2 class="project-section__title">Problem Statement</h2>
+  <p>I was unlocking my phone 15 times a day just to copy 2FA codes. Authy has a desktop app, sure, but it syncs your secrets to their cloud &mdash; and once you work in identity security, that starts to feel uncomfortable. I wanted something that stays on my machine and doesn't phone home. So I built it.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Hypothesis</h2>
+  <p>There's a gap between "phone authenticator" and "enterprise SSO." Desktop power users who care about privacy have basically no good options. Also &mdash; if you have to look at a 2FA app dozens of times a day, it might as well not look boring.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Solution</h2>
+  <p><strong>Desktop Authenticator</strong> is a macOS Electron app that generates TOTP codes locally with encrypted storage and zero external data transmission:</p>
+  <ul class="project-list">
+    <li><strong>TOTP generation</strong> &mdash; standard RFC 6238 time-based codes, auto-refreshing every 30 seconds with a visual countdown</li>
+    <li><strong>Multiple QR input methods</strong> &mdash; file upload, drag-and-drop, clipboard paste (&#8984;V), and screenshot capture for maximum flexibility</li>
+    <li><strong>Encrypted local storage</strong> &mdash; secrets stored in a SQLite database with <code>electron-store</code> encryption. Nothing leaves the device</li>
+    <li><strong>Minecraft-themed UI</strong> &mdash; pixelated VT323 font, block-style elements, dark mode support. Makes the mundane act of copying codes feel intentional</li>
+    <li><strong>Native macOS integration</strong> &mdash; menu bar presence, keyboard shortcuts, system dark mode detection</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Screenshots</h2>
+  <div class="project-screenshots">
+    <figure class="project-screenshot">
+      <img src="{{ site.baseurl }}/img/projects/authenticator/app-main.png" alt="Desktop Authenticator - main view with TOTP codes" loading="lazy">
+      <figcaption>Main view &mdash; TOTP codes with 30-second countdown</figcaption>
+    </figure>
+    <figure class="project-screenshot">
+      <img src="{{ site.baseurl }}/img/projects/authenticator/app-add.png" alt="Desktop Authenticator - add account via QR code" loading="lazy">
+      <figcaption>Add account &mdash; QR code scan via drag-drop or clipboard</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Technical Architecture</h2>
+  <div class="flow">
+    <div class="flow__col">
+      <div class="flow__node flow__node--group">File upload</div>
+      <div class="flow__node flow__node--group">Drag &amp; drop</div>
+      <div class="flow__node flow__node--group">&#8984;V paste</div>
+      <div class="flow__node flow__node--group">Screenshot</div>
+    </div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node">jimp<b>Image processing</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node">qrcode-reader<b>QR decode</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node flow__node--accent">otplib<b>TOTP (RFC 6238)</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node flow__node--accent">SQLite<b>Encrypted storage</b></div>
+    <div class="flow__arrow">&rarr;</div>
+    <div class="flow__node">Electron UI<b>macOS native</b></div>
+  </div>
+  <p class="exp-entry__desc" style="margin-top:0.75rem">Fully air-gappable. No network calls, no telemetry, no cloud sync. Packaged as .dmg and .zip.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Key Product Decisions</h2>
+  <ul class="project-list">
+    <li><strong>Desktop-first, not mobile</strong> &mdash; deliberately chose the underserved surface. Mobile authenticators are abundant; desktop ones that respect privacy are rare</li>
+    <li><strong>Local-only by design</strong> &mdash; no sync feature, no account system. This isn't a limitation &mdash; it's the core value proposition. Users who want cloud sync already have Authy</li>
+    <li><strong>Minecraft theme as differentiation</strong> &mdash; authenticator apps are commoditized. The theme creates emotional attachment to a utility tool &mdash; users remember and reach for it because it's <em>theirs</em></li>
+    <li><strong>Multiple QR input paths</strong> &mdash; onboarding friction kills 2FA adoption. Supporting 4 input methods (file, drag, paste, screenshot) means users can always get their secrets into the app regardless of source format</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Impact &amp; Metrics</h2>
+  <div class="project-metrics">
+    <div class="project-metric">
+      <div class="project-metric__value">0 Servers</div>
+      <div class="project-metric__label">Fully local &mdash; encrypted SQLite, no cloud, no telemetry</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">4 Input Methods</div>
+      <div class="project-metric__label">File, drag-drop, clipboard paste, screenshot</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">Open Source</div>
+      <div class="project-metric__label"><a href="https://github.com/arush361/MacAuthenticatorApp" target="_blank" rel="noopener">View on GitHub &#8599;</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Lessons Learned</h2>
+  <ul class="project-list">
+    <li><strong>Security products succeed on trust, not features.</strong> The single most important "feature" is what the app <em>doesn't</em> do &mdash; it doesn't phone home, doesn't sync, doesn't require an account. Absence of risk is the product</li>
+    <li><strong>Personality in utility software creates loyalty.</strong> The Minecraft theme sounds frivolous but it turns a forgettable tool into something users actively choose over alternatives. Delight matters even in security tools</li>
+    <li><strong>Electron gets a bad rap, but for this use case it's ideal.</strong> The app needs to process images, read QR codes, and manage a database &mdash; all things Electron handles well. It doesn't need to be a 5MB native Swift app; it needs to work reliably</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Links</h2>
+  <p>
+    <a href="https://github.com/arush361/MacAuthenticatorApp" target="_blank" rel="noopener">GitHub Repository &#8599;</a>
+  </p>
+</div>

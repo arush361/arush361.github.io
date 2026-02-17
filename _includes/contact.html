@@ -1,28 +1,32 @@
-<div class = "contact-wrap">
-  <div class = "contact" id = "contact">
-      <h1 class = "section-header mb-30">Get In Touch</h1>
-      <div class = "contact-left">
-        <div class = "headshot">
-          <img src = "../img/head.webp"/>
-        </div>
-        <div class = "contact-note">
-          <p>Always learning. Always adjusting the blueprint. I'm interested in connecting with teams building impactful products&mdash;whether in HealthTech, AI platforms, or beyond. Let's talk.</p>
-        </div>
-      </div>
-      <div class = "contact-form">
-        <form action="https://formspree.io/f/maylppgy" method="POST" class="form-stacked">
-          <label for="formName">Your name</label>
-          <input type="text" id = "formName" name="name" class="field-light" placeholder="Name*" required>
-          <label for="formEmail">Your email address</label>
-          <input type="email" id = "formEmail" name="email" class="field-light" placeholder="Email Address*" required>
-          <label for="formMessage">Your message</label>
-          <textarea type="text" id = "formMessage" name="message" class="field-light" rows="5" required placeholder="What would you like to discuss?"></textarea>
-          <input type="hidden" name="_next" value="{{ site.url }}/thanks.html" />
-          <input type="hidden" name="_subject" value="New submission!" />
-          <input type="text" name="_gotcha" style="display:none" />
-          <input type="submit" class="primary-button intro-button" value="Send Message">
-          <a class = "secondary-button" href ="{{ site.url }}/ArushResume1.pdf" target = "_blank"><i class="fa fa-file-pdf-o button-fa"></i> Download Resume</a>
-        </form>
-      </div>
+<section class="section contact reveal" id="contact">
+  <hr>
+  <h2 class="section__title">Let's Talk</h2>
+  <p>I'm always up for conversations about product strategy, AI in enterprise, identity systems, or why your favorite app's UX got worse. If you're building something interesting &mdash; or hiring someone who has &mdash; drop me a line.</p>
+  <p style="margin-bottom:1rem"><em>No recruiters with "exciting opportunities in crypto." Everything else welcome.</em></p>
+  <div class="contact__links">
+    <a href="mailto:arush361@gmail.com?subject=Hello from your website!">arush361@gmail.com</a>
+    <a href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+    <a href="https://www.github.com/{{ site.github }}" target="_blank" rel="noopener">GitHub &#8599;</a>
   </div>
-</div>
+  <div class="form-card">
+    <div class="form-card__title">Or just say hi</div>
+    <form class="contact-form" action="https://formspree.io/f/maylppgy" method="POST">
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="What should I call you?" required>
+      </div>
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" placeholder="What's on your mind? Product ideas, collaboration, feedback, or just a good meme." required></textarea>
+      </div>
+      <input type="hidden" name="_next" value="{{ site.url }}/thanks.html">
+      <input type="hidden" name="_subject" value="New submission!">
+      <input type="text" name="_gotcha" style="display:none">
+      <button type="submit" class="form-submit">Send message &rarr;</button>
+    </form>
+  </div>
+</section>

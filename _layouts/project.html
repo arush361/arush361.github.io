@@ -1,17 +1,49 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
-<!--<![endif]-->
-
-{% include phead.html %}
-
-	<body class = "project-body">
-		<!--[if lt IE 8]>
-		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-		<![endif]-->
-		{{ content }}
-	</body>
+<html lang="en">
+{% include head.html %}
+<body>
+  <a href="{{ site.baseurl }}/v1/" class="version-toggle">&#9654; Classic</a>
+  <div class="paper">
+    {% include header.html %}
+    <main>
+      <article class="project-detail">
+        <nav class="breadcrumb reveal">
+          <a href="{{ site.baseurl }}/">Home</a>
+          <span class="breadcrumb__sep">/</span>
+          <a href="{{ site.baseurl }}/projects/">Projects</a>
+          <span class="breadcrumb__sep">/</span>
+          <span>{{ page.project_name }}</span>
+        </nav>
+        <div class="project-detail__header reveal">
+          <h1>{{ page.project_name }}</h1>
+          <div class="project-detail__meta">
+            <span class="project-detail__company">{{ page.company }}</span>
+            <span class="project-detail__date">{{ page.date_range }}</span>
+          </div>
+          <div class="project-detail__tags">
+            {% for tag in page.tags %}
+            <span class="stag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <hr>
+        {{ content }}
+        {% if page.next_project %}
+        <hr>
+        <div class="project-nav reveal">
+          <a href="{{ site.baseurl }}/projects/">&#8592; All Projects</a>
+          <a href="{{ site.baseurl }}{{ page.next_project_url }}">{{ page.next_project }} &#8594;</a>
+        </div>
+        {% else %}
+        <hr>
+        <div class="project-nav reveal">
+          <a href="{{ site.baseurl }}/projects/">&#8592; All Projects</a>
+        </div>
+        {% endif %}
+      </article>
+    </main>
+    {% include footer.html %}
+  </div>
+  <script src="{{ site.baseurl }}/js/app.js" defer></script>
+</body>
 </html>
