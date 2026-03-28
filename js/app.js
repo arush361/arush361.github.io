@@ -8,7 +8,11 @@
   /* --- 1. Typewriter Effect --- */
   function initTypewriter() {
     var el = document.querySelector('.typewriter');
-    if (!el) return;
+    if (!el) {
+      // No typewriter on this page, trigger terminal immediately
+      setTimeout(initTerminal, 300);
+      return;
+    }
 
     var lines = (el.getAttribute('data-text') || '').split('|');
     var cursor = document.createElement('span');
@@ -22,8 +26,9 @@
 
     function type() {
       if (lineIdx >= lines.length) {
-        // Done typing -- keep cursor blinking for 2s then remove
         setTimeout(function () { cursor.style.display = 'none'; }, 2000);
+        // Trigger terminal after typewriter finishes
+        initTerminal();
         return;
       }
 
@@ -33,7 +38,6 @@
         charIdx++;
         setTimeout(type, 45 + Math.random() * 35);
       } else {
-        // Move to next line
         lineIdx++;
         if (lineIdx < lines.length) {
           var br = document.createElement('br');
@@ -43,13 +47,81 @@
           charIdx = 0;
           setTimeout(type, 200);
         } else {
-          type(); // trigger the "done" branch
+          type();
         }
       }
     }
 
-    // Small delay before starting
     setTimeout(type, 400);
+  }
+
+  /* --- 1b. Terminal Intro Animation --- */
+  function initTerminal() {
+    var terminal = document.getElementById('hero-terminal');
+    var body = document.getElementById('terminal-body');
+    if (!terminal || !body) return;
+
+    var script = [
+      { type: 'cmd', prompt: '>', text: ' arush.role()' },
+      { type: 'output', text: '<span class="t-key">Sr. Product Manager</span> <span class="t-comment">// Platform @ PointClickCare</span>' },
+      { type: 'output', text: 'Building the auth layer between patient data' },
+      { type: 'output', text: 'and everything that wants it. Doctors. Admins. <span class="t-highlight">AI agents.</span>' },
+      { type: 'blank' },
+      { type: 'cmd', prompt: '>', text: ' arush.career()' },
+      { type: 'output', text: '<span class="t-stat">10+ years</span> shipping products people actually use' },
+      { type: 'output', text: '<span class="t-highlight">PokerStars</span> <span class="t-comment">(72M+ users)</span> \u2192 <span class="t-highlight">FinTech</span> <span class="t-comment">(420M+ credit cards)</span> \u2192 HealthTech' },
+      { type: 'output', text: '<span class="t-stat">0\u21921</span> builds. <span class="t-stat">M+ users</span>. <span class="t-stat">M+ revenue</span>. Still going.' },
+      { type: 'blank' },
+      { type: 'cmd', prompt: '>', text: ' arush.stack()' },
+      { type: 'output', text: '<span class="t-key">tools:</span>  <span class="t-val">LLMs \u2022 platform thinking \u2022 unreasonable optimism</span>' },
+      { type: 'output', text: '<span class="t-key">fuel:</span>   <span class="t-val">alarming amounts of coffee</span>' },
+      { type: 'output', text: '<span class="t-key">belief:</span> <span class="t-val">complexity is just clarity waiting to happen</span>' },
+    ];
+
+    // Show terminal container
+    terminal.classList.add('active');
+
+    var lineIdx = 0;
+
+    function renderLine() {
+      if (lineIdx >= script.length) {
+        // All lines done, show hero links
+        var links = document.querySelector('.hero__links');
+        if (links) {
+          setTimeout(function () {
+            links.style.animation = 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both';
+          }, 300);
+        }
+        return;
+      }
+
+      var item = script[lineIdx];
+      var div = document.createElement('div');
+      div.className = 'terminal__line';
+
+      if (item.type === 'blank') {
+        div.classList.add('t-blank');
+        div.innerHTML = '&nbsp;';
+      } else if (item.type === 'cmd') {
+        div.innerHTML = '<span class="t-prompt">' + item.prompt + '</span> <span class="t-cmd">' + item.text + '</span>';
+      } else {
+        div.innerHTML = '<span class="t-output">' + item.text + '</span>';
+      }
+
+      body.appendChild(div);
+
+      // Stagger: commands get a typing delay, outputs appear faster
+      var delay = item.type === 'cmd' ? 400 : item.type === 'blank' ? 150 : 120;
+
+      setTimeout(function () {
+        div.classList.add('visible');
+        lineIdx++;
+        setTimeout(renderLine, delay);
+      }, 30);
+    }
+
+    // Start after a brief pause
+    setTimeout(renderLine, 300);
   }
 
   /* --- 2. Scroll Reveal + Stagger --- */
