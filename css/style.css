@@ -1201,6 +1201,16 @@ a.proj-dir__item:hover .proj-dir__name {
   gap: 0.875rem;
 }
 
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 22rem) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
 .form-field {
   display: flex;
   flex-direction: column;
@@ -1234,7 +1244,7 @@ a.proj-dir__item:hover .proj-dir__name {
   box-shadow: 0 0 0 3px var(--accent-light);
 }
 
-.form-field textarea { resize: vertical; min-height: 5rem; }
+.form-field textarea { resize: vertical; min-height: 2.25rem; }
 
 .form-submit {
   display: inline-flex;
@@ -2326,24 +2336,69 @@ body, .paper, .site-header, .form-card, .terminal,
 }
 
 .games-reveal__btn {
-  background: transparent;
-  border: 1px dashed var(--divider);
-  border-radius: 6px;
-  padding: 1rem 1.5rem;
+  position: relative;
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.04), rgba(153, 102, 255, 0.04));
+  border: none;
+  border-radius: 10px;
+  padding: 1.25rem 2rem;
   cursor: pointer;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
-  transition: border-color 0.3s, transform 0.2s;
+  gap: 0.4rem;
+  transition: transform 0.25s;
   font-family: inherit;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
+  overflow: hidden;
+}
+
+/* Animated gradient border */
+.games-reveal__btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  padding: 1.5px;
+  background: linear-gradient(
+    var(--gradient-angle, 0deg),
+    #00e5ff, #9966ff, #00e5ff
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderSpin 3s linear infinite;
+}
+
+@keyframes borderSpin {
+  to { --gradient-angle: 360deg; }
+}
+
+@property --gradient-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Shimmer sweep */
+.games-reveal__btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  animation: shimmerSweep 3s ease-in-out infinite;
+}
+
+@keyframes shimmerSweep {
+  0%, 100% { left: -60%; }
+  50% { left: 100%; }
 }
 
 .games-reveal__btn:hover {
-  border-color: var(--accent);
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 .games-reveal__icon {
@@ -2354,9 +2409,11 @@ body, .paper, .site-header, .form-card, .terminal,
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--accent);
+  border: 1px solid rgba(0, 229, 255, 0.4);
   border-radius: 50%;
   animation: starFlash 1.5s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes starFlash {
@@ -2367,7 +2424,7 @@ body, .paper, .site-header, .form-card, .terminal,
     opacity: 0.7;
   }
   50% {
-    box-shadow: 0 0 16px rgba(0, 229, 255, 0.6), 0 0 40px rgba(0, 229, 255, 0.2);
+    box-shadow: 0 0 16px rgba(0, 229, 255, 0.6), 0 0 40px rgba(0, 229, 255, 0.15);
     text-shadow: 0 0 12px rgba(0, 229, 255, 0.8);
     transform: scale(1.15);
     opacity: 1;
@@ -2378,12 +2435,17 @@ body, .paper, .site-header, .form-card, .terminal,
   font-size: 0.875rem;
   color: var(--text);
   font-weight: 500;
+  position: relative;
+  z-index: 1;
 }
 
 .games-reveal__hint {
   font-size: 0.6875rem;
   color: var(--muted);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
 }
 
 /* Glitch effect on reveal button */
