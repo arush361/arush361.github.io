@@ -1,9 +1,9 @@
 <footer class="site-footer">
   <p class="footer__links">
-    <a href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener">LinkedIn</a> &middot;
-    <a href="https://www.github.com/{{ site.github }}" target="_blank" rel="noopener">GitHub</a> &middot;
-    <a href="https://arusharma.medium.com" target="_blank" rel="noopener">Medium</a> &middot;
-    <a href="mailto:arush361@gmail.com?subject=Hello!">Email</a>
+    <a href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a> &middot;
+    <a href="https://www.github.com/{{ site.github }}" target="_blank" rel="noopener noreferrer">GitHub</a> &middot;
+    <a href="{{ site.medium_url }}" target="_blank" rel="noopener noreferrer">Medium</a> &middot;
+    <a href="mailto:{{ site.email }}?subject=Hello!">Email</a>
   </p>
-  <p class="footer__copy">&copy; 2026 Arush Sharma</p>
+  <p class="footer__copy">&copy; {{ 'now' | date: '%Y' }} Arush Sharma</p>
 </footer>

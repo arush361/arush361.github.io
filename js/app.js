@@ -410,29 +410,40 @@
       }
     }
 
+    function isDark() {
+      return document.documentElement.getAttribute('data-theme') === 'dark';
+    }
+
+    // Light: blue particles. Dark: cyan/teal glow
+    function pColor(alpha) {
+      return isDark()
+        ? 'rgba(0, 220, 255, ' + alpha + ')'
+        : 'rgba(0, 85, 255, ' + alpha + ')';
+    }
+
     function drawParticle(p) {
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0, 85, 255, 0.4)';
+      ctx.fillStyle = pColor(isDark() ? 0.5 : 0.4);
       ctx.fill();
     }
 
     function drawLine(p1, p2, dist, maxDist) {
-      var opacity = (1 - dist / maxDist) * 0.2;
+      var opacity = (1 - dist / maxDist) * (isDark() ? 0.25 : 0.2);
       ctx.beginPath();
       ctx.moveTo(p1.x, p1.y);
       ctx.lineTo(p2.x, p2.y);
-      ctx.strokeStyle = 'rgba(0, 85, 255, ' + opacity + ')';
+      ctx.strokeStyle = pColor(opacity);
       ctx.lineWidth = 1;
       ctx.stroke();
     }
 
     function drawMouseLine(p, dist) {
-      var opacity = (1 - dist / mouseDist) * 0.3;
+      var opacity = (1 - dist / mouseDist) * (isDark() ? 0.4 : 0.3);
       ctx.beginPath();
       ctx.moveTo(p.x, p.y);
       ctx.lineTo(mouse.x, mouse.y);
-      ctx.strokeStyle = 'rgba(0, 85, 255, ' + opacity + ')';
+      ctx.strokeStyle = pColor(opacity);
       ctx.lineWidth = 1.2;
       ctx.stroke();
     }
@@ -559,8 +570,120 @@
     setInterval(spawnGlyph, 2500 + Math.random() * 1500);
   }
 
+  /* --- 12. Back to Top Button --- */
+  function initBackToTop() {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    var shown = false;
+    window.addEventListener('scroll', function () {
+      var shouldShow = window.scrollY > 400;
+      if (shouldShow !== shown) {
+        shown = shouldShow;
+        btn.classList.toggle('visible', shown);
+      }
+    }, { passive: true });
+
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  /* --- 13. Dark Mode Toggle --- */
+  function initDarkMode() {
+    var toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+
+    // Check saved preference or system preference
+    var saved = localStorage.getItem('theme');
+    if (saved) {
+      document.documentElement.setAttribute('data-theme', saved);
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+
+    updateToggleIcon();
+
+    toggle.addEventListener('click', function () {
+      var current = document.documentElement.getAttribute('data-theme');
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateToggleIcon();
+    });
+
+    function updateToggleIcon() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      toggle.innerHTML = isDark ? '&#9728;' : '&#9790;';
+      toggle.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+    }
+  }
+
+  /* --- 13. Carousel Scroll Dots --- */
+  function initCarouselDots() {
+    document.querySelectorAll('.carousel').forEach(function (carousel) {
+      var track = carousel.querySelector('.carousel__track');
+      var dotsContainer = carousel.querySelector('.carousel__dots');
+      if (!track || !dotsContainer) return;
+
+      var cards = track.children;
+      var dotCount = cards.length;
+      if (dotCount <= 1) return;
+
+      // Create dots
+      for (var i = 0; i < dotCount; i++) {
+        var dot = document.createElement('button');
+        dot.className = 'carousel__dot';
+        dot.setAttribute('aria-label', 'Go to card ' + (i + 1));
+        dot.setAttribute('data-index', i);
+        dotsContainer.appendChild(dot);
+      }
+
+      function updateDots() {
+        var scrollLeft = track.scrollLeft;
+        var cardWidth = cards[0] ? cards[0].offsetWidth + 16 : 272; // 16 = gap
+        var activeIdx = Math.round(scrollLeft / cardWidth);
+        dotsContainer.querySelectorAll('.carousel__dot').forEach(function (d, idx) {
+          d.classList.toggle('carousel__dot--active', idx === activeIdx);
+        });
+      }
+
+      // Click dot to scroll
+      dotsContainer.addEventListener('click', function (e) {
+        var dot = e.target.closest('.carousel__dot');
+        if (!dot) return;
+        var idx = parseInt(dot.getAttribute('data-index'));
+        var cardWidth = cards[0] ? cards[0].offsetWidth + 16 : 272;
+        track.scrollTo({ left: idx * cardWidth, behavior: 'smooth' });
+      });
+
+      // Update on scroll
+      track.addEventListener('scroll', updateDots, { passive: true });
+
+      // Initial state
+      setTimeout(updateDots, 100);
+    });
+  }
+
+  /* --- 14. Fix Reveal Blank Gaps --- */
+  function fixRevealGaps() {
+    // Instantly show reveal elements that are already in or near the viewport
+    // This prevents large blank gaps on initial load
+    var viewHeight = window.innerHeight;
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      // If element is within 1.5x the viewport height, show it instantly
+      if (rect.top < viewHeight * 1.5) {
+        el.classList.add('visible');
+      }
+    });
+  }
+
   /* --- Initialize Everything --- */
   function init() {
+    initDarkMode();
+    initBackToTop();
+    fixRevealGaps();
     initTypewriter();
     initScrollReveal();
     initHRDraw();
@@ -570,6 +693,7 @@
     initHeaderScroll();
     initSmoothScroll();
     initCarousels();
+    initCarouselDots();
     initMediumFeed();
     initConstellation();
     initFloatingGlyphs();

@@ -4,13 +4,13 @@
   <p>I'm always up for conversations about product strategy, AI in enterprise, identity systems, or why your favorite app's UX got worse. If you're building something interesting &mdash; or hiring someone who has &mdash; drop me a line.</p>
   <p style="margin-bottom:1rem"><em>No recruiters with "exciting opportunities in crypto." Everything else welcome.</em></p>
   <div class="contact__links">
-    <a href="mailto:arush361@gmail.com?subject=Hello from your website!">arush361@gmail.com</a>
+    <a href="mailto:{{ site.email }}?subject=Hello from your website!">{{ site.email }}</a>
     <a href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener">LinkedIn &#8599;</a>
     <a href="https://www.github.com/{{ site.github }}" target="_blank" rel="noopener">GitHub &#8599;</a>
   </div>
   <div class="form-card">
     <div class="form-card__title">Or just say hi</div>
-    <form class="contact-form" action="https://formspree.io/f/maylppgy" method="POST">
+    <form class="contact-form" action="https://formspree.io/f/{{ site.formspree_id }}" method="POST">
       <div class="form-field">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" placeholder="What should I call you?" required>

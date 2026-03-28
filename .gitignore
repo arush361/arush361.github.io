@@ -6,3 +6,22 @@ _site/
 Gemfile
 Gemfile.lock
 node_modules/
+*.docx
+generate-audit.py
+
+# Debug screenshots (keep favicon.png, thumbnail.png, img/ folder)
+/audit-*.png
+/full-page-*.png
+/hero-*.png
+/boosted-*.png
+/toned-*.png
+/reduced-*.png
+/bg-anim*.png
+/projects-*.png
+/project-detail*.png
+/nav-*.png
+/terminal-*.png
+/word-*.png
+/light-mode.png
+/dark-mode.png
+/instant-*.png
