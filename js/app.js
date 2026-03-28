@@ -78,8 +78,16 @@
       { type: 'output', text: '<span class="t-key">belief:</span> <span class="t-val">complexity is just clarity waiting to happen</span>' },
     ];
 
-    // Show terminal container
+    // Show terminal container + trigger 3D assembly
     terminal.classList.add('active');
+
+    // 3D depth reveal: exploded -> assembled
+    if (terminal.classList.contains('terminal--3d-intro')) {
+      // Start assembled after a delay (layers fly in from exploded positions)
+      setTimeout(function () {
+        terminal.classList.add('assembled');
+      }, 200);
+    }
 
     var lineIdx = 0;
 
@@ -291,7 +299,31 @@
     }, { passive: true });
   }
 
-  /* --- 8. Smooth Scroll --- */
+  /* --- 8. Magnetic Link Underlines --- */
+  function initMagneticLinks() {
+    document.querySelectorAll('.nav-link').forEach(function (link) {
+      link.addEventListener('mousemove', function (e) {
+        var rect = link.getBoundingClientRect();
+        var x = e.clientX - rect.left - rect.width / 2;
+        var pct = x / (rect.width / 2); // -1 to 1
+        var after = link.querySelector('::after'); // can't access pseudo, use CSS variable
+        var skew = pct * 4; // max 4deg skew
+        var translateX = pct * 6; // max 6px shift
+        var scaleX = 1 + Math.abs(pct) * 0.15; // stretch up to 15%
+        link.style.setProperty('--mag-skew', skew + 'deg');
+        link.style.setProperty('--mag-tx', translateX + 'px');
+        link.style.setProperty('--mag-sx', scaleX);
+      });
+
+      link.addEventListener('mouseleave', function () {
+        link.style.setProperty('--mag-skew', '0deg');
+        link.style.setProperty('--mag-tx', '0px');
+        link.style.setProperty('--mag-sx', '1');
+      });
+    });
+  }
+
+  /* --- 9. Smooth Scroll --- */
   function initSmoothScroll() {
     document.addEventListener('click', function (e) {
       var link = e.target.closest('a[href^="#"]');
@@ -452,8 +484,16 @@
       }
     }
 
+    var _isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+    // Listen for theme changes instead of reading DOM every frame
+    var _themeObserver = new MutationObserver(function () {
+      _isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    });
+    _themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
     function isDark() {
-      return document.documentElement.getAttribute('data-theme') === 'dark';
+      return _isDark;
     }
 
     // Light: blue particles. Dark: cyan/teal glow
@@ -612,7 +652,63 @@
     setInterval(spawnGlyph, 2500 + Math.random() * 1500);
   }
 
-  /* --- 12. Back to Top Button --- */
+  /* --- 12. Avatar Lightbox --- */
+  function initAvatarLightbox() {
+    var lightbox = document.getElementById('avatar-lightbox');
+    if (!lightbox) return;
+
+    var avatars = document.querySelectorAll('.avatar--header, .avatar--lg');
+    var backdrop = lightbox.querySelector('.avatar-lightbox__backdrop');
+    var lbImg = lightbox.querySelector('.avatar-lightbox__img');
+
+    var funnyLabels = [
+      'I swear I am not an AI agent. Probably.',
+      'This human has shipped more products than most bots.',
+      'Warning: may spontaneously talk about OAuth.',
+      'Powered by coffee, not transformers.',
+      '72M+ users and they still don\'t know my face.',
+      'I build identity systems. Ironic, given this tiny photo.',
+      'Yes, I\'m real. My terminal intro is the AI part.',
+      'Trust issues? I literally manage them for a living.',
+      'The only thing I hallucinate is deadlines being met.'
+    ];
+    var nameEl = lightbox.querySelector('.avatar-lightbox__name');
+
+    function openLightbox() {
+      nameEl.textContent = funnyLabels[Math.floor(Math.random() * funnyLabels.length)];
+      lightbox.classList.remove('closing');
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.add('closing');
+      setTimeout(function () {
+        lightbox.classList.remove('active', 'closing');
+        document.body.style.overflow = '';
+      }, 400);
+    }
+
+    avatars.forEach(function (avatar) {
+      avatar.style.cursor = 'pointer';
+      avatar.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        openLightbox();
+      });
+    });
+
+    backdrop.addEventListener('click', closeLightbox);
+    lbImg.addEventListener('click', closeLightbox);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  }
+
+  /* --- 13. Back to Top Button --- */
   function initBackToTop() {
     var btn = document.getElementById('back-to-top');
     if (!btn) return;
@@ -724,6 +820,7 @@
   /* --- Initialize Everything --- */
   function init() {
     initDarkMode();
+    initAvatarLightbox();
     initBackToTop();
     fixRevealGaps();
     initTypewriter();
@@ -733,6 +830,7 @@
     initCounters();
     initMagneticTags();
     initHeaderScroll();
+    initMagneticLinks();
     initSmoothScroll();
     initCarousels();
     initCarouselDots();

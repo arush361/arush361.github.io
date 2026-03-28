@@ -1,0 +1,88 @@
+<!-- Easter Egg Games -->
+<section class="section reveal" id="games-section">
+  <hr>
+  <div class="games-reveal" id="games-reveal">
+    <button class="games-reveal__btn" id="games-reveal-btn">
+      <span class="games-reveal__icon">?</span>
+      <span class="games-reveal__text">Still here? You deserve a surprise.</span>
+      <span class="games-reveal__hint">click to reveal</span>
+    </button>
+  </div>
+
+  <div class="games-area" id="games-area" style="display:none;">
+    <h2 class="section__title">Pick Your Poison</h2>
+    <p class="games-area__sub">Three terminal games. Zero productivity. You've been warned.</p>
+
+    <div class="games-picker" id="games-picker">
+      <button class="game-pick" data-game="terminal-type">
+        <span class="game-pick__icon">&gt;_</span>
+        <span class="game-pick__name">Terminal Type</span>
+        <span class="game-pick__desc">Words fall. You type. It gets faster.</span>
+      </button>
+      <button class="game-pick" data-game="memory-decode">
+        <span class="game-pick__icon">{ }</span>
+        <span class="game-pick__name">Memory Decode</span>
+        <span class="game-pick__desc">Match hex pairs. Don't overthink it.</span>
+      </button>
+      <button class="game-pick" data-game="minesweeper">
+        <span class="game-pick__icon">*</span>
+        <span class="game-pick__name">Minesweeper</span>
+        <span class="game-pick__desc">9x9 grid. 10 mines. Don't go boom.</span>
+      </button>
+    </div>
+
+    <div class="games-stage" id="games-stage" style="display:none;">
+      <button class="games-back" id="games-back">&larr; Back to games</button>
+      <div class="games-container" id="games-container"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var revealBtn = document.getElementById('games-reveal-btn');
+  var revealWrapper = document.getElementById('games-reveal');
+  var gamesArea = document.getElementById('games-area');
+  var picker = document.getElementById('games-picker');
+  var stage = document.getElementById('games-stage');
+  var container = document.getElementById('games-container');
+  var backBtn = document.getElementById('games-back');
+
+  revealBtn.addEventListener('click', function() {
+    revealWrapper.style.display = 'none';
+    gamesArea.style.display = 'block';
+    gamesArea.classList.add('games-area--enter');
+  });
+
+  picker.addEventListener('click', function(e) {
+    var btn = e.target.closest('.game-pick');
+    if (!btn) return;
+    var game = btn.dataset.game;
+    loadGame(game);
+  });
+
+  backBtn.addEventListener('click', function() {
+    container.innerHTML = '';
+    stage.style.display = 'none';
+    picker.style.display = 'grid';
+  });
+
+  function loadGame(name) {
+    var path = '{{ site.baseurl }}/games/' + name + '.html';
+    fetch(path)
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+        container.innerHTML = html;
+        var scripts = container.querySelectorAll('script');
+        scripts.forEach(function(oldScript) {
+          var newScript = document.createElement('script');
+          newScript.textContent = oldScript.textContent;
+          oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+        picker.style.display = 'none';
+        stage.style.display = 'block';
+        stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+  }
+})();
+</script>

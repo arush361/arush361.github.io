@@ -7,18 +7,24 @@
   <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
 
   <!-- Open Graph -->
+  {% if page.og_image %}{% assign og_img = site.url | append: site.baseurl | append: page.og_image %}{% else %}{% assign og_img = site.url | append: site.baseurl | append: "/thumbnail.png" %}{% endif %}
   <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
   <meta property="og:type" content="{% if page.layout == 'project' %}article{% else %}website{% endif %}">
   <meta property="og:title" content="{{ page.title }}">
   <meta property="og:description" content="{{ desc }}">
-  <meta property="og:image" content="{{ site.url }}{{ site.baseurl }}/thumbnail.png">
+  <meta property="og:image" content="{{ og_img }}">
   <meta property="og:site_name" content="Arush Sharma">
+  {% if page.layout == 'project' %}
+  <meta property="article:author" content="Arush Sharma">
+  <meta property="article:published_time" content="{{ page.date_range }}">
+  {% for tag in page.tags %}<meta property="article:tag" content="{{ tag }}">
+  {% endfor %}{% endif %}
 
   <!-- Twitter/X Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ page.title }}">
   <meta name="twitter:description" content="{{ desc }}">
-  <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/thumbnail.png">
+  <meta name="twitter:image" content="{{ og_img }}">
 
   <!-- Theme & Icons -->
   <meta name="theme-color" content="#0055ff">
@@ -55,6 +61,26 @@
       { "@type": "EducationalOrganization", "name": "MDI Gurgaon" },
       { "@type": "EducationalOrganization", "name": "Chitkara University" }
     ]
+  }
+  </script>
+  {% endif %}
+
+  {% if page.layout == 'project' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "{{ page.project_name }}",
+    "description": "{{ page.excerpt }}",
+    "author": {
+      "@type": "Person",
+      "name": "Arush Sharma",
+      "url": "{{ site.url }}"
+    },
+    "datePublished": "{{ page.date_range }}",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "{% if page.tags contains 'macOS' %}macOS{% elsif page.tags contains 'Chrome Extension' or page.tags contains 'Chrome MV3' %}Chrome{% else %}Web{% endif %}"{% if page.tags %},
+    "keywords": "{{ page.tags | join: ', ' }}"{% endif %}
   }
   </script>
   {% endif %}

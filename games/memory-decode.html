@@ -1,0 +1,261 @@
+<!--
+  Memory Decode - Hex Pair Matching Game
+  Self-contained: no dependencies.
+-->
+<div id="memory-decode-game" style="
+  width: 100%; max-width: 420px; min-height: 480px;
+  background: #0a0a0f; border: 1px solid #1a1a2e;
+  border-radius: 6px; overflow: hidden;
+  font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  color: #e0e0e0; position: relative; user-select: none;
+">
+  <style>
+    #memory-decode-game * { box-sizing: border-box; margin: 0; padding: 0; }
+    #memory-decode-game .md-bar {
+      background: #111119; padding: 6px 12px; display: flex;
+      align-items: center; gap: 6px; border-bottom: 1px solid #1a1a2e;
+    }
+    #memory-decode-game .md-dot { width: 8px; height: 8px; border-radius: 50%; }
+    #memory-decode-game .md-dot.r { background: #ff5f57; }
+    #memory-decode-game .md-dot.y { background: #febc2e; }
+    #memory-decode-game .md-dot.g { background: #28c840; }
+    #memory-decode-game .md-title { font-size: 11px; color: #666; margin-left: auto; }
+    #memory-decode-game .md-hud {
+      display: flex; justify-content: space-between; padding: 6px 12px;
+      font-size: 11px; color: #666; background: #0d0d14;
+      border-bottom: 1px solid #1a1a2e;
+    }
+    #memory-decode-game .md-hud .val { color: #00e5ff; }
+    #memory-decode-game .md-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 8px; padding: 16px;
+    }
+    #memory-decode-game .md-card {
+      aspect-ratio: 1; background: #12121a; border: 1px solid #1a1a2e;
+      border-radius: 4px; display: flex; align-items: center;
+      justify-content: center; font-size: 13px; color: #333;
+      cursor: pointer; transition: all 0.25s; position: relative;
+    }
+    #memory-decode-game .md-card:hover { border-color: #00e5ff33; }
+    #memory-decode-game .md-card.flipped {
+      background: #0d1a2a; border-color: #00e5ff66; color: #00e5ff;
+    }
+    #memory-decode-game .md-card.matched {
+      background: #0a1a10; border-color: #28c84066; color: #28c840;
+    }
+    #memory-decode-game .md-card.wrong {
+      background: #1a0a0a; border-color: #ff5f5766; color: #ff5f57;
+    }
+    #memory-decode-game .md-card .md-face { font-size: 12px; }
+    #memory-decode-game .md-card .md-back {
+      color: #222; font-size: 16px;
+    }
+    #memory-decode-game .md-overlay {
+      position: absolute; inset: 0; background: rgba(10,10,15,0.92);
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; z-index: 10; gap: 16px;
+    }
+    #memory-decode-game .md-overlay h2 {
+      font-size: 20px; color: #00e5ff; font-weight: 600;
+    }
+    #memory-decode-game .md-overlay p {
+      font-size: 12px; color: #999; text-align: center; line-height: 1.6;
+    }
+    #memory-decode-game .md-overlay .score-line {
+      font-size: 14px; color: #e0e0e0;
+    }
+    #memory-decode-game .md-btn {
+      background: transparent; border: 1px solid #00e5ff; color: #00e5ff;
+      font-family: inherit; font-size: 13px; padding: 8px 24px;
+      border-radius: 4px; cursor: pointer; transition: all 0.2s;
+    }
+    #memory-decode-game .md-btn:hover { background: #00e5ff; color: #0a0a0f; }
+    #memory-decode-game .md-stars {
+      font-size: 18px; letter-spacing: 4px; color: #00e5ff;
+    }
+  </style>
+
+  <div class="md-bar">
+    <div class="md-dot r"></div><div class="md-dot y"></div><div class="md-dot g"></div>
+    <span class="md-title">memory-decode.sh</span>
+  </div>
+
+  <div class="md-hud" id="md-hud">
+    <span>PAIRS: <span class="val" id="md-pairs">0</span>/8</span>
+    <span>MOVES: <span class="val" id="md-moves">0</span></span>
+    <span>TIME: <span class="val" id="md-time">0:00</span></span>
+  </div>
+
+  <div class="md-grid" id="md-grid"></div>
+
+  <!-- Start overlay -->
+  <div class="md-overlay" id="md-start">
+    <h2>{ } Memory Decode</h2>
+    <p>Match pairs of hex codes.<br>Find all 8 pairs in the fewest moves.<br>Quick completion = higher score.</p>
+    <button class="md-btn" id="md-start-btn">Start</button>
+  </div>
+
+  <!-- Game Over overlay -->
+  <div class="md-overlay" id="md-gameover" style="display:none;">
+    <h2>Decoded!</h2>
+    <div class="md-stars" id="md-stars"></div>
+    <p class="score-line" id="md-final-score"></p>
+    <p class="score-line" id="md-final-detail"></p>
+    <button class="md-btn" id="md-restart-btn">Play Again</button>
+  </div>
+
+  <script>
+  (function() {
+    const HEX_VALUES = [
+      '0xCAFE', '0xDEAD', '0xBEEF', '0xC0DE',
+      '0xFACE', '0xF00D', '0xBABE', '0x1337',
+      '0xACE1', '0xB00B', '0xD00D', '0xFEED'
+    ];
+
+    let cards, flipped, matched, moves, pairs, timer, startTime, locked;
+    const grid = document.getElementById('md-grid');
+    const pairsEl = document.getElementById('md-pairs');
+    const movesEl = document.getElementById('md-moves');
+    const timeEl = document.getElementById('md-time');
+    const startOverlay = document.getElementById('md-start');
+    const gameoverOverlay = document.getElementById('md-gameover');
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function createCards() {
+      // Pick 8 random hex values, duplicate for pairs
+      const chosen = shuffle(HEX_VALUES).slice(0, 8);
+      return shuffle([...chosen, ...chosen]);
+    }
+
+    function renderGrid() {
+      grid.innerHTML = '';
+      cards.forEach((val, i) => {
+        const card = document.createElement('div');
+        card.className = 'md-card';
+        card.dataset.index = i;
+        card.innerHTML = '<span class="md-back">?</span>';
+        card.addEventListener('click', () => flipCard(i, card));
+        grid.appendChild(card);
+      });
+    }
+
+    function flipCard(index, el) {
+      if (locked || flipped.length >= 2) return;
+      if (el.classList.contains('flipped') || el.classList.contains('matched')) return;
+
+      el.classList.add('flipped');
+      el.innerHTML = '<span class="md-face">' + cards[index] + '</span>';
+      flipped.push({ index, el });
+
+      if (flipped.length === 2) {
+        moves++;
+        movesEl.textContent = moves;
+        const [a, b] = flipped;
+
+        if (cards[a.index] === cards[b.index]) {
+          // Match!
+          setTimeout(() => {
+            a.el.classList.remove('flipped');
+            b.el.classList.remove('flipped');
+            a.el.classList.add('matched');
+            b.el.classList.add('matched');
+            matched += 2;
+            pairs++;
+            pairsEl.textContent = pairs;
+            flipped = [];
+            if (pairs === 8) endGame();
+          }, 300);
+        } else {
+          // No match
+          locked = true;
+          setTimeout(() => {
+            a.el.classList.add('wrong');
+            b.el.classList.add('wrong');
+          }, 100);
+          setTimeout(() => {
+            a.el.classList.remove('flipped', 'wrong');
+            b.el.classList.remove('flipped', 'wrong');
+            a.el.innerHTML = '<span class="md-back">?</span>';
+            b.el.innerHTML = '<span class="md-back">?</span>';
+            flipped = [];
+            locked = false;
+          }, 700);
+        }
+      }
+    }
+
+    function updateTimer() {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const m = Math.floor(elapsed / 60);
+      const s = (elapsed % 60).toString().padStart(2, '0');
+      timeEl.textContent = m + ':' + s;
+    }
+
+    function calcScore() {
+      const elapsed = (Date.now() - startTime) / 1000;
+      // Base: 1000 - penalty for moves beyond perfect (16) - penalty for time
+      const movePenalty = Math.max(0, moves - 16) * 20;
+      const timePenalty = Math.max(0, elapsed - 30) * 5;
+      return Math.max(100, Math.round(1000 - movePenalty - timePenalty));
+    }
+
+    function getStars(score) {
+      if (score >= 850) return '\u2605\u2605\u2605';
+      if (score >= 600) return '\u2605\u2605\u2606';
+      return '\u2605\u2606\u2606';
+    }
+
+    function startGame() {
+      cards = createCards();
+      flipped = [];
+      matched = 0; moves = 0; pairs = 0; locked = false;
+      pairsEl.textContent = '0';
+      movesEl.textContent = '0';
+      timeEl.textContent = '0:00';
+      startOverlay.style.display = 'none';
+      gameoverOverlay.style.display = 'none';
+      renderGrid();
+      startTime = Date.now();
+      timer = setInterval(updateTimer, 1000);
+
+      // Brief flash: show all cards for 1.5s
+      const allCards = grid.querySelectorAll('.md-card');
+      allCards.forEach((el, i) => {
+        el.classList.add('flipped');
+        el.innerHTML = '<span class="md-face">' + cards[i] + '</span>';
+      });
+      locked = true;
+      setTimeout(() => {
+        allCards.forEach(el => {
+          el.classList.remove('flipped');
+          el.innerHTML = '<span class="md-back">?</span>';
+        });
+        locked = false;
+      }, 1500);
+    }
+
+    function endGame() {
+      clearInterval(timer);
+      const score = calcScore();
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      document.getElementById('md-stars').textContent = getStars(score);
+      document.getElementById('md-final-score').textContent = 'Score: ' + score;
+      document.getElementById('md-final-detail').textContent =
+        moves + ' moves | ' + Math.floor(elapsed / 60) + ':' +
+        (elapsed % 60).toString().padStart(2, '0');
+      gameoverOverlay.style.display = 'flex';
+    }
+
+    document.getElementById('md-start-btn').addEventListener('click', startGame);
+    document.getElementById('md-restart-btn').addEventListener('click', startGame);
+  })();
+  </script>
+</div>

@@ -1,0 +1,245 @@
+<!--
+  Terminal Type - Typing Speed Easter Egg Game
+  Drop this into any div on a portfolio site.
+  Self-contained: no dependencies.
+-->
+<div id="terminal-type-game" style="
+  width: 100%; max-width: 420px; height: 480px;
+  background: #0a0a0f; border: 1px solid #1a1a2e;
+  border-radius: 6px; overflow: hidden;
+  font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  color: #e0e0e0; position: relative; user-select: none;
+">
+  <style>
+    #terminal-type-game * { box-sizing: border-box; margin: 0; padding: 0; }
+    #terminal-type-game .tt-bar {
+      background: #111119; padding: 6px 12px; display: flex;
+      align-items: center; gap: 6px; border-bottom: 1px solid #1a1a2e;
+    }
+    #terminal-type-game .tt-dot { width: 8px; height: 8px; border-radius: 50%; }
+    #terminal-type-game .tt-dot.r { background: #ff5f57; }
+    #terminal-type-game .tt-dot.y { background: #febc2e; }
+    #terminal-type-game .tt-dot.g { background: #28c840; }
+    #terminal-type-game .tt-title {
+      font-size: 11px; color: #666; margin-left: auto;
+    }
+    #terminal-type-game .tt-canvas-area {
+      position: relative; width: 100%; height: 360px; overflow: hidden;
+    }
+    #terminal-type-game .tt-word {
+      position: absolute; font-size: 14px; color: #00e5ff;
+      white-space: nowrap; transition: color 0.15s;
+    }
+    #terminal-type-game .tt-word.matched { color: #28c840; }
+    #terminal-type-game .tt-word.partial span.hit { color: #28c840; }
+    #terminal-type-game .tt-input-row {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: #0d0d14; border-top: 1px solid #1a1a2e;
+      padding: 8px 12px; display: flex; align-items: center; gap: 8px;
+    }
+    #terminal-type-game .tt-prompt { color: #00e5ff; font-size: 13px; }
+    #terminal-type-game .tt-input {
+      flex: 1; background: transparent; border: none; outline: none;
+      color: #e0e0e0; font-family: inherit; font-size: 13px; caret-color: #00e5ff;
+    }
+    #terminal-type-game .tt-hud {
+      display: flex; justify-content: space-between; padding: 6px 12px;
+      font-size: 11px; color: #666; background: #0d0d14;
+      border-bottom: 1px solid #1a1a2e;
+    }
+    #terminal-type-game .tt-hud .val { color: #00e5ff; }
+    #terminal-type-game .tt-overlay {
+      position: absolute; inset: 0; background: rgba(10,10,15,0.92);
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; z-index: 10; gap: 16px;
+    }
+    #terminal-type-game .tt-overlay h2 {
+      font-size: 20px; color: #00e5ff; font-weight: 600;
+    }
+    #terminal-type-game .tt-overlay p {
+      font-size: 12px; color: #999; text-align: center; line-height: 1.6;
+    }
+    #terminal-type-game .tt-overlay .score-line {
+      font-size: 14px; color: #e0e0e0;
+    }
+    #terminal-type-game .tt-btn {
+      background: transparent; border: 1px solid #00e5ff; color: #00e5ff;
+      font-family: inherit; font-size: 13px; padding: 8px 24px;
+      border-radius: 4px; cursor: pointer; transition: all 0.2s;
+    }
+    #terminal-type-game .tt-btn:hover {
+      background: #00e5ff; color: #0a0a0f;
+    }
+  </style>
+
+  <div class="tt-bar">
+    <div class="tt-dot r"></div><div class="tt-dot y"></div><div class="tt-dot g"></div>
+    <span class="tt-title">terminal-type.sh</span>
+  </div>
+
+  <div class="tt-hud" id="tt-hud">
+    <span>SCORE: <span class="val" id="tt-score">0</span></span>
+    <span>WPM: <span class="val" id="tt-wpm">0</span></span>
+    <span>LIVES: <span class="val" id="tt-lives">3</span></span>
+  </div>
+
+  <div class="tt-canvas-area" id="tt-area">
+    <!-- Words appear here -->
+    <div class="tt-input-row">
+      <span class="tt-prompt">&gt;</span>
+      <input class="tt-input" id="tt-input" type="text" autocomplete="off" spellcheck="false" placeholder="type here..." />
+    </div>
+  </div>
+
+  <!-- Start overlay -->
+  <div class="tt-overlay" id="tt-start">
+    <h2>&gt;_ Terminal Type</h2>
+    <p>Words fall from the top.<br>Type them before they hit the bottom.<br>Speed increases. 3 lives.</p>
+    <button class="tt-btn" id="tt-start-btn">Start</button>
+  </div>
+
+  <!-- Game Over overlay -->
+  <div class="tt-overlay" id="tt-gameover" style="display:none;">
+    <h2>Process Terminated</h2>
+    <p class="score-line" id="tt-final-score"></p>
+    <p class="score-line" id="tt-final-wpm"></p>
+    <button class="tt-btn" id="tt-restart-btn">Play Again</button>
+  </div>
+
+  <script>
+  (function() {
+    const WORDS = [
+      'async','await','const','fetch','array','class','yield','super',
+      'proxy','cache','debug','parse','query','stack','queue','merge',
+      'build','patch','scope','mutex','stdin','chmod','mkdir','flask',
+      'react','redux','nginx','kafka','docker','linux','swift','shell',
+      'pixel','route','model','index','table','token','oauth','admin',
+      'deploy','sprint','refactor','pipeline','kernel','daemon','socket',
+      'binary','buffer','thread','module','export','import','return',
+      'lambda','config','schema','branch','commit','master','rebase'
+    ];
+
+    let score, lives, words, animFrame, spawnTimer, startTime, wordsTyped;
+    let speed = 0.4;
+    let spawnInterval = 2200;
+    const area = document.getElementById('tt-area');
+    const input = document.getElementById('tt-input');
+    const scoreEl = document.getElementById('tt-score');
+    const wpmEl = document.getElementById('tt-wpm');
+    const livesEl = document.getElementById('tt-lives');
+    const startOverlay = document.getElementById('tt-start');
+    const gameoverOverlay = document.getElementById('tt-gameover');
+    const finalScore = document.getElementById('tt-final-score');
+    const finalWpm = document.getElementById('tt-final-wpm');
+
+    function init() {
+      score = 0; lives = 3; words = []; wordsTyped = 0;
+      speed = 0.4; spawnInterval = 2200;
+      scoreEl.textContent = '0';
+      wpmEl.textContent = '0';
+      livesEl.textContent = '3';
+      input.value = '';
+      // Remove old word elements
+      area.querySelectorAll('.tt-word').forEach(el => el.remove());
+      startTime = Date.now();
+    }
+
+    function randomWord() {
+      return WORDS[Math.floor(Math.random() * WORDS.length)];
+    }
+
+    function spawnWord() {
+      const text = randomWord();
+      const el = document.createElement('div');
+      el.className = 'tt-word';
+      el.textContent = text;
+      const maxX = area.clientWidth - text.length * 9;
+      el.style.left = Math.max(8, Math.random() * maxX) + 'px';
+      el.style.top = '-24px';
+      area.appendChild(el);
+      words.push({ el, text, y: -24 });
+    }
+
+    function updateWpm() {
+      const elapsed = (Date.now() - startTime) / 60000;
+      if (elapsed > 0.05) {
+        wpmEl.textContent = Math.round(wordsTyped / elapsed);
+      }
+    }
+
+    function tick() {
+      for (let i = words.length - 1; i >= 0; i--) {
+        const w = words[i];
+        w.y += speed;
+        w.el.style.top = w.y + 'px';
+        if (w.y > area.clientHeight - 50) {
+          w.el.remove();
+          words.splice(i, 1);
+          lives--;
+          livesEl.textContent = lives;
+          if (lives <= 0) { endGame(); return; }
+        }
+      }
+      animFrame = requestAnimationFrame(tick);
+    }
+
+    function checkInput() {
+      const val = input.value.trim().toLowerCase();
+      for (let i = 0; i < words.length; i++) {
+        if (words[i].text === val) {
+          words[i].el.classList.add('matched');
+          const el = words[i].el;
+          setTimeout(() => el.remove(), 200);
+          words.splice(i, 1);
+          score += words.length > 5 ? 15 : 10;
+          wordsTyped++;
+          scoreEl.textContent = score;
+          updateWpm();
+          input.value = '';
+          // Gradually increase difficulty
+          if (wordsTyped % 5 === 0) {
+            speed = Math.min(1.2, speed + 0.05);
+            spawnInterval = Math.max(800, spawnInterval - 150);
+            clearInterval(spawnTimer);
+            spawnTimer = setInterval(spawnWord, spawnInterval);
+          }
+          return;
+        }
+      }
+      // Highlight partial matches
+      words.forEach(w => {
+        if (val.length > 0 && w.text.startsWith(val)) {
+          w.el.innerHTML = '<span class="hit" style="color:#28c840">' +
+            w.text.slice(0, val.length) + '</span>' + w.text.slice(val.length);
+        } else {
+          w.el.textContent = w.text;
+        }
+      });
+    }
+
+    function startGame() {
+      init();
+      startOverlay.style.display = 'none';
+      gameoverOverlay.style.display = 'none';
+      input.focus();
+      spawnWord();
+      spawnTimer = setInterval(spawnWord, spawnInterval);
+      animFrame = requestAnimationFrame(tick);
+    }
+
+    function endGame() {
+      cancelAnimationFrame(animFrame);
+      clearInterval(spawnTimer);
+      const elapsed = (Date.now() - startTime) / 60000;
+      const wpm = elapsed > 0.05 ? Math.round(wordsTyped / elapsed) : 0;
+      finalScore.textContent = 'Score: ' + score;
+      finalWpm.textContent = 'WPM: ' + wpm + ' | Words: ' + wordsTyped;
+      gameoverOverlay.style.display = 'flex';
+    }
+
+    input.addEventListener('input', checkInput);
+    document.getElementById('tt-start-btn').addEventListener('click', startGame);
+    document.getElementById('tt-restart-btn').addEventListener('click', startGame);
+  })();
+  </script>
+</div>

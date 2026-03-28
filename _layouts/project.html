@@ -47,6 +47,12 @@
     </main>
     {% include footer.html %}
   </div>
+  <div class="avatar-lightbox" id="avatar-lightbox">
+    <div class="avatar-lightbox__backdrop"></div>
+    <img src="{{ site.baseurl }}/img/headshot.png" alt="Arush Sharma" class="avatar-lightbox__img">
+    <span class="avatar-lightbox__name">Arush Sharma</span>
+    <span class="avatar-lightbox__hint">click anywhere to close</span>
+  </div>
   <button class="back-to-top" id="back-to-top" aria-label="Back to top">&#8593;</button>
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">&#9790;</button>
   <script src="{{ site.baseurl }}/js/app.js" defer></script>

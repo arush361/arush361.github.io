@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easter Egg Games - Demo</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #111; color: #e0e0e0;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 40px 20px;
+    }
+    h1 { color: #00e5ff; font-size: 18px; text-align: center; margin-bottom: 8px; }
+    p.sub { color: #666; font-size: 12px; text-align: center; margin-bottom: 40px; }
+    .games {
+      display: flex; flex-wrap: wrap; gap: 32px;
+      justify-content: center; align-items: flex-start;
+    }
+    .game-slot {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    .game-label { font-size: 11px; color: #666; }
+  </style>
+</head>
+<body>
+  <h1>&gt;_ Easter Egg Games</h1>
+  <p class="sub">Three self-contained games for a developer portfolio. Each fits in a ~420px container.</p>
+  <div class="games">
+    <div class="game-slot">
+      <div class="game-label">1 / Terminal Type (typing)</div>
+      <div id="slot-1"></div>
+    </div>
+    <div class="game-slot">
+      <div class="game-label">2 / Memory Decode (puzzle)</div>
+      <div id="slot-2"></div>
+    </div>
+    <div class="game-slot">
+      <div class="game-label">3 / Reflex Ping (reaction)</div>
+      <div id="slot-3"></div>
+    </div>
+  </div>
+  <script>
+    // Load each game into its slot via fetch + innerHTML
+    async function loadGame(file, slotId) {
+      const resp = await fetch(file);
+      const html = await resp.text();
+      const slot = document.getElementById(slotId);
+      slot.innerHTML = html;
+      // Execute scripts manually
+      slot.querySelectorAll('script').forEach(old => {
+        const s = document.createElement('script');
+        s.textContent = old.textContent;
+        old.parentNode.replaceChild(s, old);
+      });
+    }
+    loadGame('terminal-type.html', 'slot-1');
+    loadGame('memory-decode.html', 'slot-2');
+    loadGame('reflex-ping.html', 'slot-3');
+  </script>
+</body>
+</html>
