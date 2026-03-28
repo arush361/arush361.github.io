@@ -146,6 +146,7 @@ h1, h2, h3 { line-height: 1.3; }
 .hero__bio {
   color: var(--muted);
   margin-bottom: 1.25rem;
+  opacity: 0;
 }
 
 .hl {
@@ -160,6 +161,7 @@ h1, h2, h3 { line-height: 1.3; }
   gap: 1.5rem;
   font-size: 0.875rem;
   margin-bottom: 2rem;
+  opacity: 0;
 }
 
 /* (skills moved to compact section) */
@@ -196,9 +198,9 @@ h1, h2, h3 { line-height: 1.3; }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.hero h1 { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.hero__bio { animation: fadeInUp 0.6s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.hero__links { animation: fadeInUp 0.6s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.hero h1 { animation: none; } /* Typewriter handles its own entrance */
+.hero__bio { animation: fadeInUp 0.6s 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.hero__links { animation: fadeInUp 0.6s 1.0s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
 /* === Experience Timeline === */
 .exp-timeline {
@@ -1177,6 +1179,120 @@ ul.project-list li strong {
   display: block;
   margin: 0 auto;
 }
+
+/* === Typewriter Effect === */
+.typewriter {
+  min-height: 2.6em;
+  white-space: pre-wrap;
+}
+
+.typewriter .cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--accent);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* === Staggered Reveal Cascades === */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.07s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.14s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.21s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.28s; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.35s; }
+.reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.42s; }
+.reveal-stagger.visible > *:nth-child(8) { transition-delay: 0.49s; }
+
+.reveal-stagger.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Animated HR Line Draw === */
+hr {
+  position: relative;
+  border: none;
+  height: 1px;
+  background: transparent;
+  margin: 0;
+  overflow: visible;
+}
+
+hr::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--divider);
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+hr.drawn::after {
+  width: 100%;
+}
+
+/* === Magnetic Hover on Skill Tags === */
+.stag {
+  position: relative;
+  display: inline-block;
+  transition: background 0.2s, color 0.2s, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
+}
+
+.stag:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0, 85, 255, 0.15);
+}
+
+/* === Animated Counter Glow === */
+.counter-animated {
+  display: inline;
+}
+
+.hl[data-count] {
+  transition: color 0.3s;
+}
+
+.hl[data-count].counting {
+  color: var(--accent);
+}
+
+/* === Smooth Card Entrance for Carousel Items === */
+.post-card, .skill-card {
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s, border-color 0.3s;
+}
+
+.cards-visible .post-card,
+.cards-visible .skill-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.cards-visible .post-card:nth-child(1), .cards-visible .skill-card:nth-child(1) { transition-delay: 0s; }
+.cards-visible .post-card:nth-child(2), .cards-visible .skill-card:nth-child(2) { transition-delay: 0.08s; }
+.cards-visible .post-card:nth-child(3), .cards-visible .skill-card:nth-child(3) { transition-delay: 0.16s; }
+.cards-visible .post-card:nth-child(4), .cards-visible .skill-card:nth-child(4) { transition-delay: 0.24s; }
+.cards-visible .post-card:nth-child(5), .cards-visible .skill-card:nth-child(5) { transition-delay: 0.32s; }
+.cards-visible .post-card:nth-child(6), .cards-visible .skill-card:nth-child(6) { transition-delay: 0.4s; }
 
 /* === Responsive === */
 @media (max-width: 950px) {
