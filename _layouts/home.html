@@ -2,6 +2,12 @@
 <html lang="en">
 {% include head.html %}
 <body>
+  <!-- Particle constellation background -->
+  <canvas id="constellation" aria-hidden="true"></canvas>
+
+  <!-- Floating code glyphs -->
+  <div id="floating-glyphs" aria-hidden="true"></div>
+
   <a href="{{ site.baseurl }}/v1/" class="version-toggle">&#9654; Classic</a>
   <div class="paper">
     {% include header.html %}

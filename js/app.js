@@ -286,6 +286,192 @@
     return rect.top < window.innerHeight && rect.bottom > 0;
   }
 
+  /* --- 10. Particle Constellation Background --- */
+  function initConstellation() {
+    var canvas = document.getElementById('constellation');
+    if (!canvas) return;
+
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var mouse = { x: -9999, y: -9999 };
+    var w, h, particleCount;
+    var connectDist = 150;
+    var mouseDist = 200;
+    var raf;
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      particleCount = Math.min(Math.floor((w * h) / 12000), 100);
+
+      // Re-seed if particle count changed significantly
+      if (Math.abs(particles.length - particleCount) > 10) {
+        seedParticles();
+      }
+    }
+
+    function seedParticles() {
+      particles = [];
+      for (var i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r: Math.random() * 1.5 + 0.5
+        });
+      }
+    }
+
+    function drawParticle(p) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 85, 255, 0.25)';
+      ctx.fill();
+    }
+
+    function drawLine(p1, p2, dist, maxDist) {
+      var opacity = (1 - dist / maxDist) * 0.12;
+      ctx.beginPath();
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(p2.x, p2.y);
+      ctx.strokeStyle = 'rgba(0, 85, 255, ' + opacity + ')';
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    }
+
+    function drawMouseLine(p, dist) {
+      var opacity = (1 - dist / mouseDist) * 0.2;
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(mouse.x, mouse.y);
+      ctx.strokeStyle = 'rgba(0, 85, 255, ' + opacity + ')';
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+    }
+
+    function update() {
+      ctx.clearRect(0, 0, w, h);
+
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+
+        // Move
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Bounce off edges
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+
+        // Gentle mouse repulsion
+        var mdx = p.x - mouse.x;
+        var mdy = p.y - mouse.y;
+        var mDist = Math.sqrt(mdx * mdx + mdy * mdy);
+        if (mDist < mouseDist) {
+          var force = (mouseDist - mDist) / mouseDist * 0.02;
+          p.vx += (mdx / mDist) * force;
+          p.vy += (mdy / mDist) * force;
+          drawMouseLine(p, mDist);
+        }
+
+        // Speed damping
+        var speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+        if (speed > 0.8) {
+          p.vx *= 0.98;
+          p.vy *= 0.98;
+        }
+
+        drawParticle(p);
+
+        // Connect nearby particles
+        for (var j = i + 1; j < particles.length; j++) {
+          var p2 = particles[j];
+          var dx = p.x - p2.x;
+          var dy = p.y - p2.y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < connectDist) {
+            drawLine(p, p2, dist, connectDist);
+          }
+        }
+      }
+
+      raf = requestAnimationFrame(update);
+    }
+
+    // Track mouse
+    document.addEventListener('mousemove', function (e) {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    document.addEventListener('mouseleave', function () {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    });
+
+    // Pause when tab hidden
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+      } else {
+        raf = requestAnimationFrame(update);
+      }
+    });
+
+    window.addEventListener('resize', resize);
+    resize();
+    seedParticles();
+    raf = requestAnimationFrame(update);
+  }
+
+  /* --- 11. Floating Code Glyphs --- */
+  function initFloatingGlyphs() {
+    var container = document.getElementById('floating-glyphs');
+    if (!container) return;
+
+    var glyphs = [
+      '{ }', '=>', '//', '0x', '&&', '||', '/**/', '===',
+      'fn()', '[ ]', '<>', '::',  '#!/', '>>>', 'null',
+      'async', 'await', 'auth', 'token', 'key', 'id:',
+      'POST', 'GET', 'JWT', 'SHA', 'RSA', 'TLS',
+      'IAM', 'RBAC', 'SSO', 'MCP', 'API'
+    ];
+
+    var sizes = [10, 11, 12, 13, 14, 16];
+
+    function spawnGlyph() {
+      var el = document.createElement('span');
+      el.className = 'glyph';
+      el.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+
+      var size = sizes[Math.floor(Math.random() * sizes.length)];
+      var left = Math.random() * 100;
+      var duration = 25 + Math.random() * 35;
+
+      el.style.fontSize = size + 'px';
+      el.style.left = left + '%';
+      el.style.bottom = '-2rem';
+      el.style.animationDuration = duration + 's';
+      el.style.fontWeight = Math.random() > 0.6 ? '700' : '400';
+
+      container.appendChild(el);
+
+      // Cleanup after animation
+      setTimeout(function () {
+        if (el.parentNode) el.parentNode.removeChild(el);
+      }, duration * 1000);
+    }
+
+    // Initial burst
+    for (var i = 0; i < 8; i++) {
+      setTimeout(spawnGlyph, i * 600);
+    }
+
+    // Continuous spawn
+    setInterval(spawnGlyph, 3000 + Math.random() * 2000);
+  }
+
   /* --- Initialize Everything --- */
   function init() {
     initTypewriter();
@@ -297,6 +483,8 @@
     initSmoothScroll();
     initCarousels();
     initMediumFeed();
+    initConstellation();
+    initFloatingGlyphs();
   }
 
   if (document.readyState === 'loading') {
