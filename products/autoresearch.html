@@ -5,23 +5,23 @@ excerpt: "Self-improving Claude Code skills using Karpathy's autoresearch method
 project_name: "Autoresearch"
 company: "Personal Product"
 date_range: "Mar 2026"
-tags: [AI/ML, Claude Code, Evals, Prompt Engineering, Karpathy, Binary Evals]
+tags: [AI/ML, Claude Code, Evals, Prompt Engineering, Andrej Karpathy, Binary Evals, Hamel Husain]
 next_project: "Gemini Chat Exporter"
 next_project_url: "/products/gemini-exporter.html"
 ---
 <div class="project-section reveal">
   <h2 class="project-section__title">Problem Statement</h2>
-  <p>Claude Code skills "work" but nobody measures how reliably. You write a skill, run it a few times, it looks fine, you ship it. But when you actually measure with structured evals, you discover your skill is passing only 59% of the time. Vibes-based development doesn't scale.</p>
+  <p><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code</a> skills "work" but nobody measures how reliably. You write a skill, run it a few times, it looks fine, you ship it. But when you actually measure with structured evals, you discover your skill is passing only 59% of the time. Vibes-based development doesn't scale.</p>
 </div>
 
 <div class="project-section reveal">
   <h2 class="project-section__title">Hypothesis</h2>
-  <p>Apply Karpathy's autoresearch methodology (autonomous research loops with self-evaluation) to Claude Code skills. Define binary evals (yes/no, no scales), run the skill repeatedly, score outputs, analyze failures, mutate the prompt, and keep improvements. Let the system optimize itself.</p>
+  <p>Apply <a href="https://karpathy.ai/" target="_blank" rel="noopener">Karpathy's</a> <a href="https://github.com/karpathy/autoresearch" target="_blank" rel="noopener">autoresearch methodology</a> (autonomous research loops with self-evaluation) to <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code</a> skills. Define binary evals (yes/no, no scales), run the skill repeatedly, score outputs, analyze failures, mutate the prompt, and keep improvements. Let the system optimize itself.</p>
 </div>
 
 <div class="project-section reveal">
   <h2 class="project-section__title">Solution</h2>
-  <p><strong>Autoresearch</strong> is a Claude Code skill that autonomously optimizes other skills through a loop:</p>
+  <p><strong>Autoresearch</strong> is a <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code</a> skill that autonomously optimizes other skills through a loop:</p>
   <ul class="project-list">
     <li><strong>Run</strong> &mdash; execute the target skill on test inputs</li>
     <li><strong>Score</strong> &mdash; evaluate outputs against 3-6 binary evals (yes/no only)</li>
@@ -74,6 +74,8 @@ next_project_url: "/products/gemini-exporter.html"
   <h2 class="project-section__title">Links</h2>
   <p>
     <a href="https://github.com/arush361/autoresearch-claude-skills" target="_blank" rel="noopener">GitHub Repository &#8599;</a> &nbsp;&middot;&nbsp;
-    <a href="https://arusharma.medium.com/from-vibes-to-evals-how-i-made-claude-skills-self-improving-87d9bb291c64" target="_blank" rel="noopener">Medium Article &#8599;</a>
+    <a href="https://arusharma.medium.com/from-vibes-to-evals-how-i-made-claude-skills-self-improving-87d9bb291c64" target="_blank" rel="noopener">Medium Article &#8599;</a> &nbsp;&middot;&nbsp;
+    <a href="https://karpathy.ai/" target="_blank" rel="noopener">Andrej Karpathy &#8599;</a> &nbsp;&middot;&nbsp;
+    <a href="https://hamel.dev/" target="_blank" rel="noopener">Hamel Husain &#8599;</a>
   </p>
 </div>

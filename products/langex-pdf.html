@@ -23,7 +23,7 @@ next_project_url: "/products/autoresearch.html"
   <h2 class="project-section__title">Solution</h2>
   <p><strong>LangEx PDF</strong> is a full-stack web application for extracting structured data from healthcare PDFs using AI-powered semantic extraction with intelligent fallback:</p>
   <ul class="project-list">
-    <li><strong>Multi-provider AI extraction</strong> &mdash; supports Gemini, OpenAI, and Anthropic as selectable LLM providers. Users bring their own API key at runtime &mdash; keys never persisted or logged</li>
+    <li><strong>Multi-provider AI extraction</strong> &mdash; supports <a href="https://ai.google.dev" target="_blank" rel="noopener">Gemini</a>, <a href="https://platform.openai.com" target="_blank" rel="noopener">OpenAI</a>, and <a href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a> as selectable LLM providers. Users bring their own API key at runtime &mdash; keys never persisted or logged</li>
     <li><strong>Intelligent regex fallback</strong> &mdash; if AI fails or is disabled, pattern-based extraction kicks in automatically. Healthcare regex is production-grade; others are best-effort</li>
     <li><strong>AI Insights card</strong> &mdash; every extraction returns confidence level, text quality score, structure score, language detection, and processing notes</li>
     <li><strong>Type-specific schemas</strong> &mdash; output maps to healthcare (patient info, diagnoses, medications), contract, or extended care agreement structures</li>
@@ -34,7 +34,7 @@ next_project_url: "/products/autoresearch.html"
 <div class="project-section reveal">
   <h2 class="project-section__title">Technical Architecture</h2>
   <div class="excalidraw-diagram" data-project="langex-pdf"></div>
-  <p class="exp-entry__desc" style="margin-top:0.75rem">AI providers selectable at runtime (Gemini / OpenAI / Anthropic). Ephemeral API keys &mdash; never stored. SQLite metadata + 24h temp files. CSRF + strict validation.</p>
+  <p class="exp-entry__desc" style="margin-top:0.75rem">AI providers selectable at runtime (<a href="https://ai.google.dev" target="_blank" rel="noopener">Gemini</a> / <a href="https://platform.openai.com" target="_blank" rel="noopener">OpenAI</a> / <a href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a>). Ephemeral API keys &mdash; never stored. <a href="https://www.sqlite.org" target="_blank" rel="noopener">SQLite</a> metadata + 24h temp files. CSRF + strict validation.</p>
 </div>
 
 <div class="project-section reveal">
@@ -44,7 +44,7 @@ next_project_url: "/products/autoresearch.html"
     <li><strong>AI-first with deterministic fallback</strong> &mdash; LLMs handle the 80% of documents with layout variation. Regex handles the structured 20% where patterns are reliable. Together, coverage approaches 100%</li>
     <li><strong>Ephemeral API keys</strong> &mdash; keys live only in browser memory for the duration of the request. Never stored, never logged, never sent to our backend. This makes the tool usable in regulated environments without compliance review</li>
     <li><strong>Confidence scoring as a product feature</strong> &mdash; surfacing extraction confidence, text quality, and structure scores lets users make informed decisions about trusting the output. Transparency builds trust in AI-powered tools</li>
-    <li><strong>WCAG 2.1 AA accessibility</strong> &mdash; semantic markup, keyboard navigation, and screen reader support. Healthcare tools must be accessible by default, not as an afterthought</li>
+    <li><strong><a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank" rel="noopener">WCAG 2.1 AA</a> accessibility</strong> &mdash; semantic markup, keyboard navigation, and screen reader support. Healthcare tools must be accessible by default, not as an afterthought</li>
   </ul>
 </div>
 
@@ -71,7 +71,7 @@ next_project_url: "/products/autoresearch.html"
   <ul class="project-list">
     <li><strong>LLMs are powerful but not reliable alone.</strong> Semantic extraction works brilliantly 85% of the time &mdash; and fails unpredictably the other 15%. The regex fallback isn't a crutch; it's what makes the product production-viable. AI + deterministic systems > AI alone</li>
     <li><strong>Scope discipline is a superpower.</strong> The temptation was to support every document type. Narrowing to 3 types made extraction quality measurably better and development 3x faster. Ship narrow, expand with data</li>
-    <li><strong>Healthcare compliance starts at the architecture level.</strong> Ephemeral keys, no document persistence, temp file cleanup, CSRF protection &mdash; these aren't features, they're table stakes. Designing for HIPAA from day one is cheaper than retrofitting later</li>
+    <li><strong>Healthcare compliance starts at the architecture level.</strong> Ephemeral keys, no document persistence, temp file cleanup, CSRF protection &mdash; these aren't features, they're table stakes. Designing for <a href="https://www.hhs.gov/hipaa/index.html" target="_blank" rel="noopener">HIPAA</a> from day one is cheaper than retrofitting later</li>
   </ul>
 </div>
 

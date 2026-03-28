@@ -11,7 +11,7 @@ next_project_url: "/products/langex-pdf.html"
 ---
 <div class="project-section reveal">
   <h2 class="project-section__title">Problem Statement</h2>
-  <p>I was unlocking my phone 15 times a day just to copy 2FA codes. Authy has a desktop app, sure, but it syncs your secrets to their cloud &mdash; and once you work in identity security, that starts to feel uncomfortable. I wanted something that stays on my machine and doesn't phone home. So I built it.</p>
+  <p>I was unlocking my phone 15 times a day just to copy 2FA codes. <a href="https://authy.com" target="_blank" rel="noopener">Authy</a> has a desktop app, sure, but it syncs your secrets to their cloud &mdash; and once you work in identity security, that starts to feel uncomfortable. I wanted something that stays on my machine and doesn't phone home. So I built it.</p>
 </div>
 
 <div class="project-section reveal">
@@ -21,11 +21,11 @@ next_project_url: "/products/langex-pdf.html"
 
 <div class="project-section reveal">
   <h2 class="project-section__title">Solution</h2>
-  <p><strong>Desktop Authenticator</strong> is a macOS Electron app that generates TOTP codes locally with encrypted storage and zero external data transmission:</p>
+  <p><strong>Desktop Authenticator</strong> is a macOS <a href="https://www.electronjs.org" target="_blank" rel="noopener">Electron</a> app that generates <a href="https://datatracker.ietf.org/doc/html/rfc6238" target="_blank" rel="noopener">TOTP</a> codes locally with encrypted storage and zero external data transmission:</p>
   <ul class="project-list">
-    <li><strong>TOTP generation</strong> &mdash; standard RFC 6238 time-based codes, auto-refreshing every 30 seconds with a visual countdown</li>
+    <li><strong>TOTP generation</strong> &mdash; standard <a href="https://datatracker.ietf.org/doc/html/rfc6238" target="_blank" rel="noopener">RFC 6238</a> time-based codes, auto-refreshing every 30 seconds with a visual countdown</li>
     <li><strong>Multiple QR input methods</strong> &mdash; file upload, drag-and-drop, clipboard paste (&#8984;V), and screenshot capture for maximum flexibility</li>
-    <li><strong>Encrypted local storage</strong> &mdash; secrets stored in a SQLite database with <code>electron-store</code> encryption. Nothing leaves the device</li>
+    <li><strong>Encrypted local storage</strong> &mdash; secrets stored in a <a href="https://www.sqlite.org" target="_blank" rel="noopener">SQLite</a> database with <a href="https://github.com/sindresorhus/electron-store" target="_blank" rel="noopener"><code>electron-store</code></a> encryption. Nothing leaves the device</li>
     <li><strong>Minecraft-themed UI</strong> &mdash; pixelated VT323 font, block-style elements, dark mode support. Makes the mundane act of copying codes feel intentional</li>
     <li><strong>Native macOS integration</strong> &mdash; menu bar presence, keyboard shortcuts, system dark mode detection</li>
   </ul>
@@ -55,7 +55,7 @@ next_project_url: "/products/langex-pdf.html"
   <h2 class="project-section__title">Key Product Decisions</h2>
   <ul class="project-list">
     <li><strong>Desktop-first, not mobile</strong> &mdash; deliberately chose the underserved surface. Mobile authenticators are abundant; desktop ones that respect privacy are rare</li>
-    <li><strong>Local-only by design</strong> &mdash; no sync feature, no account system. This isn't a limitation &mdash; it's the core value proposition. Users who want cloud sync already have Authy</li>
+    <li><strong>Local-only by design</strong> &mdash; no sync feature, no account system. This isn't a limitation &mdash; it's the core value proposition. Users who want cloud sync already have <a href="https://authy.com" target="_blank" rel="noopener">Authy</a></li>
     <li><strong>Minecraft theme as differentiation</strong> &mdash; authenticator apps are commoditized. The theme creates emotional attachment to a utility tool &mdash; users remember and reach for it because it's <em>theirs</em></li>
     <li><strong>Multiple QR input paths</strong> &mdash; onboarding friction kills 2FA adoption. Supporting 4 input methods (file, drag, paste, screenshot) means users can always get their secrets into the app regardless of source format</li>
   </ul>

@@ -1,17 +1,22 @@
 <header class="site-header" id="site-header">
-  <div class="site-header__top">
-    <a href="{{ site.baseurl }}/" class="site-header__name">Arush Sharma</a>
-    <nav class="site-header__nav">
-      <a href="{{ site.baseurl }}/#experience" class="nav-link">Experience</a>
-      <a href="{{ site.baseurl }}/products/" class="nav-link{% if page.url contains '/products' %} nav-link--active{% endif %}">Products</a>
-      <a href="{{ site.baseurl }}/#contact" class="nav-link">Contact</a>
-      <a href="{{ site.medium_url }}" target="_blank" rel="noopener noreferrer" class="nav-link">Blog &#8599;</a>
-    </nav>
-  </div>
-  <div class="site-header__social">
-    <a href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a> &middot;
-    <a href="https://www.github.com/{{ site.github }}" target="_blank" rel="noopener noreferrer">GitHub</a> &middot;
-    <a href="{{ site.medium_url }}" target="_blank" rel="noopener noreferrer">Medium</a>
+  <div class="site-header__row">
+    <img src="{{ site.baseurl }}/img/headshot.png" alt="Arush Sharma" class="avatar avatar--header">
+    <div class="site-header__info">
+      <div class="site-header__top">
+        <a href="{{ site.baseurl }}/" class="site-header__name">Arush Sharma</a>
+        <nav class="site-header__nav">
+          <a href="{{ site.baseurl }}/#experience" class="nav-link">Experience</a>
+          <a href="{{ site.baseurl }}/products/" class="nav-link{% if page.url contains '/products' %} nav-link--active{% endif %}">Products</a>
+          <a href="{{ site.baseurl }}/#contact" class="nav-link">Contact</a>
+          <a href="{{ site.medium_url }}" target="_blank" rel="noopener noreferrer" class="nav-link">Blog &#8599;</a>
+        </nav>
+      </div>
+      <div class="site-header__social">
+        <a href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a> &middot;
+        <a href="https://www.github.com/{{ site.github }}" target="_blank" rel="noopener noreferrer">GitHub</a> &middot;
+        <a href="{{ site.medium_url }}" target="_blank" rel="noopener noreferrer">Medium</a>
+      </div>
+    </div>
   </div>
 </header>
 <hr>

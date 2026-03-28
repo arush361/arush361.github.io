@@ -11,22 +11,22 @@ next_project_url: "/products/ai-nudge.html"
 ---
 <div class="project-section reveal">
   <h2 class="project-section__title">Problem Statement</h2>
-  <p>Most people write terrible prompts. Not because they're bad at thinking — because prompting is a new skill and nobody has muscle memory for it yet. You type something vague into ChatGPT, get a mediocre response, and blame the model. But 80% of the time, the prompt was the problem.</p>
+  <p>Most people write terrible prompts. Not because they're bad at thinking — because prompting is a new skill and nobody has muscle memory for it yet. You type something vague into <a href="https://chat.openai.com" target="_blank" rel="noopener">ChatGPT</a>, get a mediocre response, and blame the model. But 80% of the time, the prompt was the problem.</p>
 </div>
 
 <div class="project-section reveal">
   <h2 class="project-section__title">Hypothesis</h2>
-  <p>What if prompt improvement happened <em>inline</em>, right where you're already typing? No separate tool, no copy-pasting into a "prompt optimizer" — just highlight your text, click a button, and get a better version. Like Grammarly, but for talking to AI.</p>
+  <p>What if prompt improvement happened <em>inline</em>, right where you're already typing? No separate tool, no copy-pasting into a "prompt optimizer" — just highlight your text, click a button, and get a better version. Like <a href="https://www.grammarly.com" target="_blank" rel="noopener">Grammarly</a>, but for talking to AI.</p>
 </div>
 
 <div class="project-section reveal">
   <h2 class="project-section__title">Solution</h2>
-  <p><strong>PromptPro</strong> is a Chrome extension that injects directly into ChatGPT and Microsoft Copilot, adding an "Improve" button next to the input box:</p>
+  <p><strong>PromptPro</strong> is a <a href="https://developer.chrome.com/docs/extensions" target="_blank" rel="noopener">Chrome extension</a> that injects directly into <a href="https://chat.openai.com" target="_blank" rel="noopener">ChatGPT</a> and <a href="https://copilot.microsoft.com" target="_blank" rel="noopener">Microsoft Copilot</a>, adding an "Improve" button next to the input box:</p>
   <ul class="project-list">
     <li><strong>Inline enhancement</strong> &mdash; select text or place cursor in any supported input, click Improve, get a restructured prompt with better clarity, structure, and specificity</li>
     <li><strong>Persona-based refinement</strong> &mdash; optionally refine with a persona (Teacher, Executive, Technical Reviewer) to shape the tone and depth</li>
     <li><strong>One-click apply</strong> &mdash; the enhanced prompt replaces your original text directly in the input box. Hit enter and go</li>
-    <li><strong>BYOK (Bring Your Own Key)</strong> &mdash; runs on your personal OpenAI API key, stored in Chrome sync storage. Never leaves your browser</li>
+    <li><strong>BYOK (Bring Your Own Key)</strong> &mdash; runs on your personal <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">OpenAI API</a> key, stored in Chrome sync storage. Never leaves your browser</li>
     <li><strong>Zero tracking</strong> &mdash; no analytics, no telemetry, no prompt logging. Your prompts stay yours</li>
   </ul>
 </div>
@@ -48,7 +48,7 @@ next_project_url: "/products/ai-nudge.html"
 <div class="project-section reveal">
   <h2 class="project-section__title">Technical Architecture</h2>
   <div class="excalidraw-diagram" data-project="prompt-pro"></div>
-  <p class="exp-entry__desc" style="margin-top:0.75rem">Key in chrome.storage.sync. Background worker mediates all network calls. Optional FastAPI + MongoDB backend scaffolded for future prompt history.</p>
+  <p class="exp-entry__desc" style="margin-top:0.75rem">Key in <a href="https://developer.chrome.com/docs/extensions/reference/api/storage" target="_blank" rel="noopener">chrome.storage.sync</a>. Background worker mediates all network calls. Optional <a href="https://fastapi.tiangolo.com" target="_blank" rel="noopener">FastAPI</a> + <a href="https://www.mongodb.com" target="_blank" rel="noopener">MongoDB</a> backend scaffolded for future prompt history.</p>
 </div>
 
 <div class="project-section reveal">
@@ -84,7 +84,7 @@ next_project_url: "/products/ai-nudge.html"
   <ul class="project-list">
     <li><strong>The best AI tools are invisible.</strong> Nobody wants to learn a new interface to use AI better. Embedding the enhancement directly into the tools people already use eliminates adoption friction entirely</li>
     <li><strong>Prompt quality is a UX problem, not an AI problem.</strong> The models are capable enough &mdash; the bottleneck is the human-to-model interface. Improving that interface is where the leverage is</li>
-    <li><strong>MV3 is painful but worth it.</strong> Chrome's Manifest V3 restrictions (no persistent background pages, limited APIs) forced cleaner architecture. The service worker pattern is actually better for this use case</li>
+    <li><strong>MV3 is painful but worth it.</strong> Chrome's <a href="https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3" target="_blank" rel="noopener">Manifest V3</a> restrictions (no persistent background pages, limited APIs) forced cleaner architecture. The service worker pattern is actually better for this use case</li>
   </ul>
 </div>
 

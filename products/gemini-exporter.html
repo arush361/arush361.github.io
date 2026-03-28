@@ -11,12 +11,12 @@ next_project_url: "/products/prompt-pro.html"
 ---
 <div class="project-section reveal">
   <h2 class="project-section__title">Problem Statement</h2>
-  <p>Google Gemini has no export button. You can't save your conversations to use in other tools, reference later, or share with teammates. For anyone building with AI, losing conversation history means losing context.</p>
+  <p><a href="https://gemini.google.com" target="_blank" rel="noopener">Google Gemini</a> has no export button. You can't save your conversations to use in other tools, reference later, or share with teammates. For anyone building with AI, losing conversation history means losing context.</p>
 </div>
 
 <div class="project-section reveal">
   <h2 class="project-section__title">The Hard Part</h2>
-  <p>Building a chat exporter sounds simple. It wasn't. Gemini uses <strong>lazy loading</strong> inside a custom <code>&lt;infinite-scroller&gt;</code> element. Only the messages visible on screen exist in the DOM. The rest don't load until you scroll to them.</p>
+  <p>Building a chat exporter sounds simple. It wasn't. <a href="https://gemini.google.com" target="_blank" rel="noopener">Gemini</a> uses <strong>lazy loading</strong> inside a custom <code>&lt;infinite-scroller&gt;</code> element. Only the messages visible on screen exist in the DOM. The rest don't load until you scroll to them.</p>
   <ul class="project-list">
     <li><strong>Custom elements, not divs</strong> &mdash; conversations live inside <code>&lt;user-query&gt;</code> and <code>&lt;model-response&gt;</code> custom elements, not standard HTML</li>
     <li><strong>Scroll-triggered loading</strong> &mdash; setting <code>scrollTop = 0</code> loads older messages above the current ones, then Gemini adjusts <code>scrollTop</code> back to keep your viewport in place</li>
@@ -27,7 +27,7 @@ next_project_url: "/products/prompt-pro.html"
 
 <div class="project-section reveal">
   <h2 class="project-section__title">Solution</h2>
-  <p><strong>Gemini Chat Exporter</strong> is a Chrome extension that reverse-engineers Gemini's DOM to capture complete conversations:</p>
+  <p><strong>Gemini Chat Exporter</strong> is a <a href="https://developer.chrome.com/docs/extensions" target="_blank" rel="noopener">Chrome extension</a> that reverse-engineers Gemini's DOM to capture complete conversations:</p>
   <ul class="project-list">
     <li><strong>Full history capture</strong> &mdash; auto-scrolls the infinite scroller to load every message before export. No truncated chats</li>
     <li><strong>Three export formats</strong> &mdash; PDF (formatted with headers and styling), Markdown (clean and portable), CSV (structured for analysis)</li>
@@ -42,7 +42,7 @@ next_project_url: "/products/prompt-pro.html"
     <li><strong>Reverse-engineer, don't scrape.</strong> Generic DOM scrapers fail on Gemini's custom elements. Understanding the actual component structure was the only path to reliable extraction</li>
     <li><strong>Scroll-then-capture pipeline.</strong> Load all content first, then parse. Trying to parse while scrolling introduces race conditions and incomplete captures</li>
     <li><strong>Three formats for three use cases.</strong> PDF for sharing, Markdown for knowledge bases, CSV for analysis. Each format is purpose-built, not a generic dump</li>
-    <li><strong>No permissions beyond activeTab.</strong> The extension only activates on gemini.google.com. No background processes, no data collection</li>
+    <li><strong>No permissions beyond <a href="https://developer.chrome.com/docs/extensions/develop/concepts/activeTab" target="_blank" rel="noopener">activeTab</a>.</strong> The extension only activates on gemini.google.com. No background processes, no data collection</li>
   </ul>
 </div>
 
