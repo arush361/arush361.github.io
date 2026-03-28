@@ -2322,19 +2322,19 @@ body, .paper, .site-header, .form-card, .terminal,
 /* === Easter Egg Games === */
 .games-reveal {
   text-align: center;
-  padding: 2rem 0;
+  padding: 0.75rem 0;
 }
 
 .games-reveal__btn {
   background: transparent;
   border: 1px dashed var(--divider);
   border-radius: 6px;
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.5rem;
   cursor: pointer;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.35rem;
   transition: border-color 0.3s, transform 0.2s;
   font-family: inherit;
   width: 100%;
@@ -2347,21 +2347,31 @@ body, .paper, .site-header, .form-card, .terminal,
 }
 
 .games-reveal__icon {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--accent);
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid var(--accent);
   border-radius: 50%;
-  animation: games-pulse 2s ease-in-out infinite;
+  animation: starFlash 1.5s ease-in-out infinite;
 }
 
-@keyframes games-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.3); }
-  50% { box-shadow: 0 0 0 8px rgba(0, 229, 255, 0); }
+@keyframes starFlash {
+  0%, 100% {
+    box-shadow: 0 0 4px rgba(0, 229, 255, 0.2);
+    text-shadow: 0 0 4px rgba(0, 229, 255, 0.3);
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(0, 229, 255, 0.6), 0 0 40px rgba(0, 229, 255, 0.2);
+    text-shadow: 0 0 12px rgba(0, 229, 255, 0.8);
+    transform: scale(1.15);
+    opacity: 1;
+  }
 }
 
 .games-reveal__text {
@@ -2376,26 +2386,104 @@ body, .paper, .site-header, .form-card, .terminal,
   letter-spacing: 0.05em;
 }
 
-.games-area {
+/* Glitch effect on reveal button */
+.games-reveal__btn--glitch {
+  animation: glitchShake 0.08s steps(2) infinite;
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.3), inset 0 0 12px rgba(0, 229, 255, 0.05);
+}
+
+@keyframes glitchShake {
+  0% { transform: translate(0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(2px, -1px); }
+  75% { transform: translate(-1px, -2px); }
+  100% { transform: translate(1px, 2px); }
+}
+
+/* Games Modal */
+.games-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.games-modal--open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.games-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+}
+
+.games-modal__content {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  border: 1px solid var(--divider);
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 580px;
+  width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.games-modal--open .games-modal__content {
+  transform: translateY(0) scale(1);
+}
+
+.games-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+  font-family: inherit;
+}
+
+.games-modal__close:hover {
+  color: var(--text);
+}
+
+.games-modal__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.25rem;
   text-align: center;
 }
 
-.games-area--enter {
-  animation: fadeInUp 0.5s both;
-}
-
-.games-area__sub {
+.games-modal__sub {
   font-size: 0.8125rem;
   color: var(--muted);
   margin-bottom: 1.5rem;
+  text-align: center;
 }
 
+/* Game picker cards */
 .games-picker {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  max-width: 640px;
-  margin: 0 auto;
 }
 
 .game-pick {
@@ -2436,11 +2524,7 @@ body, .paper, .site-header, .form-card, .terminal,
   line-height: 1.4;
 }
 
-.games-stage {
-  max-width: 440px;
-  margin: 0 auto;
-}
-
+/* Back button & game container inside modal */
 .games-back {
   background: transparent;
   border: none;
@@ -2461,12 +2545,19 @@ body, .paper, .site-header, .form-card, .terminal,
 .games-container {
   border-radius: 6px;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 @media (max-width: 48rem) {
   .games-picker {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 360px;
+    grid-template-columns: 1fr;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .games-modal__content {
+    padding: 1.25rem;
   }
 }
 

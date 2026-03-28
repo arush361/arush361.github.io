@@ -31,30 +31,30 @@
       gap: 2px; padding: 12px;
     }
     #minesweeper-game .ms-cell {
-      aspect-ratio: 1; background: #12121a; border: 1px solid #1a1a2e;
+      aspect-ratio: 1; background: #1e1e2e; border: 1px solid #2a2a3e;
       border-radius: 2px; display: flex; align-items: center;
-      justify-content: center; font-size: 12px; cursor: pointer;
-      transition: background 0.1s, border-color 0.1s;
+      justify-content: center; font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: background 0.1s, border-color 0.1s;
     }
-    #minesweeper-game .ms-cell:hover { border-color: #00e5ff44; }
+    #minesweeper-game .ms-cell:hover { border-color: #00e5ff66; background: #252540; }
     #minesweeper-game .ms-cell.revealed {
-      background: #0d0d14; cursor: default; border-color: #0d0d14;
+      background: #0e0e18; cursor: default; border-color: #16162a;
     }
-    #minesweeper-game .ms-cell.flagged { border-color: #febc2e66; }
+    #minesweeper-game .ms-cell.flagged { border-color: #febc2e99; background: #2a2518; }
     #minesweeper-game .ms-cell.mine-hit {
-      background: #1a0a0a; border-color: #ff5f5766;
+      background: #2e0a0a; border-color: #ff5f57aa;
     }
     #minesweeper-game .ms-cell.mine-show {
-      background: #12121a; border-color: #ff5f5733;
+      background: #1a0e0e; border-color: #ff5f5766;
     }
-    #minesweeper-game .ms-cell .c1 { color: #00e5ff; }
-    #minesweeper-game .ms-cell .c2 { color: #28c840; }
-    #minesweeper-game .ms-cell .c3 { color: #ff5f57; }
-    #minesweeper-game .ms-cell .c4 { color: #9966ff; }
-    #minesweeper-game .ms-cell .c5 { color: #febc2e; }
-    #minesweeper-game .ms-cell .c6 { color: #00e5ff; }
-    #minesweeper-game .ms-cell .c7 { color: #e0e0e0; }
-    #minesweeper-game .ms-cell .c8 { color: #666; }
+    #minesweeper-game .ms-cell .c1 { color: #33eeff; }
+    #minesweeper-game .ms-cell .c2 { color: #44dd55; }
+    #minesweeper-game .ms-cell .c3 { color: #ff6b6b; }
+    #minesweeper-game .ms-cell .c4 { color: #bb88ff; }
+    #minesweeper-game .ms-cell .c5 { color: #ffcc33; }
+    #minesweeper-game .ms-cell .c6 { color: #66ffdd; }
+    #minesweeper-game .ms-cell .c7 { color: #f0f0f0; }
+    #minesweeper-game .ms-cell .c8 { color: #999; }
     #minesweeper-game .ms-overlay {
       position: absolute; inset: 0; background: rgba(10,10,15,0.92);
       display: flex; flex-direction: column; align-items: center;
