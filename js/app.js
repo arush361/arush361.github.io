@@ -327,44 +327,86 @@
     if (!track) return;
 
     var rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@arusharma';
+    var cacheKey = 'medium_rss_cache';
+    var cacheTTL = 30 * 60 * 1000; // 30 minutes
+
+    var funnyErrors = [
+      'Medium is ghosting me right now. Try my <a href="https://arusharma.medium.com" target="_blank" rel="noopener">profile</a> directly.',
+      'The articles are on a coffee break. They\'ll be back. Probably.',
+      'RSS feed said "new phone, who dis?" Try again later.',
+      'My articles exist, I promise. Medium\'s API just doesn\'t feel like proving it right now.',
+      'Plot twist: the articles were the friends we made along the way. Also they\'re <a href="https://arusharma.medium.com" target="_blank" rel="noopener">here</a>.'
+    ];
+    var funnyMsg = funnyErrors[Math.floor(Math.random() * funnyErrors.length)];
+
+    function renderCards(items) {
+      track.innerHTML = '';
+      items.forEach(function (item) {
+        var tmp = document.createElement('div');
+        tmp.innerHTML = item.description || '';
+        var text = tmp.textContent || tmp.innerText || '';
+        var excerpt = text.substring(0, 160).trim() + '\u2026';
+
+        var card = document.createElement('a');
+        card.className = 'post-card';
+        card.href = item.link;
+        card.target = '_blank';
+        card.rel = 'noopener';
+
+        card.innerHTML =
+          '<div class="post-card__source">Medium</div>' +
+          '<p class="post-card__text">' + item.title + ' \u2014 ' + excerpt + '</p>' +
+          '<span class="post-card__cta">Read article \u2197</span>';
+
+        track.appendChild(card);
+      });
+
+      if (track.classList.contains('cards-visible') || isInViewport(track)) {
+        track.classList.add('cards-visible');
+      }
+    }
+
+    // Try cache first
+    try {
+      var cached = JSON.parse(localStorage.getItem(cacheKey));
+      if (cached && (Date.now() - cached.timestamp) < cacheTTL) {
+        renderCards(cached.items);
+        return;
+      }
+    } catch (e) { /* cache miss or corrupt, fetch fresh */ }
 
     fetch(rssUrl)
-      .then(function (res) { return res.json(); })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
       .then(function (data) {
         if (!data.items || !data.items.length) {
-          track.innerHTML = '<div class="posts-loading">No articles found.</div>';
+          track.innerHTML = '<div class="posts-loading">' + funnyMsg + '</div>';
           return;
         }
 
-        track.innerHTML = '';
+        // Cache the response
+        try {
+          localStorage.setItem(cacheKey, JSON.stringify({
+            items: data.items,
+            timestamp: Date.now()
+          }));
+        } catch (e) { /* localStorage full or unavailable, no-op */ }
 
-        data.items.forEach(function (item) {
-          var tmp = document.createElement('div');
-          tmp.innerHTML = item.description || '';
-          var text = tmp.textContent || tmp.innerText || '';
-          var excerpt = text.substring(0, 160).trim() + '\u2026';
-
-          var card = document.createElement('a');
-          card.className = 'post-card';
-          card.href = item.link;
-          card.target = '_blank';
-          card.rel = 'noopener';
-
-          card.innerHTML =
-            '<div class="post-card__source">Medium</div>' +
-            '<p class="post-card__text">' + item.title + ' \u2014 ' + excerpt + '</p>' +
-            '<span class="post-card__cta">Read article \u2197</span>';
-
-          track.appendChild(card);
-        });
-
-        // Trigger card stagger after feed loads
-        if (track.classList.contains('cards-visible') || isInViewport(track)) {
-          track.classList.add('cards-visible');
-        }
+        renderCards(data.items);
       })
-      .catch(function () {
-        track.innerHTML = '<div class="posts-loading">Could not load articles.</div>';
+      .catch(function (err) {
+        console.warn('RSS feed error:', err);
+        // Try stale cache as last resort
+        try {
+          var stale = JSON.parse(localStorage.getItem(cacheKey));
+          if (stale && stale.items) {
+            renderCards(stale.items);
+            return;
+          }
+        } catch (e) { /* no cache available */ }
+        track.innerHTML = '<div class="posts-loading">' + funnyMsg + '</div>';
       });
   }
 
