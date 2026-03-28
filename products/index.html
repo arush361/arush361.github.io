@@ -1,0 +1,236 @@
+---
+layout: misc
+title: "Products | Arush Sharma"
+excerpt: "Products and platforms I've built across HealthTech, gaming, fintech, and SaaS."
+---
+<div class="products-page">
+  <nav class="breadcrumb reveal">
+    <a href="{{ site.baseurl }}/">Home</a>
+    <span class="breadcrumb__sep">/</span>
+    <span>Products</span>
+  </nav>
+
+  <h1 class="products-page__title reveal">Products I've Shipped</h1>
+  <p class="products-page__subtitle reveal">Things I built because they didn't exist yet.</p>
+
+  <!-- Toggle -->
+  <div class="proj-tabs reveal">
+    <button class="proj-tab proj-tab--active" onclick="switchTab('personal',this)">Personal</button>
+    <button class="proj-tab" onclick="switchTab('professional',this)">Professional</button>
+    <div class="proj-tabs__slider"></div>
+  </div>
+
+  <!-- Personal Products -->
+  <div class="proj-panel" id="panel-personal">
+    <div class="proj-card-grid reveal-stagger">
+
+      <a class="proj-card" href="{{ site.baseurl }}/products/prompt-pro.html">
+        <div class="proj-card__icon">&#9998;</div>
+        <div class="proj-card__body">
+          <div class="proj-card__name">PromptPro</div>
+          <div class="proj-card__desc">Grammarly for prompts &mdash; enhance text inline on ChatGPT &amp; Copilot</div>
+          <div class="proj-card__tags">
+            <span class="stag">Chrome MV3</span>
+            <span class="stag">OpenAI API</span>
+            <span class="stag">JavaScript</span>
+          </div>
+        </div>
+        <div class="proj-card__meta">Aug 2025</div>
+      </a>
+
+      <a class="proj-card" href="{{ site.baseurl }}/products/ai-nudge.html">
+        <div class="proj-card__icon">&#9889;</div>
+        <div class="proj-card__body">
+          <div class="proj-card__name">AI Nudge</div>
+          <div class="proj-card__desc">New tab replaced with AI shortcuts, weather, and smart nudges</div>
+          <div class="proj-card__tags">
+            <span class="stag">Chrome Extension</span>
+            <span class="stag">OpenAI</span>
+            <span class="stag">Privacy-First</span>
+          </div>
+        </div>
+        <div class="proj-card__meta">May 2025</div>
+      </a>
+
+      <a class="proj-card" href="{{ site.baseurl }}/products/mac-authenticator.html">
+        <div class="proj-card__icon">&#128274;</div>
+        <div class="proj-card__body">
+          <div class="proj-card__name">Desktop Authenticator</div>
+          <div class="proj-card__desc">Local-only 2FA for macOS with encrypted storage. Minecraft-themed</div>
+          <div class="proj-card__tags">
+            <span class="stag">Electron</span>
+            <span class="stag">TOTP</span>
+            <span class="stag">SQLite</span>
+          </div>
+        </div>
+        <div class="proj-card__meta">May 2025</div>
+      </a>
+
+      <a class="proj-card" href="{{ site.baseurl }}/products/langex-pdf.html">
+        <div class="proj-card__icon">&#128196;</div>
+        <div class="proj-card__body">
+          <div class="proj-card__name">LangEx PDF</div>
+          <div class="proj-card__desc">LLM + regex extraction from healthcare PDFs. Multi-provider</div>
+          <div class="proj-card__tags">
+            <span class="stag">Python</span>
+            <span class="stag">LLMs</span>
+            <span class="stag">Healthcare</span>
+          </div>
+        </div>
+        <div class="proj-card__meta">May 2025</div>
+      </a>
+
+      <a class="proj-card" href="{{ site.baseurl }}/products/autoresearch.html">
+        <div class="proj-card__icon">&#128300;</div>
+        <div class="proj-card__body">
+          <div class="proj-card__name">Autoresearch</div>
+          <div class="proj-card__desc">Self-improving Claude skills via Karpathy's autoresearch + binary evals. 59% to 97%</div>
+          <div class="proj-card__tags">
+            <span class="stag">AI/ML</span>
+            <span class="stag">Evals</span>
+            <span class="stag">Claude Code</span>
+          </div>
+        </div>
+        <div class="proj-card__meta">Mar 2026</div>
+      </a>
+
+      <a class="proj-card" href="{{ site.baseurl }}/products/gemini-exporter.html">
+        <div class="proj-card__icon">&#128172;</div>
+        <div class="proj-card__body">
+          <div class="proj-card__name">Gemini Chat Exporter</div>
+          <div class="proj-card__desc">Export Google Gemini chats to PDF, Markdown, or CSV. Reverse-engineered lazy loading</div>
+          <div class="proj-card__tags">
+            <span class="stag">Chrome Extension</span>
+            <span class="stag">JavaScript</span>
+          </div>
+        </div>
+        <div class="proj-card__meta">Feb 2026</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Professional Products -->
+  <div class="proj-panel proj-panel--hidden" id="panel-professional">
+    <div class="proj-card-grid reveal-stagger">
+
+      <div class="proj-card proj-card--muted">
+        <div class="proj-card__icon">&#127973;</div>
+        <div class="proj-card__body">
+          <div class="proj-card__name">PointClickCare</div>
+          <div class="proj-card__desc">Identity platform for humans &amp; AI agents in healthcare</div>
+          <div class="proj-card__tags">
+            <span class="stag">IAM</span>
+            <span class="stag">AI Agents</span>
+            <span class="stag">OAuth</span>
+          </div>
+        </div>
+        <div class="proj-card__meta">2024 &ndash; now</div>
+      </div>
+
+      <div class="proj-card proj-card--muted">
+        <div class="proj-card__icon">&#128179;</div>
+        <div class="proj-card__body">
+          <div class="proj-card__name">Amdocs</div>
+          <div class="proj-card__desc">ML-powered billing &amp; payments optimization</div>
+          <div class="proj-card__tags">
+            <span class="stag">ML</span>
+            <span class="stag">Payments</span>
+            <span class="stag">SaaS</span>
+          </div>
+        </div>
+        <div class="proj-card__meta">2022 &ndash; 2024</div>
+      </div>
+
+      <div class="proj-card proj-card--muted">
+        <div class="proj-card__icon">&#9824;</div>
+        <div class="proj-card__body">
+          <div class="proj-card__name">Flutter / PokerStars</div>
+          <div class="proj-card__desc">Platform personalization &amp; automation at 72M+ user scale</div>
+          <div class="proj-card__tags">
+            <span class="stag">72M+ Users</span>
+            <span class="stag">Data Pipelines</span>
+            <span class="stag">ML</span>
+          </div>
+        </div>
+        <div class="proj-card__meta">2022 &ndash; 2024</div>
+      </div>
+
+      <div class="proj-card proj-card--muted">
+        <div class="proj-card__icon">&#127974;</div>
+        <div class="proj-card__body">
+          <div class="proj-card__name">IDFC First Bank</div>
+          <div class="proj-card__desc">WhatsApp loan channel &amp; digital lending. 20M MAU</div>
+          <div class="proj-card__tags">
+            <span class="stag">FinTech</span>
+            <span class="stag">Conversational AI</span>
+          </div>
+        </div>
+        <div class="proj-card__meta">2020 &ndash; 2022</div>
+      </div>
+
+      <div class="proj-card proj-card--muted">
+        <div class="proj-card__icon">&#127759;</div>
+        <div class="proj-card__body">
+          <div class="proj-card__name">JungleWorks</div>
+          <div class="proj-card__desc">Telecom ERP 0&rarr;1 Scaling</div>
+          <div class="proj-card__tags">
+            <span class="stag">Microservices</span>
+            <span class="stag">React</span>
+          </div>
+        </div>
+        <div class="proj-card__meta">2017 &ndash; 2018</div>
+      </div>
+
+      <div class="proj-card proj-card--muted">
+        <div class="proj-card__icon">&#127970;</div>
+        <div class="proj-card__body">
+          <div class="proj-card__name">BNY Mellon</div>
+          <div class="proj-card__desc">RFID document management. 2 WOW Awards</div>
+          <div class="proj-card__tags">
+            <span class="stag">Java</span>
+            <span class="stag">RFID</span>
+          </div>
+        </div>
+        <div class="proj-card__meta">2015 &ndash; 2017</div>
+      </div>
+
+    </div>
+    <p class="proj-panel__note reveal">Detailed case studies coming soon.</p>
+  </div>
+
+</div>
+
+<script>
+function switchTab(tab, btn) {
+  var panels = document.querySelectorAll('.proj-panel');
+  var tabs = document.querySelectorAll('.proj-tab');
+  // Fade out current panel
+  panels.forEach(function(p) {
+    if (!p.classList.contains('proj-panel--hidden')) {
+      p.style.opacity = '0';
+      p.style.transform = 'translateY(8px)';
+    }
+  });
+  setTimeout(function() {
+    panels.forEach(function(p) { p.classList.add('proj-panel--hidden'); });
+    tabs.forEach(function(t) { t.classList.remove('proj-tab--active'); });
+    var target = document.getElementById('panel-' + tab);
+    target.classList.remove('proj-panel--hidden');
+    target.style.opacity = '0';
+    target.style.transform = 'translateY(8px)';
+    btn.classList.add('proj-tab--active');
+    // Fade in new panel
+    requestAnimationFrame(function() {
+      target.style.opacity = '1';
+      target.style.transform = 'translateY(0)';
+      // Re-trigger stagger
+      var grid = target.querySelector('.reveal-stagger');
+      if (grid) {
+        grid.classList.remove('visible');
+        requestAnimationFrame(function() { grid.classList.add('visible'); });
+      }
+    });
+  }, 200);
+}
+</script>

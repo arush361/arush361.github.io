@@ -1,0 +1,79 @@
+---
+layout: project
+title: "Autoresearch | Arush Sharma"
+excerpt: "Self-improving Claude Code skills using Karpathy's autoresearch methodology and binary evals. 59% to 97% in 3 experiments."
+project_name: "Autoresearch"
+company: "Personal Product"
+date_range: "Mar 2026"
+tags: [AI/ML, Claude Code, Evals, Prompt Engineering, Karpathy, Binary Evals]
+next_project: "Gemini Chat Exporter"
+next_project_url: "/products/gemini-exporter.html"
+---
+<div class="project-section reveal">
+  <h2 class="project-section__title">Problem Statement</h2>
+  <p>Claude Code skills "work" but nobody measures how reliably. You write a skill, run it a few times, it looks fine, you ship it. But when you actually measure with structured evals, you discover your skill is passing only 59% of the time. Vibes-based development doesn't scale.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Hypothesis</h2>
+  <p>Apply Karpathy's autoresearch methodology (autonomous research loops with self-evaluation) to Claude Code skills. Define binary evals (yes/no, no scales), run the skill repeatedly, score outputs, analyze failures, mutate the prompt, and keep improvements. Let the system optimize itself.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Solution</h2>
+  <p><strong>Autoresearch</strong> is a Claude Code skill that autonomously optimizes other skills through a loop:</p>
+  <ul class="project-list">
+    <li><strong>Run</strong> &mdash; execute the target skill on test inputs</li>
+    <li><strong>Score</strong> &mdash; evaluate outputs against 3-6 binary evals (yes/no only)</li>
+    <li><strong>Analyze</strong> &mdash; identify failure patterns and root causes</li>
+    <li><strong>Mutate</strong> &mdash; modify the skill's prompt to address failures</li>
+    <li><strong>Keep or discard</strong> &mdash; only keep mutations that improve the score</li>
+  </ul>
+  <p>The loop repeats until the skill hits 95%+ or you stop it.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Case Study: 59% to 97%</h2>
+  <p>The <code>/product-manager</code> skill handles gap analysis, competitor research, and PRD generation. I defined 6 binary evals and ran 20 tests per experiment (120 checks total):</p>
+  <ul class="project-list">
+    <li><strong>Baseline:</strong> 59% pass rate. The skill was silently failing on structure, scoring format, and citation quality</li>
+    <li><strong>Experiment 1:</strong> Jumped to 82%. Mutations fixed scoring format and added explicit section headers</li>
+    <li><strong>Experiment 2:</strong> Hit 91%. Addressed edge cases in competitor research depth</li>
+    <li><strong>Experiment 3:</strong> Reached 97%. Final mutations tightened citation requirements and output consistency</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Key Product Decisions</h2>
+  <ul class="project-list">
+    <li><strong>Binary evals only.</strong> No 1-5 scales, no "mostly good." Either the output has the required structure or it doesn't. Binary evals are unambiguous and automatable</li>
+    <li><strong>Small eval sets.</strong> 3-6 evals per skill. More evals means more noise and slower iteration. Focus on the criteria that actually matter</li>
+    <li><strong>Mutation, not rewrite.</strong> Each iteration makes targeted changes to the prompt, not wholesale rewrites. This preserves what's already working and isolates the effect of each change</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Impact &amp; Metrics</h2>
+  <div class="project-metrics">
+    <div class="project-metric">
+      <div class="project-metric__value">59% &rarr; 97%</div>
+      <div class="project-metric__label">Skill pass rate improvement in 3 experiments</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">120 Checks</div>
+      <div class="project-metric__label">Binary evals across 20 test runs per experiment</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">Open Source</div>
+      <div class="project-metric__label"><a href="https://github.com/arush361/autoresearch-claude-skills" target="_blank" rel="noopener">View on GitHub &#8599;</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Links</h2>
+  <p>
+    <a href="https://github.com/arush361/autoresearch-claude-skills" target="_blank" rel="noopener">GitHub Repository &#8599;</a> &nbsp;&middot;&nbsp;
+    <a href="https://arusharma.medium.com/from-vibes-to-evals-how-i-made-claude-skills-self-improving-87d9bb291c64" target="_blank" rel="noopener">Medium Article &#8599;</a>
+  </p>
+</div>

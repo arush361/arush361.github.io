@@ -204,7 +204,22 @@
     });
   }
 
-  /* --- 7. Smooth Scroll --- */
+  /* --- 7. Header Scroll Shrink --- */
+  function initHeaderScroll() {
+    var header = document.getElementById('site-header');
+    if (!header) return;
+
+    var scrolled = false;
+    window.addEventListener('scroll', function () {
+      var isScrolled = window.scrollY > 60;
+      if (isScrolled !== scrolled) {
+        scrolled = isScrolled;
+        header.classList.toggle('site-header--scrolled', scrolled);
+      }
+    }, { passive: true });
+  }
+
+  /* --- 8. Smooth Scroll --- */
   function initSmoothScroll() {
     document.addEventListener('click', function (e) {
       var link = e.target.closest('a[href^="#"]');
@@ -295,14 +310,14 @@
     var particles = [];
     var mouse = { x: -9999, y: -9999 };
     var w, h, particleCount;
-    var connectDist = 150;
-    var mouseDist = 200;
+    var connectDist = 180;
+    var mouseDist = 250;
     var raf;
 
     function resize() {
       w = canvas.width = window.innerWidth;
       h = canvas.height = window.innerHeight;
-      particleCount = Math.min(Math.floor((w * h) / 12000), 100);
+      particleCount = Math.min(Math.floor((w * h) / 10000), 120);
 
       // Re-seed if particle count changed significantly
       if (Math.abs(particles.length - particleCount) > 10) {
@@ -318,7 +333,7 @@
           y: Math.random() * h,
           vx: (Math.random() - 0.5) * 0.4,
           vy: (Math.random() - 0.5) * 0.4,
-          r: Math.random() * 1.5 + 0.5
+          r: Math.random() * 1.8 + 0.8
         });
       }
     }
@@ -326,27 +341,27 @@
     function drawParticle(p) {
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0, 85, 255, 0.25)';
+      ctx.fillStyle = 'rgba(0, 85, 255, 0.4)';
       ctx.fill();
     }
 
     function drawLine(p1, p2, dist, maxDist) {
-      var opacity = (1 - dist / maxDist) * 0.12;
+      var opacity = (1 - dist / maxDist) * 0.2;
       ctx.beginPath();
       ctx.moveTo(p1.x, p1.y);
       ctx.lineTo(p2.x, p2.y);
       ctx.strokeStyle = 'rgba(0, 85, 255, ' + opacity + ')';
-      ctx.lineWidth = 0.5;
+      ctx.lineWidth = 1;
       ctx.stroke();
     }
 
     function drawMouseLine(p, dist) {
-      var opacity = (1 - dist / mouseDist) * 0.2;
+      var opacity = (1 - dist / mouseDist) * 0.3;
       ctx.beginPath();
       ctx.moveTo(p.x, p.y);
       ctx.lineTo(mouse.x, mouse.y);
       ctx.strokeStyle = 'rgba(0, 85, 255, ' + opacity + ')';
-      ctx.lineWidth = 0.8;
+      ctx.lineWidth = 1.2;
       ctx.stroke();
     }
 
@@ -438,7 +453,7 @@
       'IAM', 'RBAC', 'SSO', 'MCP', 'API'
     ];
 
-    var sizes = [10, 11, 12, 13, 14, 16];
+    var sizes = [11, 12, 13, 14, 16, 18];
 
     function spawnGlyph() {
       var el = document.createElement('span');
@@ -464,12 +479,12 @@
     }
 
     // Initial burst
-    for (var i = 0; i < 8; i++) {
-      setTimeout(spawnGlyph, i * 600);
+    for (var i = 0; i < 10; i++) {
+      setTimeout(spawnGlyph, i * 500);
     }
 
     // Continuous spawn
-    setInterval(spawnGlyph, 3000 + Math.random() * 2000);
+    setInterval(spawnGlyph, 2500 + Math.random() * 1500);
   }
 
   /* --- Initialize Everything --- */
@@ -480,6 +495,7 @@
     initCardsReveal();
     initCounters();
     initMagneticTags();
+    initHeaderScroll();
     initSmoothScroll();
     initCarousels();
     initMediumFeed();

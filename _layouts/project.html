@@ -2,6 +2,8 @@
 <html lang="en">
 {% include head.html %}
 <body>
+  <canvas id="constellation" aria-hidden="true"></canvas>
+  <div id="floating-glyphs" aria-hidden="true"></div>
   <a href="{{ site.baseurl }}/v1/" class="version-toggle">&#9654; Classic</a>
   <div class="paper">
     {% include header.html %}
@@ -10,11 +12,12 @@
         <nav class="breadcrumb reveal">
           <a href="{{ site.baseurl }}/">Home</a>
           <span class="breadcrumb__sep">/</span>
-          <a href="{{ site.baseurl }}/projects/">Products</a>
+          <a href="{{ site.baseurl }}/products/">Products</a>
           <span class="breadcrumb__sep">/</span>
           <span>{{ page.project_name }}</span>
         </nav>
         <div class="project-detail__header reveal">
+          <div class="project-hero-gradient" aria-hidden="true"></div>
           <h1>{{ page.project_name }}</h1>
           <div class="project-detail__meta">
             <span class="project-detail__company">{{ page.company }}</span>
@@ -31,13 +34,13 @@
         {% if page.next_project %}
         <hr>
         <div class="project-nav reveal">
-          <a href="{{ site.baseurl }}/projects/">&#8592; All Products</a>
+          <a href="{{ site.baseurl }}/products/">&#8592; All Products</a>
           <a href="{{ site.baseurl }}{{ page.next_project_url }}">{{ page.next_project }} &#8594;</a>
         </div>
         {% else %}
         <hr>
         <div class="project-nav reveal">
-          <a href="{{ site.baseurl }}/projects/">&#8592; All Products</a>
+          <a href="{{ site.baseurl }}/products/">&#8592; All Products</a>
 </div>
         {% endif %}
       </article>

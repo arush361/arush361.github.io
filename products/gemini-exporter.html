@@ -1,0 +1,81 @@
+---
+layout: project
+title: "Gemini Chat Exporter | Arush Sharma"
+excerpt: "Chrome extension to export Google Gemini AI chats to PDF, Markdown, or CSV -- after reverse-engineering Gemini's lazy-loading DOM."
+project_name: "Gemini Chat Exporter"
+company: "Personal Product"
+date_range: "Feb 2026"
+tags: [Chrome Extension, JavaScript, PDF Generation, Markdown, Reverse Engineering]
+next_project: "PromptPro"
+next_project_url: "/products/prompt-pro.html"
+---
+<div class="project-section reveal">
+  <h2 class="project-section__title">Problem Statement</h2>
+  <p>Google Gemini has no export button. You can't save your conversations to use in other tools, reference later, or share with teammates. For anyone building with AI, losing conversation history means losing context.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">The Hard Part</h2>
+  <p>Building a chat exporter sounds simple. It wasn't. Gemini uses <strong>lazy loading</strong> inside a custom <code>&lt;infinite-scroller&gt;</code> element. Only the messages visible on screen exist in the DOM. The rest don't load until you scroll to them.</p>
+  <ul class="project-list">
+    <li><strong>Custom elements, not divs</strong> &mdash; conversations live inside <code>&lt;user-query&gt;</code> and <code>&lt;model-response&gt;</code> custom elements, not standard HTML</li>
+    <li><strong>Scroll-triggered loading</strong> &mdash; setting <code>scrollTop = 0</code> loads older messages above the current ones, then Gemini adjusts <code>scrollTop</code> back to keep your viewport in place</li>
+    <li><strong>Repeated hammering required</strong> &mdash; you have to keep forcing <code>scrollTop = 0</code> with pauses until no new content appears. First scroll: 10 messages. After repeated scrolling: 34 (the full chat)</li>
+    <li><strong>Hidden screen-reader spans</strong> &mdash; Gemini injects <code>&lt;span class="screen-reader-only"&gt;You said&lt;/span&gt;</code> text that pollutes exports if not filtered</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Solution</h2>
+  <p><strong>Gemini Chat Exporter</strong> is a Chrome extension that reverse-engineers Gemini's DOM to capture complete conversations:</p>
+  <ul class="project-list">
+    <li><strong>Full history capture</strong> &mdash; auto-scrolls the infinite scroller to load every message before export. No truncated chats</li>
+    <li><strong>Three export formats</strong> &mdash; PDF (formatted with headers and styling), Markdown (clean and portable), CSV (structured for analysis)</li>
+    <li><strong>Clean output</strong> &mdash; strips screen-reader artifacts, normalizes whitespace, preserves code blocks and formatting</li>
+    <li><strong>One-click export</strong> &mdash; popup UI with format selection. Click and download</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Key Product Decisions</h2>
+  <ul class="project-list">
+    <li><strong>Reverse-engineer, don't scrape.</strong> Generic DOM scrapers fail on Gemini's custom elements. Understanding the actual component structure was the only path to reliable extraction</li>
+    <li><strong>Scroll-then-capture pipeline.</strong> Load all content first, then parse. Trying to parse while scrolling introduces race conditions and incomplete captures</li>
+    <li><strong>Three formats for three use cases.</strong> PDF for sharing, Markdown for knowledge bases, CSV for analysis. Each format is purpose-built, not a generic dump</li>
+    <li><strong>No permissions beyond activeTab.</strong> The extension only activates on gemini.google.com. No background processes, no data collection</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Impact &amp; Metrics</h2>
+  <div class="project-metrics">
+    <div class="project-metric">
+      <div class="project-metric__value">3 Formats</div>
+      <div class="project-metric__label">PDF, Markdown, and CSV export</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">100%</div>
+      <div class="project-metric__label">Full chat capture via reverse-engineered scroll</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">Open Source</div>
+      <div class="project-metric__label"><a href="https://github.com/arush361/gemini-chat-exporter" target="_blank" rel="noopener">View on GitHub &#8599;</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Lessons Learned</h2>
+  <ul class="project-list">
+    <li><strong>Modern web apps are hostile to extensions.</strong> Custom elements, shadow DOM, lazy loading, dynamic class names. Building reliable extensions for apps like Gemini requires actual reverse engineering, not just querySelector</li>
+    <li><strong>The scroll problem is the whole problem.</strong> 90% of the engineering effort went into reliably loading all messages. The actual export logic was trivial by comparison</li>
+    <li><strong>AI agents can scaffold fast, but edge cases are manual.</strong> The initial 4-agent build took 90 seconds. Fixing the lazy-loading capture took hours of manual DOM investigation</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Links</h2>
+  <p>
+    <a href="https://github.com/arush361/gemini-chat-exporter" target="_blank" rel="noopener">GitHub Repository &#8599;</a>
+  </p>
+</div>

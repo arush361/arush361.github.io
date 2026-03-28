@@ -1,11 +1,11 @@
-<header class="site-header">
+<header class="site-header" id="site-header">
   <div class="site-header__top">
     <a href="{{ site.baseurl }}/" class="site-header__name">Arush Sharma</a>
     <nav class="site-header__nav">
-      <a href="#experience">Experience</a>
-      <a href="{{ site.baseurl }}/projects/">Products</a>
-      <a href="#contact">Contact</a>
-      <a href="https://arusharma.medium.com" target="_blank" rel="noopener">Blog &#8599;</a>
+      <a href="{{ site.baseurl }}/#experience" class="nav-link">Experience</a>
+      <a href="{{ site.baseurl }}/products/" class="nav-link{% if page.url contains '/products' %} nav-link--active{% endif %}">Products</a>
+      <a href="{{ site.baseurl }}/#contact" class="nav-link">Contact</a>
+      <a href="https://arusharma.medium.com" target="_blank" rel="noopener" class="nav-link">Blog &#8599;</a>
     </nav>
   </div>
   <div class="site-header__social">
