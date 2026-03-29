@@ -68,7 +68,7 @@
       { type: 'output', text: 'and everything that wants it. Doctors. Admins. <span class="t-highlight">AI agents.</span>' },
       { type: 'blank' },
       { type: 'cmd', prompt: '>', text: ' arush.career()' },
-      { type: 'output', text: '<span class="t-stat">10+ years</span> shipping products people actually use' },
+      { type: 'output', text: '<span class="t-stat">10+ years</span> building + shipping products at scale' },
       { type: 'output', text: '<span class="t-highlight">PokerStars</span> <span class="t-comment">(72M+ users)</span> \u2192 <span class="t-highlight">FinTech</span> <span class="t-comment">(420M+ credit cards)</span> \u2192 HealthTech' },
       { type: 'output', text: '<span class="t-stat">0\u21921</span> builds. <span class="t-stat">M+ users</span>. <span class="t-stat">M+ revenue</span>. Still going.' },
       { type: 'blank' },
@@ -385,9 +385,16 @@
         card.target = '_blank';
         card.rel = 'noopener';
 
+        var pubDate = '';
+        if (item.pubDate) {
+          var d = new Date(item.pubDate);
+          pubDate = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
         card.innerHTML =
           '<div class="post-card__source">Medium</div>' +
           '<p class="post-card__text">' + item.title + ' \u2014 ' + excerpt + '</p>' +
+          (pubDate ? '<span class="post-card__date">' + pubDate + '</span>' : '') +
           '<span class="post-card__cta">Read article \u2197</span>';
 
         track.appendChild(card);

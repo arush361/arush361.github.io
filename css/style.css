@@ -1110,6 +1110,13 @@ a.proj-dir__item:hover .proj-dir__name {
   margin-bottom: 0.625rem;
 }
 
+.post-card__date {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+
 .post-card__text {
   font-size: 0.8125rem;
   line-height: 1.6;
