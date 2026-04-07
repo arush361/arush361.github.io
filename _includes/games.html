@@ -135,7 +135,9 @@
     pickerView.style.display = 'block';
   });
 
+  var ALLOWED_GAMES = ['terminal-type', 'memory-decode', 'minesweeper'];
   function loadGame(name) {
+    if (ALLOWED_GAMES.indexOf(name) === -1) return;
     var path = '{{ site.baseurl }}/games/' + name + '.html';
     fetch(path)
       .then(function(r) { return r.text(); })
@@ -147,6 +149,11 @@
           newScript.textContent = oldScript.textContent;
           oldScript.parentNode.replaceChild(newScript, oldScript);
         });
+        pickerView.style.display = 'none';
+        stageView.style.display = 'block';
+      })
+      .catch(function() {
+        container.textContent = 'Game unavailable.';
         pickerView.style.display = 'none';
         stageView.style.display = 'block';
       });

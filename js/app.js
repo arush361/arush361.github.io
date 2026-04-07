@@ -391,11 +391,27 @@
           pubDate = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         }
 
-        card.innerHTML =
-          '<div class="post-card__source">Medium</div>' +
-          '<p class="post-card__text">' + item.title + ' \u2014 ' + excerpt + '</p>' +
-          (pubDate ? '<span class="post-card__date">' + pubDate + '</span>' : '') +
-          '<span class="post-card__cta">Read article \u2197</span>';
+        var source = document.createElement('div');
+        source.className = 'post-card__source';
+        source.textContent = 'Medium';
+        card.appendChild(source);
+
+        var text = document.createElement('p');
+        text.className = 'post-card__text';
+        text.textContent = item.title + ' \u2014 ' + excerpt;
+        card.appendChild(text);
+
+        if (pubDate) {
+          var dateSpan = document.createElement('span');
+          dateSpan.className = 'post-card__date';
+          dateSpan.textContent = pubDate;
+          card.appendChild(dateSpan);
+        }
+
+        var cta = document.createElement('span');
+        cta.className = 'post-card__cta';
+        cta.textContent = 'Read article \u2197';
+        card.appendChild(cta);
 
         track.appendChild(card);
       });
@@ -436,7 +452,6 @@
         renderCards(data.items);
       })
       .catch(function (err) {
-        console.warn('RSS feed error:', err);
         // Try stale cache as last resort
         try {
           var stale = JSON.parse(localStorage.getItem(cacheKey));

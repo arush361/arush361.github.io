@@ -209,8 +209,13 @@
       // Highlight partial matches
       words.forEach(w => {
         if (val.length > 0 && w.text.startsWith(val)) {
-          w.el.innerHTML = '<span class="hit" style="color:#28c840">' +
-            w.text.slice(0, val.length) + '</span>' + w.text.slice(val.length);
+          w.el.textContent = '';
+          var hit = document.createElement('span');
+          hit.className = 'hit';
+          hit.style.color = '#28c840';
+          hit.textContent = w.text.slice(0, val.length);
+          w.el.appendChild(hit);
+          w.el.appendChild(document.createTextNode(w.text.slice(val.length)));
         } else {
           w.el.textContent = w.text;
         }

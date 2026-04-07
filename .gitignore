@@ -8,6 +8,8 @@ Gemfile.lock
 node_modules/
 *.docx
 generate-audit.py
+.env*
+CLAUDE.md
 
 # Debug screenshots (keep favicon.png, thumbnail.png, img/ folder)
 /audit-*.png

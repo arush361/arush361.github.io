@@ -4,7 +4,8 @@
   <title>{{ page.title }}</title>
   {% assign desc = page.excerpt | default: site.tagline %}
   <meta name="description" content="{{ desc }}">
-  <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+  {% if page.noindex %}<meta name="robots" content="noindex">
+  {% endif %}<link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
 
   <!-- Open Graph -->
   {% if page.og_image %}{% assign og_img = site.url | append: site.baseurl | append: page.og_image %}{% else %}{% assign og_img = site.url | append: site.baseurl | append: "/thumbnail.png" %}{% endif %}
@@ -25,6 +26,10 @@
   <meta name="twitter:title" content="{{ page.title }}">
   <meta name="twitter:description" content="{{ desc }}">
   <meta name="twitter:image" content="{{ og_img }}">
+
+  <!-- Security -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.rss2json.com https://www.google-analytics.com https://www.googletagmanager.com; img-src 'self' data: https:; frame-ancestors 'none';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <!-- Theme & Icons -->
   <meta name="theme-color" content="#0055ff">
