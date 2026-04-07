@@ -363,20 +363,38 @@
     var cacheTTL = 30 * 60 * 1000; // 30 minutes
 
     var funnyErrors = [
-      'Medium is ghosting me right now. Try my <a href="https://arusharma.medium.com" target="_blank" rel="noopener">profile</a> directly.',
-      'The articles are on a coffee break. They\'ll be back. Probably.',
-      'RSS feed said "new phone, who dis?" Try again later.',
-      'My articles exist, I promise. Medium\'s API just doesn\'t feel like proving it right now.',
-      'Plot twist: the articles were the friends we made along the way. Also they\'re <a href="https://arusharma.medium.com" target="_blank" rel="noopener">here</a>.'
+      { text: 'Medium is ghosting me right now. Try my ', linkText: 'profile', after: ' directly.' },
+      { text: 'The articles are on a coffee break. They\'ll be back. Probably.', linkText: null, after: '' },
+      { text: 'RSS feed said "new phone, who dis?" Try again later.', linkText: null, after: '' },
+      { text: 'My articles exist, I promise. Medium\'s API just doesn\'t feel like proving it right now.', linkText: null, after: '' },
+      { text: 'Plot twist: the articles were the friends we made along the way. Also they\'re ', linkText: 'here', after: '.' }
     ];
-    var funnyMsg = funnyErrors[Math.floor(Math.random() * funnyErrors.length)];
+    var funnyChoice = funnyErrors[Math.floor(Math.random() * funnyErrors.length)];
+
+    function buildErrorMsg() {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'posts-loading';
+      wrapper.appendChild(document.createTextNode(funnyChoice.text));
+      if (funnyChoice.linkText) {
+        var link = document.createElement('a');
+        link.href = 'https://arusharma.medium.com';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = funnyChoice.linkText;
+        wrapper.appendChild(link);
+      }
+      if (funnyChoice.after) {
+        wrapper.appendChild(document.createTextNode(funnyChoice.after));
+      }
+      return wrapper;
+    }
 
     function renderCards(items) {
       track.innerHTML = '';
       items.forEach(function (item) {
-        var tmp = document.createElement('div');
-        tmp.innerHTML = item.description || '';
-        var text = tmp.textContent || tmp.innerText || '';
+        var parser = new DOMParser();
+        var parsed = parser.parseFromString(item.description || '', 'text/html');
+        var text = parsed.body.textContent || '';
         var excerpt = text.substring(0, 160).trim() + '\u2026';
 
         var card = document.createElement('a');
@@ -437,7 +455,8 @@
       })
       .then(function (data) {
         if (!data.items || !data.items.length) {
-          track.innerHTML = '<div class="posts-loading">' + funnyMsg + '</div>';
+          track.innerHTML = '';
+          track.appendChild(buildErrorMsg());
           return;
         }
 
@@ -460,7 +479,8 @@
             return;
           }
         } catch (e) { /* no cache available */ }
-        track.innerHTML = '<div class="posts-loading">' + funnyMsg + '</div>';
+        track.innerHTML = '';
+        track.appendChild(buildErrorMsg());
       });
   }
 
