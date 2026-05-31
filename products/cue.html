@@ -1,33 +1,35 @@
 ---
 layout: project
 title: "Cue | Arush Sharma"
-excerpt: "A macOS menu bar AI companion with fully on-device voice. Push-to-talk, sees your screen, points at things with a flying cursor."
+excerpt: "A macOS menu bar learning buddy that sees your screen and points at things while it teaches you. Push-to-talk, screen-aware, with fully on-device voice."
 project_name: "Cue"
 company: "Personal Product"
 date_range: "May 2026"
-tags: [Swift, macOS, WhisperKit, Kokoro TTS, Claude API, On-Device AI]
+tags: [Swift, macOS, Screen-Aware AI, WhisperKit, Kokoro TTS, On-Device AI]
 next_project: "PromptPro"
 next_project_url: "/products/prompt-pro.html"
 ---
 <div class="project-section reveal">
   <h2 class="project-section__title">Problem Statement</h2>
-  <p>Voice AI assistants are convenient but they ship your microphone audio to someone else's servers. Every "hey, what's on my screen?" becomes a round trip to <a href="https://www.assemblyai.com" target="_blank" rel="noopener noreferrer">AssemblyAI</a> for transcription and <a href="https://elevenlabs.io" target="_blank" rel="noopener noreferrer">ElevenLabs</a> for speech, with per-character quotas and an API key for every vendor. For a tool that's always listening, that's a lot of trust to hand out, and a lot of moving parts to pay for.</p>
+  <p>Learning something new on your computer is weirdly indirect. You hit a wall in an app, screenshot it, switch to a chat window, describe what you're stuck on, paste the image, read the answer, then try to map "click the button in the top right" back onto your actual screen. And the assistants that do watch and listen ship your microphone audio and screenshots off to a stack of vendors &mdash; <a href="https://www.assemblyai.com" target="_blank" rel="noopener noreferrer">AssemblyAI</a> for transcription, <a href="https://elevenlabs.io" target="_blank" rel="noopener noreferrer">ElevenLabs</a> for speech &mdash; each metering you by the character. For a companion you'd want open all day while you learn, that's a lot of friction and a lot of trust to hand out.</p>
 </div>
 
 <div class="project-section reveal">
   <h2 class="project-section__title">Hypothesis</h2>
-  <p>Apple Silicon is fast enough to run the whole voice loop locally. If speech-to-text and text-to-speech both run on-device, the only thing that needs to leave the machine is the actual question. Strip out every voice vendor, keep one model call to <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a>, and the assistant gets cheaper, more private, and faster all at once.</p>
+  <p>What if a buddy lived on your screen, saw exactly what you see, and <em>pointed</em> at the thing instead of describing it? Showing beats telling when you're learning. And what if the whole voice loop ran on-device, so the only thing that ever left your machine was the question itself? Apple Silicon is fast enough to run speech-to-text and text-to-speech locally, which means a screen-aware learning companion can be genuinely helpful and genuinely private at the same time &mdash; one call to <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a>, nothing else leaves.</p>
 </div>
 
 <div class="project-section reveal">
   <h2 class="project-section__title">Solution</h2>
-  <p><strong>Cue</strong> is a macOS menu bar companion (no dock icon) that listens on push-to-talk, sees your screen, and talks back &mdash; with the voice pipeline running entirely on-device. It's a fork of <a href="https://github.com/farzaa/clicky" target="_blank" rel="noopener noreferrer">Clicky</a> by Farza, rebuilt around offline voice:</p>
+  <p><strong>Cue</strong> is a macOS menu bar learning buddy (no dock icon). You hold a key, talk to it like a person, and it sees your screen and talks back. It's a fork of <a href="https://github.com/farzaa/clicky" target="_blank" rel="noopener noreferrer">Clicky</a> by Farza, rebuilt around a learning-first persona and fully on-device voice:</p>
   <ul class="project-list">
-    <li><strong>On-device speech-to-text</strong> &mdash; <a href="https://github.com/argmaxinc/WhisperKit" target="_blank" rel="noopener noreferrer">WhisperKit</a> runs Whisper on CoreML / the Apple Neural Engine. A 10-second utterance transcribes in ~150ms on Apple Silicon</li>
-    <li><strong>On-device text-to-speech</strong> &mdash; <a href="https://huggingface.co/hexgrad/Kokoro-82M" target="_blank" rel="noopener noreferrer">Kokoro-82M</a> (an ~88MB INT8 neural TTS model) runs via <a href="https://onnxruntime.ai" target="_blank" rel="noopener noreferrer">ONNX Runtime</a>, with <code>AVSpeechSynthesizer</code> covering playback while Kokoro warms up</li>
-    <li><strong>The flying cursor</strong> &mdash; Claude can embed <code>[POINT:x,y:label:screenN]</code> tags in its replies, and a blue cursor flies across your screen (across multiple monitors) to point at whatever it's talking about</li>
-    <li><strong>Server-side web search</strong> &mdash; for news, weather, or anything time-sensitive, Claude's built-in <code>web_search</code> tool runs server-side. No extra keys, capped at 3 searches per response, toggleable from the panel</li>
-    <li><strong>One network call</strong> &mdash; no AssemblyAI, no ElevenLabs, no per-character quotas. The only thing that leaves your machine is the Claude <code>/chat</code> request</li>
+    <li><strong>It points, it doesn't just tell.</strong> A blue cursor flies to the exact menu, button, or word it's explaining &mdash; Claude embeds <code>[POINT:x,y:label]</code> tags in its replies, and the cursor routes to the right element even across multiple monitors. "Open the color inspector" becomes the cursor actually flying to it</li>
+    <li><strong>It teaches, conversationally.</strong> Replies are written for the ear, not the eye &mdash; short and direct by default, but it goes deep the moment you ask it to. It describes what code does instead of reading it out verbatim</li>
+    <li><strong>It never dead-ends you.</strong> Instead of closing with "want me to explain more?", it plants a seed &mdash; a related concept, a more ambitious next step, something worth coming back for</li>
+    <li><strong>It remembers the whole session.</strong> One ongoing conversation, so "wait, back up" or "okay, now the next part" just works</li>
+    <li><strong>It works on anything on screen.</strong> Color grading in Final Cut, committing in Xcode, a dense doc, your writing &mdash; if it's on screen, you can point at it with your voice and ask</li>
+    <li><strong>It pulls in fresh info when it matters.</strong> For news, prices, or recent events, Claude's server-side <code>web_search</code> runs (capped at 3 per response, source cited naturally). For anything on your screen or stable facts, it doesn't bother</li>
+    <li><strong>The voice loop is fully on-device.</strong> <a href="https://github.com/argmaxinc/WhisperKit" target="_blank" rel="noopener noreferrer">WhisperKit</a> transcribes on the Apple Neural Engine (~150ms for a 10-second utterance); <a href="https://huggingface.co/hexgrad/Kokoro-82M" target="_blank" rel="noopener noreferrer">Kokoro-82M</a> speaks the reply via <a href="https://onnxruntime.ai" target="_blank" rel="noopener noreferrer">ONNX Runtime</a>. No AssemblyAI, no ElevenLabs, no quotas &mdash; only the question reaches Claude</li>
   </ul>
 </div>
 
@@ -39,6 +41,8 @@ next_project_url: "/products/prompt-pro.html"
 <div class="project-section reveal">
   <h2 class="project-section__title">Key Product Decisions</h2>
   <ul class="project-list">
+    <li><strong>Show, don't tell.</strong> The flying cursor is the whole thesis. Telling someone "it's in the top right" still leaves them hunting; flying a cursor to the exact element removes the translation step entirely. The system prompt biases toward pointing whenever it would genuinely help</li>
+    <li><strong>Teach, don't dead-end.</strong> The persona is tuned to end on a "seed" &mdash; a deeper concept or next-level technique &mdash; rather than a yes/no question. Dead-end questions force a nod; a seed gives you a reason to keep learning</li>
     <li><strong>On-device by default, not as a setting.</strong> Privacy isn't a toggle buried in preferences &mdash; the voice stack just runs locally. The only network call is the one that's genuinely required (the model), and that's the design, not an option</li>
     <li><strong>Graceful first launch.</strong> Kokoro is ~89MB and downloads on first run, so the app falls back to <code>AVSpeechSynthesizer</code> until it's ready. Cue is usable from the very first push-to-talk instead of making you wait on a download</li>
     <li><strong>Two key paths for two audiences.</strong> Direct mode for "just me on my Mac," Worker proxy for "ship a build to someone else." Same app, the path is chosen automatically based on whether the env var is set</li>
@@ -67,8 +71,9 @@ next_project_url: "/products/prompt-pro.html"
 <div class="project-section reveal">
   <h2 class="project-section__title">Lessons Learned</h2>
   <ul class="project-list">
+    <li><strong>Showing is a different product than telling.</strong> The moment the assistant can point at the actual element, "how do I do this?" stops being a translation exercise. The cursor turns explanation into guidance &mdash; that's the feature people actually feel</li>
     <li><strong>The Neural Engine changes what's possible locally.</strong> Whisper transcription in ~150ms on-device makes push-to-talk feel instant. The "send audio to a server" architecture exists mostly because people assume local inference is too slow &mdash; on Apple Silicon, it isn't</li>
-    <li><strong>Fork, don't rebuild.</strong> Starting from Clicky meant the cursor overlay, screenshot capture, and panel UI already worked. The interesting work was swapping the voice layer, not reinventing the menu bar plumbing</li>
+    <li><strong>Fork, don't rebuild.</strong> Starting from Clicky meant the cursor overlay, screenshot capture, and panel UI already worked. The interesting work was the learning-first persona and swapping the voice layer for an on-device one, not reinventing the menu bar plumbing</li>
     <li><strong>Renaming a fork is deceptively deep.</strong> A real rebrand touches user-facing strings, internal Swift identifiers, the build product, and migration logic for existing users' preferences &mdash; not just the display name</li>
   </ul>
 </div>
