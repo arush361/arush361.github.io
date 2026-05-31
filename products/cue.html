@@ -1,0 +1,83 @@
+---
+layout: project
+title: "Cue | Arush Sharma"
+excerpt: "A macOS menu bar AI companion with fully on-device voice. Push-to-talk, sees your screen, points at things with a flying cursor."
+project_name: "Cue"
+company: "Personal Product"
+date_range: "May 2026"
+tags: [Swift, macOS, WhisperKit, Kokoro TTS, Claude API, On-Device AI]
+next_project: "PromptPro"
+next_project_url: "/products/prompt-pro.html"
+---
+<div class="project-section reveal">
+  <h2 class="project-section__title">Problem Statement</h2>
+  <p>Voice AI assistants are convenient but they ship your microphone audio to someone else's servers. Every "hey, what's on my screen?" becomes a round trip to <a href="https://www.assemblyai.com" target="_blank" rel="noopener noreferrer">AssemblyAI</a> for transcription and <a href="https://elevenlabs.io" target="_blank" rel="noopener noreferrer">ElevenLabs</a> for speech, with per-character quotas and an API key for every vendor. For a tool that's always listening, that's a lot of trust to hand out, and a lot of moving parts to pay for.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Hypothesis</h2>
+  <p>Apple Silicon is fast enough to run the whole voice loop locally. If speech-to-text and text-to-speech both run on-device, the only thing that needs to leave the machine is the actual question. Strip out every voice vendor, keep one model call to <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a>, and the assistant gets cheaper, more private, and faster all at once.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Solution</h2>
+  <p><strong>Cue</strong> is a macOS menu bar companion (no dock icon) that listens on push-to-talk, sees your screen, and talks back &mdash; with the voice pipeline running entirely on-device. It's a fork of <a href="https://github.com/farzaa/clicky" target="_blank" rel="noopener noreferrer">Clicky</a> by Farza, rebuilt around offline voice:</p>
+  <ul class="project-list">
+    <li><strong>On-device speech-to-text</strong> &mdash; <a href="https://github.com/argmaxinc/WhisperKit" target="_blank" rel="noopener noreferrer">WhisperKit</a> runs Whisper on CoreML / the Apple Neural Engine. A 10-second utterance transcribes in ~150ms on Apple Silicon</li>
+    <li><strong>On-device text-to-speech</strong> &mdash; <a href="https://huggingface.co/hexgrad/Kokoro-82M" target="_blank" rel="noopener noreferrer">Kokoro-82M</a> (an ~88MB INT8 neural TTS model) runs via <a href="https://onnxruntime.ai" target="_blank" rel="noopener noreferrer">ONNX Runtime</a>, with <code>AVSpeechSynthesizer</code> covering playback while Kokoro warms up</li>
+    <li><strong>The flying cursor</strong> &mdash; Claude can embed <code>[POINT:x,y:label:screenN]</code> tags in its replies, and a blue cursor flies across your screen (across multiple monitors) to point at whatever it's talking about</li>
+    <li><strong>Server-side web search</strong> &mdash; for news, weather, or anything time-sensitive, Claude's built-in <code>web_search</code> tool runs server-side. No extra keys, capped at 3 searches per response, toggleable from the panel</li>
+    <li><strong>One network call</strong> &mdash; no AssemblyAI, no ElevenLabs, no per-character quotas. The only thing that leaves your machine is the Claude <code>/chat</code> request</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Technical Architecture</h2>
+  <p class="exp-entry__desc" style="margin-top:0">A menu bar app with two <code>NSPanel</code> windows: a control panel dropdown and a full-screen transparent cursor overlay. Push-to-talk (Control + Option) buffers audio locally, runs <a href="https://github.com/argmaxinc/WhisperKit" target="_blank" rel="noopener noreferrer">WhisperKit</a> transcription on key-up, then streams the transcript plus a screenshot to Claude over SSE. The reply is spoken locally through <a href="https://huggingface.co/hexgrad/Kokoro-82M" target="_blank" rel="noopener noreferrer">Kokoro-82M</a> once its model finishes downloading. Two API key paths are supported: direct mode (key read from the environment at runtime, never bundled into the binary) for personal use, and a <a href="https://workers.cloudflare.com" target="_blank" rel="noopener noreferrer">Cloudflare Worker</a> proxy for shipping signed builds without burning the key into the app.</p>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Key Product Decisions</h2>
+  <ul class="project-list">
+    <li><strong>On-device by default, not as a setting.</strong> Privacy isn't a toggle buried in preferences &mdash; the voice stack just runs locally. The only network call is the one that's genuinely required (the model), and that's the design, not an option</li>
+    <li><strong>Graceful first launch.</strong> Kokoro is ~89MB and downloads on first run, so the app falls back to <code>AVSpeechSynthesizer</code> until it's ready. Cue is usable from the very first push-to-talk instead of making you wait on a download</li>
+    <li><strong>Two key paths for two audiences.</strong> Direct mode for "just me on my Mac," Worker proxy for "ship a build to someone else." Same app, the path is chosen automatically based on whether the env var is set</li>
+    <li><strong>Don't rename what users never see.</strong> The Clicky&rarr;Cue rebrand renamed every user-facing string and internal identifier, but deliberately kept the Xcode scheme name to avoid a deep <code>.pbxproj</code> rewrite that risked breaking the build. Old UserDefaults keys auto-migrate so existing users keep their settings</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Impact &amp; Metrics</h2>
+  <div class="project-metrics">
+    <div class="project-metric">
+      <div class="project-metric__value">~150ms</div>
+      <div class="project-metric__label">On-device transcription of a 10s utterance on Apple Silicon</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">1 Call</div>
+      <div class="project-metric__label">Only Claude leaves the machine &mdash; no voice vendors</div>
+    </div>
+    <div class="project-metric">
+      <div class="project-metric__value">Open Source</div>
+      <div class="project-metric__label"><a href="https://github.com/arush361/Cue" target="_blank" rel="noopener noreferrer">View on GitHub &#8599;</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Lessons Learned</h2>
+  <ul class="project-list">
+    <li><strong>The Neural Engine changes what's possible locally.</strong> Whisper transcription in ~150ms on-device makes push-to-talk feel instant. The "send audio to a server" architecture exists mostly because people assume local inference is too slow &mdash; on Apple Silicon, it isn't</li>
+    <li><strong>Fork, don't rebuild.</strong> Starting from Clicky meant the cursor overlay, screenshot capture, and panel UI already worked. The interesting work was swapping the voice layer, not reinventing the menu bar plumbing</li>
+    <li><strong>Renaming a fork is deceptively deep.</strong> A real rebrand touches user-facing strings, internal Swift identifiers, the build product, and migration logic for existing users' preferences &mdash; not just the display name</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">Links</h2>
+  <p>
+    <a href="https://github.com/arush361/Cue" target="_blank" rel="noopener noreferrer">GitHub Repository &#8599;</a> &nbsp;&middot;&nbsp;
+    <a href="https://github.com/farzaa/clicky" target="_blank" rel="noopener noreferrer">Clicky (upstream) &#8599;</a> &nbsp;&middot;&nbsp;
+    <a href="https://huggingface.co/hexgrad/Kokoro-82M" target="_blank" rel="noopener noreferrer">Kokoro-82M &#8599;</a>
+  </p>
+</div>
