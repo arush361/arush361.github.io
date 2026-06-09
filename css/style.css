@@ -1041,6 +1041,15 @@ a.proj-dir__item:hover .proj-dir__name {
   cursor: default;
 }
 
+.proj-dir__item--more .proj-dir__name {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.proj-dir__item--more .proj-dir__meta {
+  font-style: italic;
+}
+
 .proj-dir__tree {
   color: var(--divider);
   flex-shrink: 0;
@@ -1112,7 +1121,7 @@ a.proj-dir__item:hover .proj-dir__name {
 
 .post-card__date {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.7rrem;
   color: var(--muted);
   margin-bottom: 0.25rem;
 }
