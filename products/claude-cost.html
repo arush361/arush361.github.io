@@ -5,7 +5,7 @@ excerpt: "Local-first Claude Code usage dashboard. Reads your ~/.claude logs on 
 project_name: "Claude-Cost"
 company: "Personal Product"
 date_range: "Jul 2026"
-tags: [Claude Code, Python, Local-First, Data Viz, Cost Analytics, Zero Dependencies]
+tags: [Claude Code, Python, Local-First, SQLite, Data Viz, Cost Analytics, Zero Dependencies]
 next_project: "Claude Auto-Accept"
 next_project_url: "/products/claude-auto-accept.html"
 ---
@@ -30,6 +30,7 @@ next_project_url: "/products/claude-auto-accept.html"
     <li><strong>&#10022; Wrapped</strong> &mdash; Spotify-Wrapped-but-for-tokens. Headline stats, fun analogies ("Claude wrote ~59 novels of text"), a GitHub-style activity calendar, and a records &amp; superlatives grid (priciest day, marathon session, biggest single message). Export it as a PNG to share</li>
     <li><strong>Overview</strong> &mdash; spend, sessions, messages, tokens, daily trend, and a real weekday &times; hour activity heatmap</li>
     <li><strong>Usage</strong> &mdash; cost + sessions in one place with server-side filters by project and timeframe, so the numbers stay correct, not just the visible rows. Click any session for a turn-by-turn replay with per-turn cost and context-compaction markers</li>
+    <li><strong>Activity</strong> &mdash; where your tokens actually go: most-used tools, a file-hotspots table, skills, and subagents, plus an approximate "context injected" meter (bytes each tool fed back into the conversation &mdash; a proxy for tokens, honestly labeled, not a fake per-tool bill)</li>
     <li><strong>Projects</strong> &mdash; spend grouped by the actual working directory</li>
     <li><strong>Insights</strong> &mdash; an efficiency grade plus ranked, quantified ways to cut cost (route Opus work to Sonnet, fix cache misses, trim bloated context)</li>
   </ul>
@@ -42,6 +43,17 @@ next_project_url: "/products/claude-auto-accept.html"
     <li><strong>Dedupes on <code>message.id</code>.</strong> One assistant message is split across many log lines with the same usage repeated on each. Summing per line would multiply your cost by the number of content blocks. It doesn't</li>
     <li><strong>Disjoint token buckets</strong>, each priced at its own rate: input &times;1.0, output &times;1.0, cache read &times;0.10, cache write 5m &times;1.25, cache write 1h &times;2.0</li>
     <li><strong>Local time</strong> for daily and hourly buckets (logs are UTC). Unknown and <code>&lt;synthetic&gt;</code> models don't get silently priced at $0</li>
+    <li><strong>Raw buckets, never a frozen dollar figure.</strong> The warehouse stores token counts, not computed cost, so editing a rate in <code>pricing.py</code> re-prices <em>all</em> your history the next time you load &mdash; even sessions whose logs are long gone</li>
+  </ul>
+</div>
+
+<div class="project-section reveal">
+  <h2 class="project-section__title">History That Outlives the Logs</h2>
+  <p>Claude Code prunes its own <code>~/.claude</code> session logs after about 30 days. Claude-Cost keeps a tiny local <strong>warehouse</strong> at <code>~/.claude-cost/history.db</code> (a SQLite file) so your spend history sticks around after the raw logs disappear.</p>
+  <ul class="project-list">
+    <li><strong>Persistent</strong> &mdash; each message is ingested once, keyed on its stable id. When a log file gets pruned, its rows stay in the warehouse, so your all-time totals don't quietly shrink</li>
+    <li><strong>Incremental</strong> &mdash; only session files whose size or mtime changed get re-parsed, so after the first run the dashboard warm-starts in about half a second instead of re-reading hundreds of MB every time</li>
+    <li><strong>Yours</strong> &mdash; it lives outside the repo and never leaves your machine. Point it elsewhere with <code>--db</code> or <code>$CLAUDE_COST_DB</code>, or delete it to rebuild from whatever logs still exist</li>
   </ul>
 </div>
 
