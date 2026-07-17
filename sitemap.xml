@@ -14,6 +14,11 @@ layout: null
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>{{ site.url }}{{ site.baseurl }}/products/claude-cost.html</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>{{ site.url }}{{ site.baseurl }}/products/prompt-pro.html</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
