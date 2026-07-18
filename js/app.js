@@ -799,6 +799,33 @@
     }
   }
 
+  /* --- 13b. Dark Mode Hint Popup --- */
+  function initDarkModeHint() {
+    var hint = document.getElementById('dm-hint');
+    if (!hint) return;
+
+    // Don't show again once dismissed
+    if (localStorage.getItem('dmHintDismissed')) return;
+
+    function dismiss() {
+      hint.classList.remove('visible');
+      localStorage.setItem('dmHintDismissed', '1');
+      // Fully hide after the fade-out transition
+      setTimeout(function () { hint.hidden = true; }, 300);
+    }
+
+    // Reveal after a short delay so it eases in after load
+    hint.hidden = false;
+    setTimeout(function () { hint.classList.add('visible'); }, 800);
+
+    var closeBtn = document.getElementById('dm-hint-close');
+    if (closeBtn) closeBtn.addEventListener('click', dismiss);
+
+    // Also dismiss once the user actually uses the toggle (hint served its purpose)
+    var toggle = document.getElementById('theme-toggle');
+    if (toggle) toggle.addEventListener('click', dismiss, { once: true });
+  }
+
   /* --- 13. Carousel Scroll Dots --- */
   function initCarouselDots() {
     document.querySelectorAll('.carousel').forEach(function (carousel) {
@@ -862,6 +889,7 @@
   /* --- Initialize Everything --- */
   function init() {
     initDarkMode();
+    initDarkModeHint();
     initAvatarLightbox();
     initBackToTop();
     fixRevealGaps();
