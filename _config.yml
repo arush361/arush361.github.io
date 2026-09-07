@@ -15,9 +15,6 @@ medium_url: "https://arusharma.medium.com"
 email: "arush361@gmail.com"
 formspree_id: "maylppgy"
 
-# Resume
-resume_file: "ArushResume1.pdf"
-
 exclude: [.scss, README.md, CLAUDE.md, node_modules, gruntfile.js, package.json, .playwright-mcp, "*.docx", generate-audit.py, "games/index.html"]
 
 include: [v1]
